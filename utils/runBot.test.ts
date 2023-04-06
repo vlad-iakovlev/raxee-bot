@@ -1,25 +1,12 @@
-const mockSetMyCommands = jest.fn()
-const mockUse = jest.fn()
-const mockCatch = jest.fn()
-const mockStart = jest.fn()
-const mockBot = jest.fn(() => {
-  return {
-    api: {
-      setMyCommands: mockSetMyCommands,
-    },
-    use: mockUse,
-    catch: mockCatch,
-    start: mockStart,
-  }
-})
-
-jest.mock('grammy', () => ({
-  Bot: mockBot,
-}))
-
 import { BotModule } from '../types/module'
 import { handleError } from './handleError'
 import { runBot } from './runBot'
+
+jest.mock('grammy')
+const { Bot } = jest.requireMock('grammy')
+Bot.prototype.api = {
+  setMyCommands: jest.fn(),
+}
 
 describe('#runBot', () => {
   beforeEach(() => {
@@ -57,23 +44,16 @@ describe('#runBot', () => {
       modules,
     })
 
-    expect(mockBot).toBeCalledWith('12345')
-    expect(mockSetMyCommands).toBeCalledWith([
-      {
-        command: 'test1',
-        description: 'First test command',
-      },
-      {
-        command: 'test2',
-        description: 'Second test command',
-      },
-      {
-        command: 'test3',
-        description: 'Third test command',
-      },
+    expect(Bot).toBeCalledWith('12345')
+    expect(Bot.prototype.api.setMyCommands).toBeCalledWith([
+      ...modules[0].commands,
+      ...modules[1].commands,
     ])
-    expect(mockUse).toBeCalledWith(modules[0].composer, modules[1].composer)
-    expect(mockCatch).lastCalledWith(handleError)
-    expect(mockStart).toBeCalledWith()
+    expect(Bot.prototype.use).toBeCalledWith(
+      modules[0].composer,
+      modules[1].composer
+    )
+    expect(Bot.prototype.catch).lastCalledWith(handleError)
+    expect(Bot.prototype.start).toBeCalledWith()
   })
 })

@@ -64,14 +64,11 @@
     "transform": {
       "\\.ts$": "ts-jest"
     },
-    "testMatch": [
-      "**/*.test.ts"
-    ],
     "collectCoverageFrom": [
       "!**/node_modules/**",
       "**/*.ts",
-      "**/{!(constants),}.ts",
-      "!bin/*.ts"
+      "!bin/*.ts",
+      "!**/constants.ts"
     ]
   },
   "lint-staged": {
