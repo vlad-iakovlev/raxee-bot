@@ -1,0 +1,12 @@
+networks:
+  vlad-yakovlev-dev:
+    name: vlad-yakovlev-dev
+
+services:
+  raxee-bot:
+    build: .
+    networks:
+      - vlad-yakovlev-dev
+    environment:
+      DATABASE_URL: mongodb://mongo:27017/expense
+    restart: always
