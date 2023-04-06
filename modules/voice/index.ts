@@ -1,6 +1,7 @@
 import { Composer } from 'grammy'
 import { getRandomItem } from '../../utils/getRandomItem'
 import { voiceStickers } from './constants'
+import { BotModule } from '../../types/module'
 
 const createComposer = () => {
   const bot = new Composer()
@@ -13,7 +14,7 @@ const createComposer = () => {
   return bot
 }
 
-export const createVoiceModule = () => ({
+export const createVoiceModule = (): BotModule => ({
   commands: [],
   composer: createComposer(),
 })
