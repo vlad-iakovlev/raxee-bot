@@ -1,0 +1,65 @@
+{
+  "name": "raxee-bot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "async-pause": "^1.0.0",
+    "date-fns": "^2.29.3",
+    "dotenv-flow": "^3.2.0",
+    "grammy": "^1.15.3",
+    "grammy-reply-with-markdown": "^1.0.0",
+    "remeda": "^1.12.0",
+    "telegram-md": "^1.2.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^16.18.23",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.7",
+    "ts-jest": "^29.1.0"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ],
+    "overrides": [
+      {
+        "files": "*.test.ts",
+        "rules": {
+          "@typescript-eslint/no-explicit-any": "off"
+        }
+      }
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "/src/.*\\.test\\.ts$",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/{!(constants),}.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts"
+    ]
+  }
+}
