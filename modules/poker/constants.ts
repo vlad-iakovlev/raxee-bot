@@ -20,7 +20,7 @@ export const POKER_CARD_SUIT_NAMES = {
   [POKER_CARD_SUIT.DIAMONDS]: '♦️',
   [POKER_CARD_SUIT.HEARTS]: '♥️',
   [POKER_CARD_SUIT.SPADES]: '♠️',
-}
+} as const
 
 export const POKER_CARD_VALUE_NAMES = {
   [POKER_CARD_VALUE.TWO]: '2',
@@ -36,7 +36,7 @@ export const POKER_CARD_VALUE_NAMES = {
   [POKER_CARD_VALUE.QUEEN]: 'Q',
   [POKER_CARD_VALUE.KING]: 'K',
   [POKER_CARD_VALUE.ACE]: 'A',
-}
+} as const
 
 export const POKER_COMBINATION_LEVEL_NAMES = {
   [POKER_COMBINATION_LEVEL.HIGH_CARD]: 'High Card',
@@ -49,7 +49,7 @@ export const POKER_COMBINATION_LEVEL_NAMES = {
   [POKER_COMBINATION_LEVEL.FOUR_OF_KIND]: 'Four of a Kind',
   [POKER_COMBINATION_LEVEL.STRAIGHT_FLUSH]: 'Straight Flush',
   [POKER_COMBINATION_LEVEL.ROYAL_FLUSH]: 'Royal Flush',
-}
+} as const
 
 export const STRINGS = {
   allIn: '💰 All in',
