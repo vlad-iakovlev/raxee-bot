@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv-flow').config()
 
+import { createPokerModule } from '../modules/poker'
 import { createVoiceModule } from '../modules/voice'
 import { runBot } from '../utils/runBot'
 
@@ -13,7 +14,7 @@ void (async () => {
 
     await runBot({
       botToken,
-      modules: [createVoiceModule()],
+      modules: [createPokerModule(), createVoiceModule()],
     })
 
     process.exit(0)

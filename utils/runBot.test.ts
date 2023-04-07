@@ -1,3 +1,4 @@
+import { initUserMiddleware } from '../middleware/initUser'
 import { BotModule } from '../types/module'
 import { handleError } from './handleError'
 import { runBot } from './runBot'
@@ -50,6 +51,7 @@ describe('#runBot', () => {
       ...modules[1].commands,
     ])
     expect(Bot.prototype.use).toBeCalledWith(
+      initUserMiddleware,
       modules[0].composer,
       modules[1].composer
     )

@@ -1,9 +1,54 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["extendedWhereUnique"]
 }
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  tgUserId  Int     @unique
+  firstName String
+  lastName  String?
+  username  String?
+
+  pokerPlayer PokerPlayer?
+}
+
+model PokerPlayer {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  cards     Int[]
+  balance   Int
+  betAmount Int
+  hasFolded Boolean
+  hasLost   Boolean
+  hasTurned Boolean
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique @db.ObjectId
+
+  pokerState   PokerState @relation(fields: [pokerStateId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  pokerStateId String     @db.ObjectId
+}
+
+model PokerState {
+  id                 String      @id @default(auto()) @map("_id") @db.ObjectId
+  tgChatId           Int         @unique
+  cards              Int[]
+  round              POKER_ROUND
+  dealsCount         Int
+  dealerIndex        Int
+  currentPlayerIndex Int
+
+  players PokerPlayer[]
+}
+
+enum POKER_ROUND {
+  PRE_FLOP
+  FLOP
+  TURN
+  RIVER
 }

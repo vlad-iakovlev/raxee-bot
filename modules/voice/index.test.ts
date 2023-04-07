@@ -12,10 +12,7 @@ describe('#createVoiceModule', () => {
     jest.spyOn(global.Math, 'random').mockRestore()
   })
 
-  it('should reply with sticker', async () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
-
-    // Step 1: check the return value of the function
+  it('should return a voice module', () => {
     const module = createVoiceModule()
 
     expect(module.commands).toStrictEqual([])
@@ -25,8 +22,11 @@ describe('#createVoiceModule', () => {
       ['message:voice', 'message:video_note'],
       expect.any(Function)
     )
+  })
 
-    // Step 2: Check sticker sending
+  it('on message should reply with sticker', async () => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
+    createVoiceModule()
     const ctx = { replyWithSticker: jest.fn() } as any
     const next = jest.fn()
 

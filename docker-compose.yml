@@ -8,5 +8,5 @@ services:
     networks:
       - vlad-yakovlev-dev
     environment:
-      DATABASE_URL: mongodb://mongo:27017/expense
+      DATABASE_URL: mongodb://mongo:27017/raxee-bot
     restart: always
