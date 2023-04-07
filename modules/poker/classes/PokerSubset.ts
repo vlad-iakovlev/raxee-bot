@@ -13,32 +13,27 @@ export class PokerSubset {
     return this.cards.map(PokerCard.getString).join(' ')
   }
 
-  static getRoyalFlush(subset?: PokerSubset): PokerSubset | undefined {
-    if (
-      subset &&
-      PokerCard.getValue(subset.cards[0]) === POKER_CARD_VALUE.ACE
-    ) {
-      return PokerSubset.getStraightFlush(subset)
+  get royalFlush(): PokerSubset | undefined {
+    if (PokerCard.getValue(this.cards[0]) === POKER_CARD_VALUE.ACE) {
+      return this.straightFlush
     }
   }
 
-  static getStraightFlush(subset?: PokerSubset): PokerSubset | undefined {
-    return PokerSubset.getStraight(PokerSubset.getFlush(subset))
+  get straightFlush(): PokerSubset | undefined {
+    return this.straight?.flush
   }
 
-  static getFourOfKind(subset?: PokerSubset): PokerSubset | undefined {
-    if (!subset) return
-
-    for (let i = 0; i < subset.cards.length - 3; i += 1) {
-      for (let j = i + 1; j < subset.cards.length - 2; j += 1) {
-        for (let k = j + 1; k < subset.cards.length - 1; k += 1) {
-          for (let l = k + 1; l < subset.cards.length; l += 1) {
+  get fourOfKind(): PokerSubset | undefined {
+    for (let i = 0; i < this.cards.length - 3; i += 1) {
+      for (let j = i + 1; j < this.cards.length - 2; j += 1) {
+        for (let k = j + 1; k < this.cards.length - 1; k += 1) {
+          for (let l = k + 1; l < this.cards.length; l += 1) {
             if (
-              PokerCard.isValueEqual(subset.cards[i], subset.cards[j]) &&
-              PokerCard.isValueEqual(subset.cards[i], subset.cards[k]) &&
-              PokerCard.isValueEqual(subset.cards[i], subset.cards[l])
+              PokerCard.isValueEqual(this.cards[i], this.cards[j]) &&
+              PokerCard.isValueEqual(this.cards[i], this.cards[k]) &&
+              PokerCard.isValueEqual(this.cards[i], this.cards[l])
             ) {
-              PokerSubset.reorder(subset, [i, j, k, l])
+              return this.reorder([i, j, k, l])
             }
           }
         }
@@ -46,88 +41,81 @@ export class PokerSubset {
     }
   }
 
-  static getFullHouse(subset?: PokerSubset): PokerSubset | undefined {
-    if (!subset) return
-
+  get fullHouse(): PokerSubset | undefined {
     if (
-      PokerCard.isValueEqual(subset.cards[0], subset.cards[1]) &&
-      PokerCard.isValueEqual(subset.cards[0], subset.cards[2]) &&
-      PokerCard.isValueEqual(subset.cards[3], subset.cards[4])
+      PokerCard.isValueEqual(this.cards[0], this.cards[1]) &&
+      PokerCard.isValueEqual(this.cards[0], this.cards[2]) &&
+      PokerCard.isValueEqual(this.cards[3], this.cards[4])
     ) {
-      return subset
+      return this
     }
 
     if (
-      PokerCard.isValueEqual(subset.cards[2], subset.cards[3]) &&
-      PokerCard.isValueEqual(subset.cards[2], subset.cards[4]) &&
-      PokerCard.isValueEqual(subset.cards[0], subset.cards[1])
+      PokerCard.isValueEqual(this.cards[2], this.cards[3]) &&
+      PokerCard.isValueEqual(this.cards[2], this.cards[4]) &&
+      PokerCard.isValueEqual(this.cards[0], this.cards[1])
     ) {
-      return PokerSubset.reorder(subset, [2, 3, 4])
+      return this.reorder([2, 3, 4])
     }
   }
 
-  static getFlush(subset?: PokerSubset): PokerSubset | undefined {
+  get flush(): PokerSubset | undefined {
     if (
-      subset?.cards.every((card) =>
-        PokerCard.isSuitEqual(card, subset.cards[0])
-      )
+      PokerCard.isSuitEqual(this.cards[0], this.cards[1]) &&
+      PokerCard.isSuitEqual(this.cards[0], this.cards[2]) &&
+      PokerCard.isSuitEqual(this.cards[0], this.cards[3]) &&
+      PokerCard.isSuitEqual(this.cards[0], this.cards[4])
     ) {
-      return subset
+      return this
     }
   }
 
-  static getStraight(subset?: PokerSubset): PokerSubset | undefined {
-    if (!subset) return
-
+  get straight(): PokerSubset | undefined {
     if (
-      PokerCard.getValue(subset.cards[0]) === POKER_CARD_VALUE.ACE &&
-      PokerCard.getValue(subset.cards[1]) === POKER_CARD_VALUE.FIVE &&
-      PokerCard.getValue(subset.cards[2]) === POKER_CARD_VALUE.FOUR &&
-      PokerCard.getValue(subset.cards[3]) === POKER_CARD_VALUE.THREE &&
-      PokerCard.getValue(subset.cards[4]) === POKER_CARD_VALUE.TWO
+      PokerCard.getValue(this.cards[0]) === POKER_CARD_VALUE.ACE &&
+      PokerCard.getValue(this.cards[1]) === POKER_CARD_VALUE.FIVE &&
+      PokerCard.getValue(this.cards[2]) === POKER_CARD_VALUE.FOUR &&
+      PokerCard.getValue(this.cards[3]) === POKER_CARD_VALUE.THREE &&
+      PokerCard.getValue(this.cards[4]) === POKER_CARD_VALUE.TWO
     ) {
-      return PokerSubset.reorder(subset, [1, 2, 3, 4])
+      return this.reorder([1, 2, 3, 4])
     }
 
     if (
-      PokerCard.isValueEqual(subset.cards[1], subset.cards[0] - 4) &&
-      PokerCard.isValueEqual(subset.cards[2], subset.cards[0] - 8) &&
-      PokerCard.isValueEqual(subset.cards[3], subset.cards[0] - 12) &&
-      PokerCard.isValueEqual(subset.cards[4], subset.cards[0] - 16)
+      PokerCard.isValueEqual(this.cards[0], this.cards[1] + 4) &&
+      PokerCard.isValueEqual(this.cards[1], this.cards[2] + 4) &&
+      PokerCard.isValueEqual(this.cards[2], this.cards[3] + 4) &&
+      PokerCard.isValueEqual(this.cards[3], this.cards[4] + 4)
     ) {
-      return subset
+      return this
     }
   }
 
-  static getThreeOfKind(subset?: PokerSubset): PokerSubset | undefined {
-    if (!subset) return
-
-    for (let i = 0; i < subset.cards.length - 2; i += 1) {
-      for (let j = i + 1; j < subset.cards.length - 1; j += 1) {
-        for (let k = j + 1; k < subset.cards.length; k += 1) {
+  get threeOfKind(): PokerSubset | undefined {
+    for (let i = 0; i < this.cards.length - 2; i += 1) {
+      for (let j = i + 1; j < this.cards.length - 1; j += 1) {
+        for (let k = j + 1; k < this.cards.length; k += 1) {
           if (
-            PokerCard.isValueEqual(subset.cards[i], subset.cards[j]) &&
-            PokerCard.isValueEqual(subset.cards[i], subset.cards[k])
+            PokerCard.isValueEqual(this.cards[i], this.cards[j]) &&
+            PokerCard.isValueEqual(this.cards[i], this.cards[k])
           ) {
-            return PokerSubset.reorder(subset, [i, j, k])
+            return this.reorder([i, j, k])
           }
         }
       }
     }
   }
 
-  static getTwoPair(subset?: PokerSubset): PokerSubset | undefined {
-    if (!subset) return
-
-    for (let i = 0; i < subset.cards.length - 3; i += 1) {
-      for (let j = i + 1; j < subset.cards.length - 2; j += 1) {
-        for (let k = j + 1; k < subset.cards.length - 1; k += 1) {
-          for (let l = k + 1; l < subset.cards.length; l += 1) {
+  get twoPair(): PokerSubset | undefined {
+    for (let i = 0; i < this.cards.length - 3; i += 1) {
+      for (let j = i + 1; j < this.cards.length - 2; j += 1) {
+        for (let k = j + 1; k < this.cards.length - 1; k += 1) {
+          for (let l = k + 1; l < this.cards.length; l += 1) {
             if (
-              PokerCard.isValueEqual(subset.cards[i], subset.cards[j]) &&
-              PokerCard.isValueEqual(subset.cards[k], subset.cards[l])
+              PokerCard.isValueEqual(this.cards[i], this.cards[j]) &&
+              PokerCard.isValueEqual(this.cards[k], this.cards[l])
             ) {
-              return PokerSubset.reorder(subset, [i, j, k, l])
+              return this.reorder([i, j, k, l])
             }
           }
         }
@@ -135,13 +123,11 @@ export class PokerSubset {
     }
   }
 
-  static getPair(subset?: PokerSubset): PokerSubset | undefined {
-    if (!subset) return
-
-    for (let i = 0; i < subset.cards.length - 1; i += 1) {
-      for (let j = i + 1; j < subset.cards.length; j += 1) {
-        if (PokerCard.isValueEqual(subset.cards[i], subset.cards[j])) {
-          return PokerSubset.reorder(subset, [i, j])
+  get pair(): PokerSubset | undefined {
+    for (let i = 0; i < this.cards.length - 1; i += 1) {
+      for (let j = i + 1; j < this.cards.length; j += 1) {
+        if (PokerCard.isValueEqual(this.cards[i], this.cards[j])) {
+          return this.reorder([i, j])
         }
       }
     }
@@ -173,19 +159,19 @@ export class PokerSubset {
     return subsets
   }
 
-  static reorder(subset: PokerSubset, priorityIndexes: number[]): PokerSubset {
+  private reorder(priorityIndexes: number[]): PokerSubset {
     const newSubset = new PokerSubset(
       [] as unknown as [number, number, number, number, number]
     )
-    const otherIndexes = new Set(R.range(0, subset.cards.length))
+    const otherIndexes = new Set(R.range(0, this.cards.length))
 
     priorityIndexes.forEach((index) => {
-      newSubset.cards.push(subset.cards[index])
+      newSubset.cards.push(this.cards[index])
       otherIndexes.delete(index)
     })
 
     otherIndexes.forEach((index) => {
-      newSubset.cards.push(subset.cards[index])
+      newSubset.cards.push(this.cards[index])
     })
 
     return newSubset
