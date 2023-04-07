@@ -57,17 +57,17 @@ export class PokerCombination {
     )
   }
 
-  static build(
+  private static build(
     level: POKER_COMBINATION_LEVEL,
     subset: PokerSubset
   ): PokerCombination
 
-  static build(
+  private static build(
     level: POKER_COMBINATION_LEVEL,
     subset?: PokerSubset
   ): PokerCombination | undefined
 
-  static build(
+  private static build(
     level: POKER_COMBINATION_LEVEL,
     subset?: PokerSubset
   ): PokerCombination | undefined {
