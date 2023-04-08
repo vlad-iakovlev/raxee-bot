@@ -1,7 +1,7 @@
-import { Middleware } from 'grammy'
+import { MiddlewareFn } from 'grammy'
 import { prisma } from '../utils/prisma'
 
-export const initUserMiddleware: Middleware = async (ctx, next) => {
+export const initUserMiddleware: MiddlewareFn = async (ctx, next) => {
   if (ctx.from) {
     await prisma.user.upsert({
       where: {
@@ -19,6 +19,7 @@ export const initUserMiddleware: Middleware = async (ctx, next) => {
         lastName: ctx.from.last_name,
         username: ctx.from.username,
       },
+      select: {},
     })
   }
 
