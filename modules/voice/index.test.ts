@@ -106,4 +106,34 @@ describe('#createVoiceModule', () => {
       },
     ])
   })
+
+  it('should not reply with sticker when receiving a text message', async () => {
+    const { bot, requests } = mockGrammyBot()
+    const module = createVoiceModule()
+    bot.use(module.composer)
+    await bot.init()
+
+    await bot.handleUpdate({
+      update_id: 10000,
+      message: {
+        date: 1441645532,
+        chat: {
+          id: 1111111,
+          type: 'group',
+          title: 'Test Group',
+        },
+        message_id: 1365,
+        from: {
+          id: 1111111,
+          is_bot: false,
+          first_name: 'John',
+        },
+        text: 'Hello',
+      },
+    })
+
+    expect(requests).toStrictEqual([
+      { method: 'getMe', payload: undefined, signal: undefined },
+    ])
+  })
 })
