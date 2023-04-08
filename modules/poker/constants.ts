@@ -58,7 +58,7 @@ export const STRINGS = {
   call: (value: number | string) => `✅ ${value}`,
   check: '✊ Check',
   fold: '❌ Fold',
-  preFlop: 'Preflop',
+  preflop: 'Preflop',
   raise: (value: number | string) => `⏫ ${value}`,
   win: '🏆 Win',
 }
@@ -118,8 +118,8 @@ export const MESSAGES = {
         ],
         '\n\n'
       ),
-    gameEnded: 'Game over, thanks',
-    userTurn: (player: PokerPlayerManager) => md`${getMention(player.user)}, your turn`,
+    gameEnded: 'The game is over, folks..',
+    userTurn: (player: PokerPlayerManager) => md`${getMention(player.user)}, your turn!`,
     playerMessage: (player: PokerPlayerManager, message: string) => md`${getMention(player.user)}: ${message}`,
   },
 

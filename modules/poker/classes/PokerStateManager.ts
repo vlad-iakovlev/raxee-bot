@@ -57,7 +57,7 @@ export class PokerStateManager {
       create: {
         tgChatId,
         cards: [],
-        round: POKER_ROUND.PRE_FLOP,
+        round: POKER_ROUND.PREFLOP,
         dealsCount: 0,
         dealerIndex: 0,
         currentPlayerIndex: 0,
@@ -220,7 +220,7 @@ export class PokerStateManager {
   async dealCards() {
     const deck = shuffle(R.range(0, 52))
     this.dealsCount++
-    this.round = POKER_ROUND.PRE_FLOP
+    this.round = POKER_ROUND.PREFLOP
     this.cards = deck.splice(0, 5)
     this.players.forEach((player) => {
       player.betAmount = 0
@@ -407,7 +407,7 @@ export class PokerStateManager {
 
   getNextRound(round: POKER_ROUND): POKER_ROUND {
     switch (round) {
-      case POKER_ROUND.PRE_FLOP:
+      case POKER_ROUND.PREFLOP:
         return POKER_ROUND.FLOP
       case POKER_ROUND.FLOP:
         return POKER_ROUND.TURN

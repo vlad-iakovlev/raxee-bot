@@ -51,11 +51,11 @@ describe('#handleError', () => {
     )
 
     expect(consoleError).toBeCalledTimes(2)
-    expect(consoleError.mock.calls[0]).toEqual([
+    expect(consoleError.mock.calls[0]).toStrictEqual([
       'Error while handling update 12345:',
       error,
     ])
-    expect(consoleError.mock.calls[1]).toEqual([replyError])
+    expect(consoleError.mock.calls[1]).toStrictEqual([replyError])
 
     expect(reply).toBeCalledTimes(1)
     expect(reply).toBeCalledWith('Something went wrong ¯\\_(ツ)_/¯')

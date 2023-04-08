@@ -47,7 +47,7 @@ model PokerState {
 }
 
 enum POKER_ROUND {
-  PRE_FLOP
+  PREFLOP
   FLOP
   TURN
   RIVER

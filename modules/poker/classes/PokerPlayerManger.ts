@@ -37,7 +37,7 @@ export class PokerPlayerManager {
   }
 
   get canFold(): boolean {
-    return !(this.pokerState.isAllIn && this.balance === 0)
+    return !this.pokerState.isAllIn || this.balance > 0
   }
 
   get canCheck(): boolean {
@@ -63,14 +63,15 @@ export class PokerPlayerManager {
 
   get isWinner(): boolean {
     return (
-      this.bestCombination?.weight === this.pokerState.bestCombinationWeight
+      !!this.bestCombination &&
+      this.bestCombination.weight === this.pokerState.bestCombinationWeight
     )
   }
 
   get keyboardCards(): string[] | undefined {
     switch (this.pokerState.round) {
-      case POKER_ROUND.PRE_FLOP:
-        return [STRINGS.preFlop]
+      case POKER_ROUND.PREFLOP:
+        return [STRINGS.preflop]
 
       case POKER_ROUND.FLOP:
         return this.pokerState.cards
@@ -83,9 +84,7 @@ export class PokerPlayerManager {
           .map((card, index) => (index < 4 ? card : ' '))
 
       case POKER_ROUND.RIVER:
-        return this.pokerState.cards
-          .map(PokerCard.getString)
-          .map((card, index) => (index < 5 ? card : ' '))
+        return this.pokerState.cards.map(PokerCard.getString)
     }
   }
 
