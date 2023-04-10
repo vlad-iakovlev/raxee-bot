@@ -723,7 +723,10 @@ describe('PokerStateManager', () => {
           hasFolded: true,
           hasLost: true,
         },
-        mockPlayer(6),
+        {
+          ...mockPlayer(6),
+          balance: 35,
+        },
         mockPlayer(7),
         {
           ...mockPlayer(8),
@@ -763,7 +766,7 @@ describe('PokerStateManager', () => {
           ...mockPlayer(4),
           cards: [46, 49],
           balance: 980,
-          betAmount: 20, // << small blind
+          betAmount: 20, // << Small blind
         }),
         new PokerPlayerManager(state, {
           ...mockPlayer(5),
@@ -773,8 +776,8 @@ describe('PokerStateManager', () => {
         new PokerPlayerManager(state, {
           ...mockPlayer(6),
           cards: [18, 5],
-          balance: 960,
-          betAmount: 40, // << big blind
+          balance: 0,
+          betAmount: 35, // << Big blind, limited by balance
         }),
         new PokerPlayerManager(state, {
           ...mockPlayer(7),
@@ -800,13 +803,13 @@ describe('PokerStateManager', () => {
           '• @user\\-1\\-username \\(1000 🪙\\)',
           '• @user\\-3\\-username \\(1000 🪙\\)',
           '• @user\\-4\\-username \\(1000 🪙\\)',
-          '• @user\\-6\\-username \\(1000 🪙\\)',
+          '• @user\\-6\\-username \\(35 🪙\\) 💰 All in',
           '• @user\\-7\\-username \\(1000 🪙\\)',
           '• @user\\-9\\-username \\(1000 🪙\\)',
           '',
           '*Dealer:* @user\\-3\\-username',
           '*Small:* @user\\-4\\-username \\(20 🪙\\)',
-          '*Big:* @user\\-6\\-username \\(40 🪙\\)',
+          '*Big:* @user\\-6\\-username \\(35 🪙\\)',
         ].join('\n'),
       })
       expect(state.broadcastCurrentTurn).toBeCalledWith()

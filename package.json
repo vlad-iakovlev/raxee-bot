@@ -67,8 +67,7 @@
     "collectCoverageFrom": [
       "!**/node_modules/**",
       "**/*.ts",
-      "!bin/*.ts",
-      "!**/constants.ts"
+      "!bin/*.ts"
     ]
   },
   "lint-staged": {
