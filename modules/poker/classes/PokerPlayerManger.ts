@@ -33,7 +33,7 @@ export class PokerPlayerManager {
   }
 
   get callAmount(): number {
-    return this.pokerState.topBetAmount - this.betAmount
+    return this.pokerState.requiredBetAmount - this.betAmount
   }
 
   get canFold(): boolean {

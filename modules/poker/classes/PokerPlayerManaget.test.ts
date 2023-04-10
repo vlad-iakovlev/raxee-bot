@@ -64,8 +64,7 @@ const mockStateSmallIndex = jest.fn(() => 1)
 const mockStateBigIndex = jest.fn(() => 2)
 const mockStateCurrentPlayerIndex = jest.fn(() => 3)
 const mockBankAmount = jest.fn(() => 100)
-const mockMinBetAmount = jest.fn(() => 10)
-const mockTopBetAmount = jest.fn(() => 20)
+const mockRequiredBetAmount = jest.fn(() => 20)
 const mockIsAllIn = jest.fn(() => false)
 const mockStateCurrentPlayer = jest.fn(
   () => ({ id: 'player-id' } as PokerPlayerManager)
@@ -85,8 +84,7 @@ const mockPokerStateManager = jest.fn(
       currentPlayerIndex: mockStateCurrentPlayerIndex(),
       tgApi: mockTgApi(),
       bankAmount: mockBankAmount(),
-      minBetAmount: mockMinBetAmount(),
-      topBetAmount: mockTopBetAmount(),
+      requiredBetAmount: mockRequiredBetAmount(),
       isAllIn: mockIsAllIn(),
       currentPlayer: mockStateCurrentPlayer(),
       bestCombinationWeight: mockBestCombinationWeight(),
@@ -95,13 +93,13 @@ const mockPokerStateManager = jest.fn(
 
 describe('PokerPlayerManager', () => {
   let player: PokerPlayerManager
-  const resetPokerPlayerManager = () => {
+  const resetPlayer = () => {
     player = new PokerPlayerManager(mockPokerStateManager(), mockPokerPlayer())
   }
 
   beforeEach(() => {
     jest.clearAllMocks()
-    resetPokerPlayerManager()
+    resetPlayer()
   })
 
   describe('#constructor', () => {
@@ -131,7 +129,7 @@ describe('PokerPlayerManager', () => {
 
     it('should return true if isAllIn and player balance is bigger than 0', () => {
       mockIsAllIn.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canFold).toBe(true)
     })
@@ -139,7 +137,7 @@ describe('PokerPlayerManager', () => {
     it('should return false if isAllIn and player balance is 0', () => {
       mockIsAllIn.mockReturnValueOnce(true)
       mockPlayerBalance.mockReturnValueOnce(0)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canFold).toBe(false)
     })
@@ -148,7 +146,7 @@ describe('PokerPlayerManager', () => {
   describe('#canCheck', () => {
     it('should return true if player.callAmount is 0', () => {
       mockPlayerBetAmount.mockReturnValueOnce(20)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canCheck).toBe(true)
     })
@@ -165,7 +163,7 @@ describe('PokerPlayerManager', () => {
 
     it('should return false if player has not enough balance', () => {
       mockPlayerBalance.mockReturnValueOnce(5)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canCall).toBe(false)
     })
@@ -179,7 +177,7 @@ describe('PokerPlayerManager', () => {
     it('should return true if isAllIn and player cannot check or call', () => {
       mockIsAllIn.mockReturnValueOnce(true)
       mockPlayerBalance.mockReturnValueOnce(5)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canAllIn).toBe(true)
     })
@@ -187,14 +185,14 @@ describe('PokerPlayerManager', () => {
     it('should return false if isAllIn and player can check', () => {
       mockIsAllIn.mockReturnValueOnce(true)
       mockPlayerBetAmount.mockReturnValueOnce(20)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canAllIn).toBe(false)
     })
 
     it('should return false if isAllIn and player can call', () => {
       mockIsAllIn.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canAllIn).toBe(false)
     })
@@ -207,7 +205,7 @@ describe('PokerPlayerManager', () => {
 
     it('should return false if isAllIn', () => {
       mockIsAllIn.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.canRaise).toBe(false)
     })
@@ -225,14 +223,14 @@ describe('PokerPlayerManager', () => {
 
     it('should return undefined if player has lost', () => {
       mockPlayerHasLost.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.bestCombination).toBeUndefined()
     })
 
     it('should return undefined if player has folded', () => {
       mockPlayerHasFolded.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.bestCombination).toBeUndefined()
     })
@@ -241,7 +239,7 @@ describe('PokerPlayerManager', () => {
   describe('#isWinner', () => {
     it("should return true if player's best combination is a top on", () => {
       mockBestCombinationWeight.mockReturnValueOnce(70101010100)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.isWinner).toBe(true)
     })
@@ -252,7 +250,7 @@ describe('PokerPlayerManager', () => {
 
     it('should return false if player has no best combination', () => {
       mockPlayerHasLost.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.isWinner).toBe(false)
     })
@@ -262,14 +260,14 @@ describe('PokerPlayerManager', () => {
     describe('#keyboardCards', () => {
       it('should return preflop on preflop', () => {
         mockStateRound.mockReturnValueOnce(POKER_ROUND.PREFLOP)
-        resetPokerPlayerManager()
+        resetPlayer()
 
         expect(player.keyboardCards).toStrictEqual(['Preflop'])
       })
 
       it('should return 3 cards and 2 blank spots on flop', () => {
         mockStateRound.mockReturnValueOnce(POKER_ROUND.FLOP)
-        resetPokerPlayerManager()
+        resetPlayer()
 
         expect(player.keyboardCards).toStrictEqual([
           '♦️2',
@@ -282,7 +280,7 @@ describe('PokerPlayerManager', () => {
 
       it('should return 4 cards and 1 blank spot on turn', () => {
         mockStateRound.mockReturnValueOnce(POKER_ROUND.TURN)
-        resetPokerPlayerManager()
+        resetPlayer()
 
         expect(player.keyboardCards).toStrictEqual([
           '♦️2',
@@ -295,7 +293,7 @@ describe('PokerPlayerManager', () => {
 
       it('should return 5 cards on river', () => {
         mockStateRound.mockReturnValueOnce(POKER_ROUND.RIVER)
-        resetPokerPlayerManager()
+        resetPlayer()
 
         expect(player.keyboardCards).toStrictEqual([
           '♦️2',
@@ -321,7 +319,7 @@ describe('PokerPlayerManager', () => {
 
     it('should return undefined if player has lost', () => {
       mockPlayerHasLost.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.keyboardBalance).toBeUndefined()
     })
@@ -332,7 +330,7 @@ describe('PokerPlayerManager', () => {
       mockStateCurrentPlayer.mockReturnValueOnce({
         id: 'player2',
       } as PokerPlayerManager)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.keyboardActions).toBeUndefined()
     })
@@ -347,7 +345,7 @@ describe('PokerPlayerManager', () => {
 
     it('should return fold, check and all in', () => {
       mockPlayerBetAmount.mockReturnValueOnce(20)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.keyboardActions).toStrictEqual([
         '❌ Fold',
@@ -358,7 +356,7 @@ describe('PokerPlayerManager', () => {
 
     it('should return fold and all in', () => {
       mockPlayerBalance.mockReturnValueOnce(5)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.keyboardActions).toStrictEqual(['❌ Fold', '💰 All in'])
     })
@@ -367,7 +365,7 @@ describe('PokerPlayerManager', () => {
       mockIsAllIn.mockReturnValueOnce(true)
       mockPlayerBetAmount.mockReturnValueOnce(20)
       mockPlayerBalance.mockReturnValueOnce(0)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.keyboardActions).toStrictEqual(['✊ Check'])
     })
@@ -387,7 +385,7 @@ describe('PokerPlayerManager', () => {
       mockStateCurrentPlayer.mockReturnValueOnce({
         id: 'player2',
       } as PokerPlayerManager)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.keyboard).toStrictEqual([
         ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
@@ -401,7 +399,7 @@ describe('PokerPlayerManager', () => {
         id: 'player2',
       } as PokerPlayerManager)
       mockPlayerHasLost.mockReturnValueOnce(true)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       expect(player.keyboard).toStrictEqual([
         ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
@@ -471,7 +469,7 @@ describe('PokerPlayerManager', () => {
   describe('#sendCurrentTurn', () => {
     it('should send current turn', () => {
       mockStateCurrentPlayer.mockReturnValueOnce(player)
-      resetPokerPlayerManager()
+      resetPlayer()
 
       player.sendCurrentTurn()
 

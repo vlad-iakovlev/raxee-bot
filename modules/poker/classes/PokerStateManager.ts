@@ -21,8 +21,6 @@ export class PokerStateManager {
   round: POKER_ROUND
   dealsCount: number
   dealerIndex: number
-  smallIndex: number
-  bigIndex: number
   currentPlayerIndex: number
   players: PokerPlayerManager[]
   tgApi: Api
@@ -37,8 +35,6 @@ export class PokerStateManager {
     this.round = stateData.round
     this.dealsCount = stateData.dealsCount
     this.dealerIndex = stateData.dealerIndex
-    this.smallIndex = 0
-    this.bigIndex = 0
     this.currentPlayerIndex = stateData.currentPlayerIndex
     this.players = stateData.players.map(
       (playerData) => new PokerPlayerManager(this, playerData)
@@ -135,11 +131,11 @@ export class PokerStateManager {
     return this.players.reduce((acc, player) => acc + player.betAmount, 0)
   }
 
-  get minBetAmount(): number {
+  get baseBetAmount(): number {
     return (Math.floor(this.dealsCount / 4) + 1) * BASE_BET
   }
 
-  get topBetAmount(): number {
+  get requiredBetAmount(): number {
     return Math.max(...this.players.map((player) => player.betAmount))
   }
 
@@ -153,8 +149,16 @@ export class PokerStateManager {
     return this.players[this.dealerIndex]
   }
 
+  get smallIndex(): number {
+    return this.getNextPlayerIndex(this.dealerIndex)
+  }
+
   get small(): PokerPlayerManager {
     return this.players[this.smallIndex]
+  }
+
+  get bigIndex(): number {
+    return this.getNextPlayerIndex(this.smallIndex)
   }
 
   get big(): PokerPlayerManager {
@@ -173,13 +177,13 @@ export class PokerStateManager {
     return this.playersInDeal.length === 1
   }
 
-  get everyoneHasTurned(): boolean {
+  get isAllPlayersTurned(): boolean {
     return this.players.every(
       (player) =>
         player.hasLost ||
         player.hasFolded ||
         player.balance === 0 ||
-        (player.hasTurned && player.betAmount === this.topBetAmount)
+        (player.hasTurned && player.betAmount === this.requiredBetAmount)
     )
   }
 
@@ -230,12 +234,10 @@ export class PokerStateManager {
     })
 
     this.dealerIndex = this.getNextPlayerIndex(this.dealerIndex)
-    this.smallIndex = this.getNextPlayerIndex(this.dealerIndex)
-    this.bigIndex = this.getNextPlayerIndex(this.smallIndex)
     this.currentPlayerIndex = this.getNextPlayerIndex(this.bigIndex)
 
-    this.big.increaseBet(this.minBetAmount)
-    this.small.increaseBet(this.minBetAmount / 2)
+    this.small.increaseBet(this.baseBetAmount / 2)
+    this.big.increaseBet(this.baseBetAmount)
 
     await this.save()
 
@@ -308,7 +310,7 @@ export class PokerStateManager {
       return MESSAGES.onMessage.callNotAllowed
     }
 
-    this.currentPlayer.increaseBet(sender.callAmount)
+    sender.increaseBet(sender.callAmount)
     await this.broadcastPlayerMessage(sender, message)
     await this.nextTurn()
   }
@@ -339,7 +341,7 @@ export class PokerStateManager {
       return MESSAGES.onMessage.betTooBig
     }
 
-    if (betAmount < sender.callAmount + this.minBetAmount) {
+    if (betAmount < sender.callAmount + this.baseBetAmount) {
       return MESSAGES.onMessage.betTooSmall
     }
 
@@ -355,7 +357,7 @@ export class PokerStateManager {
       return this.endDeal()
     }
 
-    if (this.everyoneHasTurned) {
+    if (this.isAllPlayersTurned) {
       if (this.round === POKER_ROUND.RIVER || this.isAllIn) {
         return this.endDeal()
       }

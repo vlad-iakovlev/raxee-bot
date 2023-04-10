@@ -118,17 +118,17 @@ export const MESSAGES = {
         ],
         '\n\n'
       ),
-    gameEnded: 'The game is over, folks..',
+    gameEnded: 'The game is over, folks',
     userTurn: (player: PokerPlayerManager) => md`${getMention(player.user)}, your turn!`,
     playerMessage: (player: PokerPlayerManager, message: string) => md`${getMention(player.user)}: ${message}`,
   },
 
   onMessage: {
-    foldNotAllowed: 'You can not fold',
-    checkNotAllowed: 'You can not check',
-    callNotAllowed: 'You can not call',
-    allInNotAllowed: 'You can not go all in',
-    raiseNotAllowed: 'You can not raise',
+    foldNotAllowed: 'You cannot fold',
+    checkNotAllowed: 'You cannot check',
+    callNotAllowed: 'You cannot call',
+    allInNotAllowed: 'You cannot go all in',
+    raiseNotAllowed: 'You cannot raise',
     betTooBig: 'Such a big bet is not allowed',
     betTooSmall: 'Such a small bet is not allowed',
     unknownCommand: "I didn't understand you, but I told everyone",

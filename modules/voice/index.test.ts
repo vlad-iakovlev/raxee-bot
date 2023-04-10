@@ -4,7 +4,7 @@ import { mockGrammyBot } from '../../testUtils/mockGrammyBot'
 
 describe('#createVoiceModule', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
   })
 
   afterEach(() => {
@@ -19,7 +19,6 @@ describe('#createVoiceModule', () => {
   })
 
   it('should reply with sticker when receiving a voice message', async () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
     const { bot, requests } = mockGrammyBot()
     const module = createVoiceModule()
     bot.use(module.composer)
@@ -63,7 +62,6 @@ describe('#createVoiceModule', () => {
   })
 
   it('should reply with sticker when receiving a video_note message', async () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
     const { bot, requests } = mockGrammyBot()
     const module = createVoiceModule()
     bot.use(module.composer)
