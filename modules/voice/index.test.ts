@@ -18,120 +18,118 @@ describe('#createVoiceModule', () => {
     expect(module.composer).toBeInstanceOf(Composer)
   })
 
-  it('should reply with sticker when receiving a voice message', async () => {
-    const { bot, requests } = mockGrammyBot()
-    const module = createVoiceModule()
-    bot.use(module.composer)
-    await bot.init()
+  describe('on:message:voice, on:message:video_note', () => {
+    it('should reply with sticker when receiving a voice message', async () => {
+      const { bot, requests } = mockGrammyBot()
+      const module = createVoiceModule()
+      bot.use(module.composer)
+      await bot.init()
 
-    await bot.handleUpdate({
-      update_id: 10000,
-      message: {
-        date: 1441645532,
-        chat: {
-          id: 1111111,
-          type: 'group',
-          title: 'Test Group',
+      await bot.handleUpdate({
+        update_id: 10000,
+        message: {
+          date: 1441645532,
+          chat: {
+            id: 1111111,
+            type: 'group',
+            title: 'Test Group',
+          },
+          message_id: 1365,
+          from: {
+            id: 1111111,
+            is_bot: false,
+            first_name: 'John',
+          },
+          voice: {
+            file_id: 'AwACAgIAAxkBA',
+            file_unique_id: 'AgADpQVgLwQAAg',
+            duration: 5,
+          },
         },
-        message_id: 1365,
-        from: {
-          id: 1111111,
-          is_bot: false,
-          first_name: 'John',
+      })
+
+      expect(requests).toStrictEqual([
+        {
+          method: 'sendSticker',
+          payload: {
+            chat_id: 1111111,
+            sticker:
+              'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',
+          },
+          signal: undefined,
         },
-        voice: {
-          file_id: 'AwACAgIAAxkBA',
-          file_unique_id: 'AgADpQVgLwQAAg',
-          duration: 5,
-        },
-      },
+      ])
     })
 
-    expect(requests).toStrictEqual([
-      { method: 'getMe', payload: undefined, signal: undefined },
-      {
-        method: 'sendSticker',
-        payload: {
-          chat_id: 1111111,
-          sticker:
-            'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',
-        },
-        signal: undefined,
-      },
-    ])
-  })
+    it('should reply with sticker when receiving a video_note message', async () => {
+      const { bot, requests } = mockGrammyBot()
+      const module = createVoiceModule()
+      bot.use(module.composer)
+      await bot.init()
 
-  it('should reply with sticker when receiving a video_note message', async () => {
-    const { bot, requests } = mockGrammyBot()
-    const module = createVoiceModule()
-    bot.use(module.composer)
-    await bot.init()
+      await bot.handleUpdate({
+        update_id: 10000,
+        message: {
+          date: 1441645532,
+          chat: {
+            id: 1111111,
+            type: 'group',
+            title: 'Test Group',
+          },
+          message_id: 1365,
+          from: {
+            id: 1111111,
+            is_bot: false,
+            first_name: 'John',
+          },
+          video_note: {
+            file_id: 'AwACAgIAAxkBA',
+            file_unique_id: 'AgADpQVgLwQAAg',
+            duration: 5,
+            length: 10,
+          },
+        },
+      })
 
-    await bot.handleUpdate({
-      update_id: 10000,
-      message: {
-        date: 1441645532,
-        chat: {
-          id: 1111111,
-          type: 'group',
-          title: 'Test Group',
+      expect(requests).toStrictEqual([
+        {
+          method: 'sendSticker',
+          payload: {
+            chat_id: 1111111,
+            sticker:
+              'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',
+          },
+          signal: undefined,
         },
-        message_id: 1365,
-        from: {
-          id: 1111111,
-          is_bot: false,
-          first_name: 'John',
-        },
-        video_note: {
-          file_id: 'AwACAgIAAxkBA',
-          file_unique_id: 'AgADpQVgLwQAAg',
-          duration: 5,
-          length: 10,
-        },
-      },
+      ])
     })
 
-    expect(requests).toStrictEqual([
-      { method: 'getMe', payload: undefined, signal: undefined },
-      {
-        method: 'sendSticker',
-        payload: {
-          chat_id: 1111111,
-          sticker:
-            'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',
-        },
-        signal: undefined,
-      },
-    ])
-  })
+    it('should not reply with sticker when receiving a text message', async () => {
+      const { bot, requests } = mockGrammyBot()
+      const module = createVoiceModule()
+      bot.use(module.composer)
+      await bot.init()
 
-  it('should not reply with sticker when receiving a text message', async () => {
-    const { bot, requests } = mockGrammyBot()
-    const module = createVoiceModule()
-    bot.use(module.composer)
-    await bot.init()
+      await bot.handleUpdate({
+        update_id: 10000,
+        message: {
+          date: 1441645532,
+          chat: {
+            id: 1111111,
+            type: 'group',
+            title: 'Test Group',
+          },
+          message_id: 1365,
+          from: {
+            id: 1111111,
+            is_bot: false,
+            first_name: 'John',
+          },
+          text: 'Hello',
+        },
+      })
 
-    await bot.handleUpdate({
-      update_id: 10000,
-      message: {
-        date: 1441645532,
-        chat: {
-          id: 1111111,
-          type: 'group',
-          title: 'Test Group',
-        },
-        message_id: 1365,
-        from: {
-          id: 1111111,
-          is_bot: false,
-          first_name: 'John',
-        },
-        text: 'Hello',
-      },
+      expect(requests).toStrictEqual([])
     })
-
-    expect(requests).toStrictEqual([
-      { method: 'getMe', payload: undefined, signal: undefined },
-    ])
   })
 })

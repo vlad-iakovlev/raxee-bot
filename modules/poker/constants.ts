@@ -146,7 +146,7 @@ export const MESSAGES = {
   pokerStart: {
     alreadyStarted: 'The game in this chat has already started, wait for it to end',
     started: md`Go to the ${md.link('PM', 'https://t.me/raxee_bot')}, the game is on`,
-    tooFew: 'Too few players in this chat, add via /poker_reg',
+    tooFew: 'Not enough players, add via /poker_join',
   },
 
   pokerStopGroup: {

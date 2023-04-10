@@ -16,7 +16,7 @@ const createComposer = () => {
     await next()
   })
 
-  bot.chatType(['group', 'supergroup']).command('poker_reg', async (ctx) => {
+  bot.chatType(['group', 'supergroup']).command('poker_join', async (ctx) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
       ctx.from.id,
       ctx.api
@@ -68,18 +68,24 @@ const createComposer = () => {
     )
 
     if (pokerState.dealsCount > 0) {
-      await ctx.replyWithMarkdown(MESSAGES.pokerStart.alreadyStarted)
+      await ctx.replyWithMarkdown(MESSAGES.pokerStart.alreadyStarted, {
+        reply_to_message_id: ctx.message.message_id,
+      })
       return
     }
 
     if (pokerState.players.length < 2) {
-      await ctx.replyWithMarkdown(MESSAGES.pokerStart.tooFew)
+      await ctx.replyWithMarkdown(MESSAGES.pokerStart.tooFew, {
+        reply_to_message_id: ctx.message.message_id,
+      })
       return
     }
 
     await pokerState.dealCards()
 
-    await ctx.replyWithMarkdown(MESSAGES.pokerStart.started)
+    await ctx.replyWithMarkdown(MESSAGES.pokerStart.started, {
+      reply_to_message_id: ctx.message.message_id,
+    })
   })
 
   bot.chatType(['group', 'supergroup']).command('poker_stop', async (ctx) => {
@@ -92,7 +98,8 @@ const createComposer = () => {
     await ctx.replyWithMarkdown(
       pokerState.dealsCount > 0
         ? MESSAGES.pokerStopGroup.stopped
-        : MESSAGES.pokerStopGroup.cancelled
+        : MESSAGES.pokerStopGroup.cancelled,
+      { reply_to_message_id: ctx.message.message_id }
     )
   })
 
@@ -119,6 +126,7 @@ const createComposer = () => {
       const sender = senderPokerState.players.find(
         (player) => player.user.tgUserId === ctx.from.id
       )
+      // istanbul ignore next
       if (!sender) throw new Error('Player not found')
 
       const message = ctx.message.text
@@ -141,7 +149,7 @@ const createComposer = () => {
 export const createPokerModule = (): BotModule => ({
   commands: [
     {
-      command: 'poker_reg',
+      command: 'poker_join',
       description: 'Join the game [group]',
     },
     {

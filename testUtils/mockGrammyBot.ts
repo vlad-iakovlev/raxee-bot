@@ -23,6 +23,16 @@ export const mockGrammyBot = () => {
     })
   })
 
+  bot.botInfo = {
+    id: 42,
+    first_name: 'Test Bot',
+    is_bot: true,
+    username: 'bot',
+    can_join_groups: true,
+    can_read_all_group_messages: true,
+    supports_inline_queries: false,
+  }
+
   return {
     bot,
     requests,
