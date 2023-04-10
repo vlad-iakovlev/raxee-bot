@@ -30,8 +30,8 @@ model PokerPlayer {
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique @db.ObjectId
 
-  pokerState   PokerState @relation(fields: [pokerStateId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  pokerStateId String     @db.ObjectId
+  state   PokerState @relation(fields: [stateId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  stateId String     @db.ObjectId
 }
 
 model PokerState {

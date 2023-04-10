@@ -207,7 +207,7 @@ export class PokerStateManager {
             tgUserId,
           },
         },
-        pokerState: {
+        state: {
           connect: {
             id: this.id,
           },

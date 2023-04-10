@@ -678,7 +678,7 @@ describe('PokerStateManager', () => {
               tgUserId,
             },
           },
-          pokerState: {
+          state: {
             connect: {
               id: state.id,
             },
