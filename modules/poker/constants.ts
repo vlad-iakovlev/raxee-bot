@@ -1,4 +1,3 @@
-import * as R from 'remeda'
 import { md } from 'telegram-md'
 
 import { getMention } from '../../utils/getMention'
@@ -82,7 +81,7 @@ export const MESSAGES = {
                 getMention(player.user),
                 `(${STRINGS.amount(player.balance + player.betAmount)})`,
                 player.balance === 0 && STRINGS.allIn,
-              ].filter(R.isTruthy),
+              ].filter(Boolean),
               ' '
             )
           ),
@@ -109,9 +108,9 @@ export const MESSAGES = {
                   player.hasFolded && STRINGS.fold,
                   player.isWinner && STRINGS.win,
                 ]
-                  .filter(R.isTruthy)
+                  .filter(Boolean)
                   .join(' '),
-              ].filter(R.isTruthy),
+              ].filter(Boolean),
               '\n'
             )
           ),
