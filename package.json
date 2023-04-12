@@ -2,6 +2,7 @@
   "name": "raxee-bot",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "ts-node bin/bot.ts",
     "generate-models": "prisma generate",
@@ -27,6 +28,8 @@
     "typescript": "^5.0.3"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/dotenv-flow": "^3.2.0",
     "@types/jest": "^29.5.0",
     "@types/node": "^16.18.23",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
@@ -58,11 +61,19 @@
   },
   "prettier": {
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "importOrder": [
+      "^~/",
+      "^\\.\\./",
+      "^\\./"
+    ],
+    "importOrderSortSpecifiers": true
   },
   "jest": {
-    "transform": {
-      "\\.ts$": "ts-jest"
+    "preset": "ts-jest/presets/default-esm",
+    "moduleNameMapper": {
+      "~/(.*)\\.js$": "<rootDir>/$1",
+      "^(\\.{1,2}/.*)\\.js$": "$1"
     },
     "collectCoverageFrom": [
       "!**/node_modules/**",

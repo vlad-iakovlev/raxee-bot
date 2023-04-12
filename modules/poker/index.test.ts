@@ -1,6 +1,6 @@
 import { Composer } from 'grammy'
-import { createPokerModule } from '.'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot'
+import { mockGrammyBot } from '~/testUtils/mockGrammyBot.js'
+import { createPokerModule } from './index.js'
 
 jest.mock('./classes/PokerStateManager')
 const { PokerStateManager } = jest.requireMock('./classes/PokerStateManager')

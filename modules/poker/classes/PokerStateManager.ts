@@ -1,18 +1,18 @@
+import { POKER_ROUND, PokerPlayer, PokerState, User } from '@prisma/client'
+import { Api } from 'grammy'
 import * as R from 'remeda'
-import { PokerPlayer, User, PokerState, POKER_ROUND } from '@prisma/client'
-import { prisma } from '../../../utils/prisma'
-import { PokerPlayerManager } from './PokerPlayerManger'
-import { shuffle } from '../../../utils/shuffle'
+import { Markdown } from 'telegram-md'
+import { getRandomItem } from '~/utils/getRandomItem.js'
+import { prisma } from '~/utils/prisma.js'
+import { shuffle } from '~/utils/shuffle.js'
 import {
   BASE_BET,
   DEFAULT_BALANCE,
   MESSAGES,
   STICKERS,
   STRINGS,
-} from '../constants'
-import { Markdown } from 'telegram-md'
-import { getRandomItem } from '../../../utils/getRandomItem'
-import { Api } from 'grammy'
+} from '../constants.js'
+import { PokerPlayerManager } from './PokerPlayerManger.js'
 
 export class PokerStateManager {
   id: string

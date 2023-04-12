@@ -1,7 +1,7 @@
 import { Composer } from 'grammy'
-import { getRandomItem } from '../../utils/getRandomItem'
-import { STICKERS } from './constants'
-import { BotModule } from '../../types/module'
+import { BotModule } from '~/types/module.js'
+import { getRandomItem } from '~/utils/getRandomItem.js'
+import { STICKERS } from './constants.js'
 
 const createComposer = () => {
   const bot = new Composer()

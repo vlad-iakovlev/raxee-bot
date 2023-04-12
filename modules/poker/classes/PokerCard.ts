@@ -1,5 +1,5 @@
-import { POKER_CARD_SUIT_NAMES, POKER_CARD_VALUE_NAMES } from '../constants'
-import { POKER_CARD_SUIT, POKER_CARD_VALUE } from '../types'
+import { POKER_CARD_SUIT_NAMES, POKER_CARD_VALUE_NAMES } from '../constants.js'
+import { POKER_CARD_SUIT, POKER_CARD_VALUE } from '../types.js'
 
 export class PokerCard {
   static getSuit(card: number): POKER_CARD_SUIT {

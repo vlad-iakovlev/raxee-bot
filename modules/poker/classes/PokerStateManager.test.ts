@@ -1,22 +1,22 @@
-const mockPrisma = {
-  pokerPlayer: {
-    create: jest.fn(),
-  },
-  pokerState: {
-    upsert: jest.fn(),
-    update: jest.fn(),
-    delete: jest.fn(),
-    findFirst: jest.fn(),
-  },
-}
-jest.mock('../../../utils/prisma', () => ({
-  prisma: mockPrisma,
-}))
-
 import { POKER_ROUND, PokerPlayer, PokerState, User } from '@prisma/client'
 import { Api } from 'grammy'
-import { PokerStateManager } from './PokerStateManager'
-import { PokerPlayerManager } from './PokerPlayerManger'
+import { PokerPlayerManager } from './PokerPlayerManger.js'
+import { PokerStateManager } from './PokerStateManager.js'
+
+jest.mock('~/utils/prisma.js', () => ({
+  prisma: {
+    pokerPlayer: {
+      create: jest.fn(),
+    },
+    pokerState: {
+      upsert: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      findFirst: jest.fn(),
+    },
+  },
+}))
+const { prisma } = jest.requireMock('~/utils/prisma.js')
 
 const mockUser = (index: number) =>
   ({
@@ -114,7 +114,7 @@ describe('PokerStateManager', () => {
 
   describe('#loadByTgChatIdOrCreate', () => {
     it('should call prisma.pokerState.upsert and return new PokerStateManager instance', async () => {
-      mockPrisma.pokerState.upsert.mockReturnValueOnce(mockStateData())
+      prisma.pokerState.upsert.mockReturnValueOnce(mockStateData())
       const tgChatId = 100500
 
       const newState = await PokerStateManager.loadByTgChatIdOrCreate(
@@ -122,7 +122,7 @@ describe('PokerStateManager', () => {
         mockTgApi()
       )
 
-      expect(mockPrisma.pokerState.upsert).toBeCalledWith({
+      expect(prisma.pokerState.upsert).toBeCalledWith({
         where: {
           tgChatId,
         },
@@ -149,7 +149,7 @@ describe('PokerStateManager', () => {
 
   describe('#loadByTgUserId', () => {
     it('should call prisma.pokerState.findFirst and return new PokerStateManager instance', async () => {
-      mockPrisma.pokerState.findFirst.mockReturnValueOnce(mockStateData())
+      prisma.pokerState.findFirst.mockReturnValueOnce(mockStateData())
       const tgUserId = 100500
 
       const newState = await PokerStateManager.loadByTgUserId(
@@ -157,7 +157,7 @@ describe('PokerStateManager', () => {
         mockTgApi()
       )
 
-      expect(mockPrisma.pokerState.findFirst).toBeCalledWith({
+      expect(prisma.pokerState.findFirst).toBeCalledWith({
         where: {
           players: {
             some: {
@@ -179,7 +179,7 @@ describe('PokerStateManager', () => {
     })
 
     it('should call prisma.pokerState.findFirst and return undefined', async () => {
-      mockPrisma.pokerState.findFirst.mockReturnValueOnce(undefined)
+      prisma.pokerState.findFirst.mockReturnValueOnce(undefined)
       const tgUserId = 100500
 
       const newState = await PokerStateManager.loadByTgUserId(
@@ -187,7 +187,7 @@ describe('PokerStateManager', () => {
         mockTgApi()
       )
 
-      expect(mockPrisma.pokerState.findFirst).toBeCalledWith({
+      expect(prisma.pokerState.findFirst).toBeCalledWith({
         where: {
           players: {
             some: {
@@ -213,7 +213,7 @@ describe('PokerStateManager', () => {
     it('should call prisma.pokerState.update', async () => {
       await state.save()
 
-      expect(mockPrisma.pokerState.update).toBeCalledWith({
+      expect(prisma.pokerState.update).toBeCalledWith({
         where: {
           id: state.id,
         },
@@ -660,12 +660,12 @@ describe('PokerStateManager', () => {
 
   describe('#addPlayer', () => {
     it('should add call prisma.pokerPlayer.create and add player to players', async () => {
-      mockPrisma.pokerPlayer.create.mockReturnValueOnce(mockPlayer(10))
+      prisma.pokerPlayer.create.mockReturnValueOnce(mockPlayer(10))
       const tgUserId = 1240
 
       await state.addPlayer(tgUserId)
 
-      expect(mockPrisma.pokerPlayer.create).toBeCalledWith({
+      expect(prisma.pokerPlayer.create).toBeCalledWith({
         data: {
           cards: [],
           balance: 1000,
@@ -857,7 +857,7 @@ describe('PokerStateManager', () => {
           { reply_markup: { remove_keyboard: true } },
         ],
       ])
-      expect(mockPrisma.pokerState.delete).toBeCalledWith({
+      expect(prisma.pokerState.delete).toBeCalledWith({
         where: { id: 'state-id' },
       })
     })

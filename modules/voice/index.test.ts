@@ -1,6 +1,6 @@
 import { Composer } from 'grammy'
-import { createVoiceModule } from '.'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot'
+import { mockGrammyBot } from '~/testUtils/mockGrammyBot.js'
+import { createVoiceModule } from './index.js'
 
 describe('#createVoiceModule', () => {
   beforeEach(() => {

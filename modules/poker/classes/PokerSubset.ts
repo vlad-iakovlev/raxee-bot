@@ -1,6 +1,6 @@
 import * as R from 'remeda'
-import { PokerCard } from './PokerCard'
-import { POKER_CARD_VALUE } from '../types'
+import { POKER_CARD_VALUE } from '../types.js'
+import { PokerCard } from './PokerCard.js'
 
 export class PokerSubset {
   cards: [number, number, number, number, number]

@@ -1,4 +1,4 @@
-import { PokerCard } from './PokerCard'
+import { PokerCard } from './PokerCard.js'
 
 describe('PokerCard', () => {
   describe('#getSuit', () => {

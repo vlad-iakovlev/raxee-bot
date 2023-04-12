@@ -1,4 +1,4 @@
-import { PokerSubset } from './PokerSubset'
+import { PokerSubset } from './PokerSubset.js'
 
 describe('PokerSubset', () => {
   describe('#constructor', () => {

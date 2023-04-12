@@ -1,13 +1,13 @@
-const mockPrisma = {
-  user: {
-    upsert: jest.fn(),
-  },
-}
-jest.mock('../utils/prisma', () => ({
-  prisma: mockPrisma,
-}))
+import { initUserMiddleware } from './initUser.js'
 
-import { initUserMiddleware } from './initUser'
+jest.mock('~/utils/prisma.js', () => ({
+  prisma: {
+    user: {
+      upsert: jest.fn(),
+    },
+  },
+}))
+const { prisma } = jest.requireMock('~/utils/prisma.js')
 
 describe('#initUserMiddleware', () => {
   beforeEach(() => {
@@ -27,21 +27,20 @@ describe('#initUserMiddleware', () => {
 
     await initUserMiddleware(ctx, next)
 
-    expect(mockPrisma.user.upsert).toBeCalledWith({
+    expect(prisma.user.upsert).toBeCalledWith({
       where: {
-        tgUserId: ctx.from.id,
+        tgUserId: 123456789,
       },
       create: {
-        tgUserId: ctx.from.id,
-        firstName: ctx.from.first_name,
-        lastName: ctx.from.last_name,
-        username: ctx.from.username,
+        tgUserId: 123456789,
+        firstName: 'John',
+        lastName: 'Doe',
+        username: 'cool_john',
       },
       update: {
-        tgUserId: ctx.from.id,
-        firstName: ctx.from.first_name,
-        lastName: ctx.from.last_name,
-        username: ctx.from.username,
+        firstName: 'John',
+        lastName: 'Doe',
+        username: 'cool_john',
       },
       select: {},
     })
@@ -56,7 +55,7 @@ describe('#initUserMiddleware', () => {
 
     await initUserMiddleware(ctx, next)
 
-    expect(mockPrisma.user.upsert).not.toBeCalled()
+    expect(prisma.user.upsert).not.toBeCalled()
     expect(next).toBeCalledWith()
   })
 })

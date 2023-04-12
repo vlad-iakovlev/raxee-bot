@@ -1,8 +1,8 @@
 import * as R from 'remeda'
-import { POKER_COMBINATION_LEVEL } from '../types'
-import { PokerSubset } from './PokerSubset'
-import { PokerCard } from './PokerCard'
-import { POKER_COMBINATION_LEVEL_NAMES } from '../constants'
+import { POKER_COMBINATION_LEVEL_NAMES } from '../constants.js'
+import { POKER_COMBINATION_LEVEL } from '../types.js'
+import { PokerCard } from './PokerCard.js'
+import { PokerSubset } from './PokerSubset.js'
 
 export class PokerCombination {
   level: POKER_COMBINATION_LEVEL

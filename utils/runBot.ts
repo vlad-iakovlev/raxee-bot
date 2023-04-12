@@ -1,7 +1,7 @@
 import { Bot } from 'grammy'
-import { BotModule } from '../types/module'
-import { handleError } from './handleError'
-import { initUserMiddleware } from '../middleware/initUser'
+import { initUserMiddleware } from '~/middleware/initUser.js'
+import { BotModule } from '~/types/module.js'
+import { handleError } from './handleError.js'
 
 export interface RunBotOptions {
   botToken: string

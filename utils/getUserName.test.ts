@@ -1,4 +1,4 @@
-import { getUserName } from './getUserName'
+import { getUserName } from './getUserName.js'
 
 describe('#getUserName', () => {
   it('should accept undefined', () => {

@@ -1,7 +1,7 @@
-import { initUserMiddleware } from '../middleware/initUser'
-import { BotModule } from '../types/module'
-import { handleError } from './handleError'
-import { runBot } from './runBot'
+import { initUserMiddleware } from '~/middleware/initUser.js'
+import { BotModule } from '~/types/module.js'
+import { handleError } from './handleError.js'
+import { runBot } from './runBot.js'
 
 jest.mock('grammy')
 const { Bot } = jest.requireMock('grammy')

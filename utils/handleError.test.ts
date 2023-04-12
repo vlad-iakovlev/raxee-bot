@@ -1,6 +1,5 @@
 import { BotError, Context } from 'grammy'
-
-import { handleError } from './handleError'
+import { handleError } from './handleError.js'
 
 afterEach(() => {
   jest.spyOn(global.console, 'error').mockRestore()

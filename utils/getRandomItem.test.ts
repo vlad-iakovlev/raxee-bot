@@ -1,4 +1,4 @@
-import { getRandomItem } from './getRandomItem'
+import { getRandomItem } from './getRandomItem.js'
 
 describe('#getRandomItem', () => {
   beforeEach(() => {

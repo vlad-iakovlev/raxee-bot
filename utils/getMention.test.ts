@@ -1,4 +1,4 @@
-import { getMention } from './getMention'
+import { getMention } from './getMention.js'
 
 describe('#getMention', () => {
   it('should accept undefined', () => {
