@@ -1,5 +1,5 @@
 import { Composer } from 'grammy'
-import { mockGrammyBot } from '~/testUtils/mockGrammyBot.js'
+import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
 import { createVoiceModule } from './index.js'
 
 describe('#createVoiceModule', () => {

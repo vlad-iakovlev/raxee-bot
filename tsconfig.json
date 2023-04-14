@@ -9,11 +9,7 @@
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "types": ["node", "jest"],
-    "paths": {
-      "~/*": ["./*"],
-      "@raxee-bot/*": ["./modules/*/index.js"]
-    }
+    "types": ["node", "jest"]
   },
   "exclude": ["node_modules"]
 }

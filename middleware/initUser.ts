@@ -1,5 +1,5 @@
 import { MiddlewareFn } from 'grammy'
-import { prisma } from '~/utils/prisma.js'
+import { prisma } from '../utils/prisma.js'
 
 export const initUserMiddleware: MiddlewareFn = async (ctx, next) => {
   if (ctx.from) {
@@ -18,7 +18,9 @@ export const initUserMiddleware: MiddlewareFn = async (ctx, next) => {
         lastName: ctx.from.last_name,
         username: ctx.from.username,
       },
-      select: {},
+      select: {
+        id: true,
+      },
     })
   }
 

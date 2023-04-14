@@ -1,6 +1,6 @@
 import { Composer, Context } from 'grammy'
 import { replyWithMarkdownPlugin } from 'grammy-reply-with-markdown'
-import { BotModule } from '~/types/module.js'
+import { BotModule } from '../../types/module.js'
 import { PokerStateManager } from './classes/PokerStateManager.js'
 import { MESSAGES } from './constants.js'
 
@@ -24,10 +24,12 @@ const createComposer = () => {
     if (senderPokerState) {
       if (senderPokerState.tgChatId === ctx.chat.id) {
         await ctx.replyWithMarkdown(MESSAGES.pokerReg.duplicateSameChat, {
+          disable_notification: true,
           reply_to_message_id: ctx.message.message_id,
         })
       } else {
         await ctx.replyWithMarkdown(MESSAGES.pokerReg.duplicateOtherChat, {
+          disable_notification: true,
           reply_to_message_id: ctx.message.message_id,
         })
       }
@@ -41,6 +43,7 @@ const createComposer = () => {
 
     if (pokerState.dealsCount > 0) {
       await ctx.replyWithMarkdown(MESSAGES.pokerReg.alreadyStarted, {
+        disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
       })
       return
@@ -48,6 +51,7 @@ const createComposer = () => {
 
     if (pokerState.players.length >= 10) {
       await ctx.replyWithMarkdown(MESSAGES.pokerReg.tooMany, {
+        disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
       })
       return
@@ -56,6 +60,7 @@ const createComposer = () => {
     await pokerState.addPlayer(ctx.from.id)
 
     await ctx.replyWithMarkdown(MESSAGES.pokerReg.registered, {
+      disable_notification: true,
       reply_to_message_id: ctx.message.message_id,
     })
   })
@@ -68,6 +73,7 @@ const createComposer = () => {
 
     if (pokerState.dealsCount > 0) {
       await ctx.replyWithMarkdown(MESSAGES.pokerStart.alreadyStarted, {
+        disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
       })
       return
@@ -75,6 +81,7 @@ const createComposer = () => {
 
     if (pokerState.players.length < 2) {
       await ctx.replyWithMarkdown(MESSAGES.pokerStart.tooFew, {
+        disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
       })
       return
@@ -83,6 +90,7 @@ const createComposer = () => {
     await pokerState.dealCards()
 
     await ctx.replyWithMarkdown(MESSAGES.pokerStart.started, {
+      disable_notification: true,
       reply_to_message_id: ctx.message.message_id,
     })
   })
@@ -98,7 +106,10 @@ const createComposer = () => {
       pokerState.dealsCount > 0
         ? MESSAGES.pokerStopGroup.stopped
         : MESSAGES.pokerStopGroup.cancelled,
-      { reply_to_message_id: ctx.message.message_id }
+      {
+        disable_notification: true,
+        reply_to_message_id: ctx.message.message_id,
+      }
     )
   })
 

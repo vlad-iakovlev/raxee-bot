@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "ts-node bin/bot.ts",
+    "start": "ts-node --esm bin/bot.ts",
     "generate-models": "prisma generate",
     "prepare": "husky install",
     "compile": "tsc --noEmit",
@@ -63,7 +63,6 @@
     "semi": false,
     "singleQuote": true,
     "importOrder": [
-      "^~/",
       "^\\.\\./",
       "^\\./"
     ],
@@ -72,7 +71,6 @@
   "jest": {
     "preset": "ts-jest/presets/default-esm",
     "moduleNameMapper": {
-      "~/(.*)\\.js$": "<rootDir>/$1",
       "^(\\.{1,2}/.*)\\.js$": "$1"
     },
     "collectCoverageFrom": [

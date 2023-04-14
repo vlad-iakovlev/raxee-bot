@@ -3,7 +3,7 @@ import { Api } from 'grammy'
 import { PokerPlayerManager } from './PokerPlayerManger.js'
 import { PokerStateManager } from './PokerStateManager.js'
 
-jest.mock('~/utils/prisma.js', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pokerPlayer: {
       create: jest.fn(),
@@ -16,7 +16,7 @@ jest.mock('~/utils/prisma.js', () => ({
     },
   },
 }))
-const { prisma } = jest.requireMock('~/utils/prisma.js')
+const { prisma } = jest.requireMock('../../../utils/prisma.js')
 
 const mockUser = (index: number) =>
   ({

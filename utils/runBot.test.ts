@@ -1,5 +1,5 @@
-import { initUserMiddleware } from '~/middleware/initUser.js'
-import { BotModule } from '~/types/module.js'
+import { initUserMiddleware } from '../middleware/initUser.js'
+import { BotModule } from '../types/module.js'
 import { handleError } from './handleError.js'
 import { runBot } from './runBot.js'
 

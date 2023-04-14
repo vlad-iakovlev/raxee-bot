@@ -1,5 +1,5 @@
 import { Composer } from 'grammy'
-import { mockGrammyBot } from '~/testUtils/mockGrammyBot.js'
+import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
 import { createPokerModule } from './index.js'
 
 jest.mock('./classes/PokerStateManager')
@@ -210,6 +210,7 @@ describe('#createPokerModule', () => {
             text: "Get ready, you're in the game\\. So that I can communicate with you, [start a chat with me](https://t\\.me/raxee\\_bot?start\\=poker)",
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -309,6 +310,7 @@ describe('#createPokerModule', () => {
             text: 'You are already in the game in this chat',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -363,6 +365,7 @@ describe('#createPokerModule', () => {
             text: 'You are already in the game in another chat',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -419,6 +422,7 @@ describe('#createPokerModule', () => {
             text: 'The game in this chat has already started',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -475,6 +479,7 @@ describe('#createPokerModule', () => {
             text: 'Too many players in this chat, wait for the game to end',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -532,6 +537,7 @@ describe('#createPokerModule', () => {
             text: 'Go to the [PM](https://t\\.me/raxee\\_bot), the game is on',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -631,6 +637,7 @@ describe('#createPokerModule', () => {
             text: 'The game in this chat has already started, wait for it to end',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -683,9 +690,10 @@ describe('#createPokerModule', () => {
           method: 'sendMessage',
           payload: {
             chat_id: 1111111,
-            text: 'Not enough players, add via /poker\\_join',
+            text: 'Not enough players, add with /poker\\_join',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -740,6 +748,7 @@ describe('#createPokerModule', () => {
             text: 'The game in this chat has been stopped',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },
@@ -792,6 +801,7 @@ describe('#createPokerModule', () => {
             text: 'The game in this chat has been cancelled',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
+            disable_notification: true,
           },
           signal: undefined,
         },

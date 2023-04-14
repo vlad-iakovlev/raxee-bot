@@ -1,13 +1,13 @@
 import { initUserMiddleware } from './initUser.js'
 
-jest.mock('~/utils/prisma.js', () => ({
+jest.mock('../utils/prisma.js', () => ({
   prisma: {
     user: {
       upsert: jest.fn(),
     },
   },
 }))
-const { prisma } = jest.requireMock('~/utils/prisma.js')
+const { prisma } = jest.requireMock('../utils/prisma.js')
 
 describe('#initUserMiddleware', () => {
   beforeEach(() => {
@@ -42,7 +42,9 @@ describe('#initUserMiddleware', () => {
         lastName: 'Doe',
         username: 'cool_john',
       },
-      select: {},
+      select: {
+        id: true,
+      },
     })
     expect(next).toBeCalledWith()
   })

@@ -1,5 +1,5 @@
 import { md } from 'telegram-md'
-import { getMention } from '~/utils/getMention.js'
+import { getMention } from '../../utils/getMention.js'
 import { PokerCard } from './classes/PokerCard.js'
 import { PokerPlayerManager } from './classes/PokerPlayerManger.js'
 import {
@@ -143,7 +143,7 @@ export const MESSAGES = {
   pokerStart: {
     alreadyStarted: 'The game in this chat has already started, wait for it to end',
     started: md`Go to the ${md.link('PM', 'https://t.me/raxee_bot')}, the game is on`,
-    tooFew: 'Not enough players, add via /poker_join',
+    tooFew: 'Not enough players, add with /poker_join',
   },
 
   pokerStopGroup: {
@@ -162,15 +162,15 @@ export const MESSAGES = {
         md`The game is played by ${md.link("Texas Hold'em", 'https://en.wikipedia.org/wiki/Texas_hold_%27em')} rules.`,
         md.join(
           [
-            md`Once the game starts, the normal keypad will be replaced by a poker keypad:`,
-            md`\u2022 in the first line, the cards that are on the table are displayed;`,
-            md`\u2022 in the second line, the bank is displayed \u2014 the amount of all bets for the round;`,
-            md`\u2022 in the third line, your cards and balance are displayed;`,
-            md`\u2022 in the fourth line, available actions are displayed: ${STRINGS.fold}, ${STRINGS.check}, ${STRINGS.call('Call')}, ${STRINGS.allIn}.`,
+            'Once the game starts, the normal keypad will be replaced by a poker keypad:',
+            '\u2022 in the first line, the cards that are on the table are displayed;',
+            '\u2022 in the second line, the bank is displayed \u2014 the amount of all bets for the round;',
+            '\u2022 in the third line, your cards and balance are displayed;',
+            `\u2022 in the fourth line, available actions are displayed: ${STRINGS.fold}, ${STRINGS.check}, ${STRINGS.call('Call')}, ${STRINGS.allIn}.`,
           ],
           '\n'
         ),
-        md`To make a ${STRINGS.raise('Raise')}, write a number in the chat room. For example, "100" if you want to bet ${STRINGS.amount(100)}.`,
+        `To make a ${STRINGS.raise('Raise')}, write a number in the chat room. For example, "100" if you want to bet ${STRINGS.amount(100)}.`,
       ],
       '\n\n'
     ),

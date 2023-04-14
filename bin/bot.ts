@@ -1,7 +1,7 @@
-import { createPokerModule } from '@raxee-bot/poker'
-import { createVoiceModule } from '@raxee-bot/voice'
 import * as dotenv from 'dotenv-flow'
-import { runBot } from '~/utils/runBot.js'
+import { createPokerModule } from '../modules/poker/index.js'
+import { createVoiceModule } from '../modules/voice/index.js'
+import { runBot } from '../utils/runBot.js'
 
 void (async () => {
   try {
