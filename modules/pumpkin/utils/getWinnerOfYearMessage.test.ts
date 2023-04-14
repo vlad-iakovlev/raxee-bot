@@ -1,5 +1,4 @@
 import { md } from 'telegram-md'
-import { getMention } from '../../../utils/getMention.js'
 import { PumpkinManager } from '../classes/PumpkinManager.js'
 import { PumpkinPlayerWithStats } from '../types.js'
 import { getWinnerOfYearMessage } from './getWinnerOfYearMessage.js'
