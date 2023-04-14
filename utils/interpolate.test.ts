@@ -1,29 +1,29 @@
-import { Markdown } from 'telegram-md'
+import { Markdown, md } from 'telegram-md'
 import { interpolate } from './interpolate.js'
 
 describe('#interpolate', () => {
   it('should interpolate over markdown', () => {
-    const text = new Markdown('Hello %{0}, %{1}!')
+    const text = new Markdown('Hello %{0}, %{1}, %{2}!')
 
-    const result = interpolate(text, 'Mark', 'Tom')
+    const result = interpolate(text, 'Mark', 'Tom_Tom', md.bold('Bond'))
 
-    expect(result).toStrictEqual(new Markdown('Hello Mark, Tom!'))
+    expect(result).toStrictEqual(md`Hello Mark, Tom_Tom, ${md.bold('Bond')}!`)
     expect(result).not.toBe(text)
   })
 
   it('should interpolate over string', () => {
-    const text = 'Hello %{0}, %{1}!'
+    const text = 'Hello %{0}, %{1}, %{2}!'
 
-    const result = interpolate(text, 'Mark', 'Tom')
+    const result = interpolate(text, 'Mark', 'Tom_Tom', md.bold('Bond'))
 
-    expect(result).toStrictEqual(new Markdown('Hello Mark, Tom!'))
+    expect(result).toStrictEqual(md`Hello Mark, Tom_Tom, ${md.bold('Bond')}!`)
   })
 
   it('should replace null arguments with empty string', () => {
-    const text = 'Hello %{0}, %{1}!'
+    const text = 'Hello %{0}, %{1}, %{2}!'
 
-    const result = interpolate(text, null, 'Tom')
+    const result = interpolate(text, null, 'Tom_Tom', md.bold('Bond'))
 
-    expect(result).toStrictEqual(new Markdown('Hello , Tom!'))
+    expect(result).toStrictEqual(md`Hello , Tom_Tom, ${md.bold('Bond')}!`)
   })
 })

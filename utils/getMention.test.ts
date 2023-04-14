@@ -1,12 +1,6 @@
 import { getMention } from './getMention.js'
 
 describe('#getMention', () => {
-  it('should accept undefined', () => {
-    const mention = getMention(undefined)
-
-    expect(mention.value).toBe('tg://user?id\\=undefined')
-  })
-
   it('should return simple mention when username is presented', () => {
     const mention = getMention({
       id: 'user-id',

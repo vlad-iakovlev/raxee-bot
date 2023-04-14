@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv-flow'
 import { createPokerModule } from '../modules/poker/index.js'
+import { createPumpkinModule } from '../modules/pumpkin/index.js'
 import { createVoiceModule } from '../modules/voice/index.js'
 import { runBot } from '../utils/runBot.js'
 
@@ -14,7 +15,11 @@ void (async () => {
 
     await runBot({
       botToken,
-      modules: [createPokerModule(), createVoiceModule()],
+      modules: [
+        createPumpkinModule(),
+        createPokerModule(),
+        createVoiceModule(),
+      ],
     })
 
     process.exit(0)

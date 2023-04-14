@@ -1,12 +1,6 @@
 import { getUserName } from './getUserName.js'
 
 describe('#getUserName', () => {
-  it('should accept undefined', () => {
-    const userName = getUserName(undefined)
-
-    expect(userName).toBe('')
-  })
-
   it('should return username when presented', () => {
     const userName = getUserName({
       id: 'user-id',

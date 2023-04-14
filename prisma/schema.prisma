@@ -15,7 +15,8 @@ model User {
   lastName  String?
   username  String?
 
-  pokerPlayer PokerPlayer?
+  pokerPlayer   PokerPlayer?
+  pumpkinPlayer PumpkinPlayer[]
 }
 
 model PokerPlayer {
@@ -51,4 +52,26 @@ enum POKER_ROUND {
   FLOP
   TURN
   RIVER
+}
+
+model PumpkinPlayer {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  tgChatId Int
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+
+  stats PumpkinStats[]
+
+  @@unique([tgChatId, userId])
+}
+
+model PumpkinStats {
+  id   String   @id @default(auto()) @map("_id") @db.ObjectId
+  date DateTime
+
+  player   PumpkinPlayer @relation(fields: [playerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  playerId String        @db.ObjectId
+
+  @@unique([playerId, date])
 }
