@@ -82,6 +82,7 @@ describe('#createPokerModule', () => {
               'To make a ⏫ Raise, write a number in the chat room\\. For example, "100" if you want to bet 100 🪙\\.',
             ].join('\n'),
             parse_mode: 'MarkdownV2',
+            disable_web_page_preview: true,
           },
           signal: undefined,
         },

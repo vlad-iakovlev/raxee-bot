@@ -9,7 +9,10 @@ const createComposer = () => {
 
   bot.chatType('private').command('start', async (ctx, next) => {
     if (ctx.match === 'poker') {
-      await ctx.replyWithMarkdown(MESSAGES.start.help)
+      await ctx.replyWithMarkdown(MESSAGES.start.help, {
+        disable_web_page_preview: true,
+      })
+      return
     }
 
     await next()

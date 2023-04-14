@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv-flow'
+import { createHelpModule } from '../modules/help/index.js'
 import { createPokerModule } from '../modules/poker/index.js'
 import { createPumpkinModule } from '../modules/pumpkin/index.js'
 import { createVoiceModule } from '../modules/voice/index.js'
@@ -19,6 +20,7 @@ void (async () => {
         createPumpkinModule(),
         createPokerModule(),
         createVoiceModule(),
+        createHelpModule(),
       ],
     })
 
