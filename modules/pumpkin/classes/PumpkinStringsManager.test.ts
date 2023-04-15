@@ -65,13 +65,13 @@ describe('PumpkinStringsManager', () => {
     it('should return random string if no chat string', () => {
       const manager = new PumpkinStringsManager({})
 
-      expect(manager.get('hello')).toStrictEqual('Halo')
+      expect(manager.get('hello')).toStrictEqual('Jambo')
     })
 
     it('should return random string if chat strings array is empty', () => {
       const manager = new PumpkinStringsManager({ hello: [] })
 
-      expect(manager.get('hello')).toStrictEqual('Halo')
+      expect(manager.get('hello')).toStrictEqual('Jambo')
     })
   })
 })
