@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv-flow'
+import { Composer } from 'grammy'
 import { createHelpModule } from '../modules/help/index.js'
 import { createPokerModule } from '../modules/poker/index.js'
 import { createPumpkinModule } from '../modules/pumpkin/index.js'
@@ -14,13 +15,22 @@ void (async () => {
       throw new Error('You should set BOT_TOKEN in .env file')
     }
 
+    const helpModule = createHelpModule()
+
     await runBot({
       botToken,
       modules: [
+        {
+          commands: [],
+          composer: helpModule.composer,
+        },
         createPumpkinModule(),
         createPokerModule(),
         createVoiceModule(),
-        createHelpModule(),
+        {
+          commands: helpModule.commands,
+          composer: new Composer(),
+        },
       ],
     })
 
