@@ -63,7 +63,7 @@ const mockStateDealerIndex = jest.fn(() => 0)
 const mockStateSmallIndex = jest.fn(() => 1)
 const mockStateBigIndex = jest.fn(() => 2)
 const mockStateCurrentPlayerIndex = jest.fn(() => 3)
-const mockBankAmount = jest.fn(() => 100)
+const mockPotAmount = jest.fn(() => 100)
 const mockRequiredBetAmount = jest.fn(() => 20)
 const mockIsAllIn = jest.fn(() => false)
 const mockStateCurrentPlayer = jest.fn(
@@ -83,7 +83,7 @@ const mockPokerStateManager = jest.fn(
       bigIndex: mockStateBigIndex(),
       currentPlayerIndex: mockStateCurrentPlayerIndex(),
       tgApi: mockTgApi(),
-      bankAmount: mockBankAmount(),
+      potAmount: mockPotAmount(),
       requiredBetAmount: mockRequiredBetAmount(),
       isAllIn: mockIsAllIn(),
       currentPlayer: mockStateCurrentPlayer(),
@@ -306,9 +306,9 @@ describe('PokerPlayerManager', () => {
     })
   })
 
-  describe('#keyboardBank', () => {
-    it('should return bank', () => {
-      expect(player.keyboardBank).toStrictEqual(['Bank: 100 🪙'])
+  describe('#keyboardPot', () => {
+    it('should return pot', () => {
+      expect(player.keyboardPot).toStrictEqual(['Pot: 100 🪙'])
     })
   })
 
@@ -375,7 +375,7 @@ describe('PokerPlayerManager', () => {
     it('should return keyboard', () => {
       expect(player.keyboard).toStrictEqual([
         ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-        ['Bank: 100 🪙'],
+        ['Pot: 100 🪙'],
         ['♥️3', '♠️3', '900 🪙'],
         ['❌ Fold', '✅ 10', '💰 All in'],
       ])
@@ -389,7 +389,7 @@ describe('PokerPlayerManager', () => {
 
       expect(player.keyboard).toStrictEqual([
         ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-        ['Bank: 100 🪙'],
+        ['Pot: 100 🪙'],
         ['♥️3', '♠️3', '900 🪙'],
       ])
     })
@@ -403,7 +403,7 @@ describe('PokerPlayerManager', () => {
 
       expect(player.keyboard).toStrictEqual([
         ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-        ['Bank: 100 🪙'],
+        ['Pot: 100 🪙'],
       ])
     })
   })
@@ -446,7 +446,7 @@ describe('PokerPlayerManager', () => {
           reply_markup: {
             keyboard: [
               ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-              ['Bank: 100 🪙'],
+              ['Pot: 100 🪙'],
               ['♥️3', '♠️3', '900 🪙'],
               ['❌ Fold', '✅ 10', '💰 All in'],
             ],
@@ -481,7 +481,7 @@ describe('PokerPlayerManager', () => {
           reply_markup: {
             keyboard: [
               ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-              ['Bank: 100 🪙'],
+              ['Pot: 100 🪙'],
               ['♥️3', '♠️3', '900 🪙'],
               ['❌ Fold', '✅ 10', '💰 All in'],
             ],

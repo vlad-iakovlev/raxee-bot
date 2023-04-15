@@ -40,19 +40,20 @@ describe('#createPumpkinModule', () => {
     expect(module.commands).toStrictEqual([
       {
         command: 'pumpkin',
-        description: 'Search for pumpkin of the day [group]',
+        description: 'Find the Pumpkin of the Day [group]',
       },
       {
         command: 'pumpkin_join',
-        description: 'Join pumpkin of the day [group]',
+        description: 'Join the Pumpkin of the Day game [group]',
       },
       {
         command: 'pumpkin_stats',
-        description: 'See pumpkin statistics [group]',
+        description: 'View Pumpkin of the Day statistics [group]',
       },
       {
         command: 'pumpkin_stats_year',
-        description: 'See pumpkin statistics for current year [group]',
+        description:
+          'View Pumpkin of the Day statistics for the current year [group]',
       },
     ])
     expect(module.composer).toBeInstanceOf(Composer)

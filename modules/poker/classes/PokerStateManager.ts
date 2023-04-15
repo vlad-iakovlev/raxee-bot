@@ -127,7 +127,7 @@ export class PokerStateManager {
     })
   }
 
-  get bankAmount(): number {
+  get potAmount(): number {
     return this.players.reduce((acc, player) => acc + player.betAmount, 0)
   }
 
@@ -384,7 +384,7 @@ export class PokerStateManager {
       (acc, player) => (player.isWinner ? acc + 1 : acc),
       0
     )
-    const winAmount = this.bankAmount / winnersCount
+    const winAmount = this.potAmount / winnersCount
 
     this.players.forEach((player) => {
       if (player.isWinner) player.balance += winAmount

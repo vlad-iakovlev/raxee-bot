@@ -51,12 +51,11 @@ export const POKER_COMBINATION_LEVEL_NAMES = {
 export const STRINGS = {
   allIn: '💰 All in',
   amount: (value: number | string) => `${value} 🪙`,
-  bank: (value: number | string) => `Bank: ${value} 🪙`,
+  pot: (value: number | string) => `Pot: ${value} 🪙`,
   call: (value: number | string) => `✅ ${value}`,
   check: '✊ Check',
   fold: '❌ Fold',
   preflop: 'Preflop',
-  raise: (value: number | string) => `⏫ ${value}`,
   win: '🏆 Win',
 }
 
@@ -115,35 +114,35 @@ export const MESSAGES = {
         ],
         '\n\n'
       ),
-    gameEnded: 'The game is over, folks',
+    gameEnded: 'Game over, folks!',
     userTurn: (player: PokerPlayerManager) => md`${getMention(player.user)}, your turn!`,
     playerMessage: (player: PokerPlayerManager, message: string) => md`${getMention(player.user)}: ${message}`,
   },
 
   onMessage: {
-    foldNotAllowed: 'You cannot fold',
-    checkNotAllowed: 'You cannot check',
-    callNotAllowed: 'You cannot call',
-    allInNotAllowed: 'You cannot go all in',
-    raiseNotAllowed: 'You cannot raise',
-    betTooBig: 'Such a big bet is not allowed',
-    betTooSmall: 'Such a small bet is not allowed',
-    unknownCommand: "I didn't understand you, but I told everyone",
-    wrongTurn: "It's not your turn now, but I told everyone",
+    foldNotAllowed: "Folding is not allowed",
+    checkNotAllowed: "Checking is not allowed",
+    callNotAllowed: "Calling is not allowed",
+    allInNotAllowed: "Going all in is not allowed",
+    raiseNotAllowed: "Raising is not allowed",
+    betTooBig: 'That bet is too large',
+    betTooSmall: 'That bet is too small',
+    unknownCommand: "I didn't understand you, but I shared your message with everyone",
+    wrongTurn: "It's not your turn now, but I shared your message with everyone",
   },
 
-  pokerReg: {
-    alreadyStarted: 'The game in this chat has already started',
-    duplicateOtherChat: 'You are already in the game in another chat',
-    duplicateSameChat: 'You are already in the game in this chat',
-    registered: md`Get ready, you're in the game. So that I can communicate with you, ${md.link('start a chat with me', 'https://t.me/raxee_bot?start=poker')}`,
-    tooMany: 'Too many players in this chat, wait for the game to end',
+  pokerJoin: {
+    alreadyStarted: 'A game is already in progress in this chat',
+    duplicateOtherChat: 'You are already in a game in another chat',
+    duplicateSameChat: 'You are already in a game in this chat',
+    registered: md`Get ready, you've joined the game. To communicate with me, ${md.link('start a chat', 'https://t.me/raxee_bot')}`,
+    tooMany: 'There are too many players in this chat, wait for the current game to end',
   },
 
   pokerStart: {
-    alreadyStarted: 'The game in this chat has already started, wait for it to end',
-    started: md`Go to the ${md.link('PM', 'https://t.me/raxee_bot')}, the game is on`,
-    tooFew: 'Not enough players, add with /poker_join',
+    alreadyStarted: 'A game is already in progress in this chat, please wait for it to finish',
+    started: md`Proceed to the ${md.link('PM', 'https://t.me/raxee_bot')}, the game has begun`,
+    tooFew: 'Not enough players, use /poker_join to add more',
   },
 
   pokerStopGroup: {
@@ -152,28 +151,7 @@ export const MESSAGES = {
   },
 
   pokerStopPrivate: {
-    notFound: 'You are not in the game',
-  },
-
-  start: {
-    help: md.join(
-      [
-        "I see you want to play poker. All right, well, let me tell you what's what.",
-        md`The game is played by ${md.link("Texas Hold'em", 'https://en.wikipedia.org/wiki/Texas_hold_%27em')} rules.`,
-        md.join(
-          [
-            'Once the game starts, the normal keypad will be replaced by a poker keypad:',
-            '\u2022 in the first line, the cards that are on the table are displayed;',
-            '\u2022 in the second line, the bank is displayed \u2014 the amount of all bets for the round;',
-            '\u2022 in the third line, your cards and balance are displayed;',
-            `\u2022 in the fourth line, available actions are displayed: ${STRINGS.fold}, ${STRINGS.check}, ${STRINGS.call('Call')}, ${STRINGS.allIn}.`,
-          ],
-          '\n'
-        ),
-        `To make a ${STRINGS.raise('Raise')}, write a number in the chat room. For example, "100" if you want to bet ${STRINGS.amount(100)}.`,
-      ],
-      '\n\n'
-    ),
+    notFound: 'You are not currently in a game',
   },
 }
 

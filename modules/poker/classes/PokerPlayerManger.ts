@@ -88,8 +88,8 @@ export class PokerPlayerManager {
     }
   }
 
-  get keyboardBank(): string[] | undefined {
-    return [STRINGS.bank(this.pokerState.bankAmount)]
+  get keyboardPot(): string[] | undefined {
+    return [STRINGS.pot(this.pokerState.potAmount)]
   }
 
   get keyboardBalance(): string[] | undefined {
@@ -116,7 +116,7 @@ export class PokerPlayerManager {
   get keyboard(): string[][] {
     return [
       this.keyboardCards,
-      this.keyboardBank,
+      this.keyboardPot,
       this.keyboardBalance,
       this.keyboardActions,
     ].filter(R.isTruthy)

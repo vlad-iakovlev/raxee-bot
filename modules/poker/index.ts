@@ -7,17 +7,6 @@ import { MESSAGES } from './constants.js'
 const createComposer = () => {
   const bot = new Composer(replyWithMarkdownPlugin())
 
-  bot.chatType('private').command('start', async (ctx, next) => {
-    if (ctx.match === 'poker') {
-      await ctx.replyWithMarkdown(MESSAGES.start.help, {
-        disable_web_page_preview: true,
-      })
-      return
-    }
-
-    await next()
-  })
-
   bot.chatType(['group', 'supergroup']).command('poker_join', async (ctx) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
       ctx.from.id,
@@ -26,12 +15,12 @@ const createComposer = () => {
 
     if (senderPokerState) {
       if (senderPokerState.tgChatId === ctx.chat.id) {
-        await ctx.replyWithMarkdown(MESSAGES.pokerReg.duplicateSameChat, {
+        await ctx.replyWithMarkdown(MESSAGES.pokerJoin.duplicateSameChat, {
           disable_notification: true,
           reply_to_message_id: ctx.message.message_id,
         })
       } else {
-        await ctx.replyWithMarkdown(MESSAGES.pokerReg.duplicateOtherChat, {
+        await ctx.replyWithMarkdown(MESSAGES.pokerJoin.duplicateOtherChat, {
           disable_notification: true,
           reply_to_message_id: ctx.message.message_id,
         })
@@ -45,7 +34,7 @@ const createComposer = () => {
     )
 
     if (pokerState.dealsCount > 0) {
-      await ctx.replyWithMarkdown(MESSAGES.pokerReg.alreadyStarted, {
+      await ctx.replyWithMarkdown(MESSAGES.pokerJoin.alreadyStarted, {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
       })
@@ -53,7 +42,7 @@ const createComposer = () => {
     }
 
     if (pokerState.players.length >= 10) {
-      await ctx.replyWithMarkdown(MESSAGES.pokerReg.tooMany, {
+      await ctx.replyWithMarkdown(MESSAGES.pokerJoin.tooMany, {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
       })
@@ -62,7 +51,7 @@ const createComposer = () => {
 
     await pokerState.addPlayer(ctx.from.id)
 
-    await ctx.replyWithMarkdown(MESSAGES.pokerReg.registered, {
+    await ctx.replyWithMarkdown(MESSAGES.pokerJoin.registered, {
       disable_notification: true,
       reply_to_message_id: ctx.message.message_id,
     })
@@ -163,15 +152,15 @@ export const createPokerModule = (): BotModule => ({
   commands: [
     {
       command: 'poker_join',
-      description: 'Join the game [group]',
+      description: 'Join the Poker game [group]',
     },
     {
       command: 'poker_start',
-      description: 'Start the game [group]',
+      description: 'Begin the Poker game [group]',
     },
     {
       command: 'poker_stop',
-      description: 'Stop the game [private/group]',
+      description: 'End the Poker game [private/group]',
     },
   ],
   composer: createComposer(),

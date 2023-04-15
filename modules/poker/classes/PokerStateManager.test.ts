@@ -243,7 +243,7 @@ describe('PokerStateManager', () => {
     })
   })
 
-  describe('#bankAmount', () => {
+  describe('#potAmount', () => {
     it('should return sum of all players bets', () => {
       mockStatePlayers.mockReturnValueOnce([
         {
@@ -257,7 +257,7 @@ describe('PokerStateManager', () => {
       ])
       resetState()
 
-      expect(state.bankAmount).toBe(300)
+      expect(state.potAmount).toBe(300)
     })
   })
 
@@ -829,7 +829,7 @@ describe('PokerStateManager', () => {
 
       await state.endGame()
 
-      expect(state.broadcastMessage).toBeCalledWith('The game is over, folks')
+      expect(state.broadcastMessage).toBeCalledWith('Game over, folks!')
       expect((state.tgApi.sendSticker as jest.Mock).mock.calls).toStrictEqual([
         [
           1230,
@@ -947,7 +947,7 @@ describe('PokerStateManager', () => {
         '❌ Fold'
       )
 
-      expect(response).toBe('You cannot fold')
+      expect(response).toBe('Folding is not allowed')
       expect(state.players[0].hasFolded).toBe(false)
       expect(state.broadcastPlayerMessage).not.toBeCalled()
       expect(state.nextTurn).not.toBeCalled()
@@ -982,7 +982,7 @@ describe('PokerStateManager', () => {
         '✊ Check'
       )
 
-      expect(response).toBe('You cannot check')
+      expect(response).toBe('Checking is not allowed')
       expect(state.broadcastPlayerMessage).not.toBeCalled()
       expect(state.nextTurn).not.toBeCalled()
     })
@@ -1015,7 +1015,7 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleCallMessage(state.players[0], '✅ 50')
 
-      expect(response).toBe('You cannot call')
+      expect(response).toBe('Calling is not allowed')
       expect(state.players[0].betAmount).toBe(50)
       expect(state.broadcastPlayerMessage).not.toBeCalled()
       expect(state.nextTurn).not.toBeCalled()
@@ -1053,7 +1053,7 @@ describe('PokerStateManager', () => {
         '💰 All in'
       )
 
-      expect(response).toBe('You cannot go all in')
+      expect(response).toBe('Going all in is not allowed')
       expect(state.players[0].betAmount).toBe(50)
       expect(state.broadcastPlayerMessage).not.toBeCalled()
       expect(state.nextTurn).not.toBeCalled()
@@ -1069,7 +1069,9 @@ describe('PokerStateManager', () => {
         'Some message'
       )
 
-      expect(response).toBe("I didn't understand you, but I told everyone")
+      expect(response).toBe(
+        "I didn't understand you, but I shared your message with everyone"
+      )
       expect(state.broadcastPlayerMessage).toBeCalledWith(
         state.players[0],
         'Some message'
@@ -1097,7 +1099,7 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleOtherMessage(state.players[0], '100')
 
-      expect(response).toBe('You cannot raise')
+      expect(response).toBe('Raising is not allowed')
       expect(state.players[0].betAmount).toBe(50)
       expect(state.broadcastPlayerMessage).not.toBeCalled()
     })
@@ -1108,7 +1110,7 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleOtherMessage(state.players[0], '9000')
 
-      expect(response).toBe('Such a big bet is not allowed')
+      expect(response).toBe('That bet is too large')
       expect(state.players[0].betAmount).toBe(50)
       expect(state.broadcastPlayerMessage).not.toBeCalled()
     })
@@ -1119,7 +1121,7 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleOtherMessage(state.players[0], '10')
 
-      expect(response).toBe('Such a small bet is not allowed')
+      expect(response).toBe('That bet is too small')
       expect(state.players[0].betAmount).toBe(50)
       expect(state.broadcastPlayerMessage).not.toBeCalled()
     })
@@ -1423,7 +1425,7 @@ describe('PokerStateManager', () => {
       expect(state.endGame).not.toBeCalled()
     })
 
-    it('should split bank between winners', async () => {
+    it('should split pot between winners', async () => {
       mockStateCards.mockReturnValueOnce([20, 34, 42, 46, 49])
       mockStatePlayers.mockReturnValueOnce([
         {
@@ -1815,7 +1817,7 @@ describe('PokerStateManager', () => {
             reply_markup: {
               keyboard: [
                 ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-                ['Bank: 0 🪙'],
+                ['Pot: 0 🪙'],
                 ['♥️3', '♠️3', '1000 🪙'],
               ],
             },
@@ -1829,7 +1831,7 @@ describe('PokerStateManager', () => {
             reply_markup: {
               keyboard: [
                 ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-                ['Bank: 0 🪙'],
+                ['Pot: 0 🪙'],
                 ['♠️3', '♣️4', '1000 🪙'],
               ],
             },
@@ -1843,7 +1845,7 @@ describe('PokerStateManager', () => {
             reply_markup: {
               keyboard: [
                 ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-                ['Bank: 0 🪙'],
+                ['Pot: 0 🪙'],
                 ['♣️4', '♦️4', '1000 🪙'],
               ],
             },
@@ -1857,7 +1859,7 @@ describe('PokerStateManager', () => {
             reply_markup: {
               keyboard: [
                 ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-                ['Bank: 0 🪙'],
+                ['Pot: 0 🪙'],
                 ['♦️4', '♥️4', '1000 🪙'],
                 ['❌ Fold', '✊ Check', '💰 All in'],
               ],
@@ -1872,7 +1874,7 @@ describe('PokerStateManager', () => {
             reply_markup: {
               keyboard: [
                 ['♦️2', '♥️2', '♠️2', '♣️3', ' '],
-                ['Bank: 0 🪙'],
+                ['Pot: 0 🪙'],
                 ['♥️4', '♠️4', '1000 🪙'],
               ],
             },
