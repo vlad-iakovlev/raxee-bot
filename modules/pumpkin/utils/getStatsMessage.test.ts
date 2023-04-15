@@ -3,6 +3,14 @@ import { PumpkinManager } from '../classes/PumpkinManager.js'
 import { PumpkinPlayerWithStats } from '../types.js'
 import { getStatsMessage } from './getStatsMessage.js'
 
+jest.mock('../../../utils/prisma.js', () => ({
+  prisma: {
+    pumpkinStrings: {
+      findFirst: jest.fn(),
+    },
+  },
+}))
+
 const mockGetStats = jest.spyOn(PumpkinManager, 'getStats')
 
 describe('#getStatsMessage', () => {

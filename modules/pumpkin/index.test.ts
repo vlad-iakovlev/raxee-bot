@@ -4,6 +4,14 @@ import { PumpkinManager } from './classes/PumpkinManager.js'
 import { createPumpkinModule } from './index.js'
 import { PumpkinPlayerWithUser } from './types.js'
 
+jest.mock('../../utils/prisma.js', () => ({
+  prisma: {
+    pumpkinStrings: {
+      findFirst: jest.fn(),
+    },
+  },
+}))
+
 jest.mock('async-pause', () => ({ asyncPause: jest.fn() }))
 
 const mockFindWinner = jest
