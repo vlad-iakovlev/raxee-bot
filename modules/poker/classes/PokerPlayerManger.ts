@@ -57,14 +57,18 @@ export class PokerPlayerManager {
   }
 
   get bestCombination(): PokerCombination | undefined {
-    if (this.hasLost || this.hasFolded) return
     return PokerCombination.getBest([...this.pokerState.cards, ...this.cards])
+  }
+
+  get bestCombinationWeight(): number {
+    if (this.hasLost || this.hasFolded) return 0
+    return this.bestCombination?.weight ?? 0
   }
 
   get isWinner(): boolean {
     return (
       !!this.bestCombination &&
-      this.bestCombination.weight === this.pokerState.bestCombinationWeight
+      this.bestCombinationWeight === this.pokerState.bestCombinationWeight
     )
   }
 

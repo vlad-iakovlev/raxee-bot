@@ -189,7 +189,7 @@ export class PokerStateManager {
 
   get bestCombinationWeight(): number {
     return Math.max(
-      ...this.players.map((player) => player.bestCombination?.weight || 0)
+      ...this.players.map((player) => player.bestCombinationWeight)
     )
   }
 

@@ -220,19 +220,25 @@ describe('PokerPlayerManager', () => {
         )
       )
     })
+  })
 
-    it('should return undefined if player has lost', () => {
+  describe('#bestCombinationWeight', () => {
+    it('should return best combination weight', () => {
+      expect(player.bestCombinationWeight).toBe(70101010100)
+    })
+
+    it('should return zero if player has lost', () => {
       mockPlayerHasLost.mockReturnValueOnce(true)
       resetPlayer()
 
-      expect(player.bestCombination).toBeUndefined()
+      expect(player.bestCombinationWeight).toBe(0)
     })
 
-    it('should return undefined if player has folded', () => {
+    it('should return zero if player has folded', () => {
       mockPlayerHasFolded.mockReturnValueOnce(true)
       resetPlayer()
 
-      expect(player.bestCombination).toBeUndefined()
+      expect(player.bestCombinationWeight).toBe(0)
     })
   })
 
