@@ -75,3 +75,22 @@ model PumpkinStats {
 
   @@unique([playerId, date])
 }
+
+model PumpkinStrings {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  tgChatIds         Int[]
+  hello             String[]
+  notEnoughPlayers  String[]
+  earlyWinner       String[]
+  newWinner1        String[]
+  newWinner2        String[]
+  newWinner3        String[]
+  newWinner4        String[]
+  newWinnerNewYear  String[]
+  pumpkinOfYear     String[]
+  replyForWinner    String[]
+  statsTitleAllTime String[]
+  statsTitleYear    String[]
+  statsPlayer       String[]
+  statsTotalPlayers String[]
+}

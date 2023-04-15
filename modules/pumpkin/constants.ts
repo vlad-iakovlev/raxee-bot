@@ -88,9 +88,9 @@ export const STRINGS = {
     'E kaaro',
   ],
 
-  notEnoughPlayers: 'Add with /pumpkin_join',
+  notEnoughPlayers: ['Add with /pumpkin_join'],
 
-  earlyWinner: "As I see, today's pumpkin is %{0}!",
+  earlyWinner: ["As I see, today's pumpkin is %{0}!"],
 
   newWinner1: [
     "### RUNNING 'YOUAREPUMPKIN.SH'...",
@@ -164,13 +164,15 @@ export const STRINGS = {
   ],
 
   newWinnerNewYear: [
-    'Almost forgot... Happy New Year, pumpkins!',
-    'Find out who won: /pumpkin_%{0}',
-  ].join('\n'),
+    [
+      'Almost forgot... Happy New Year, pumpkins!',
+      'Find out who won: /pumpkin_%{0}',
+    ].join('\n'),
+  ],
 
-  pumpkinOfYear: md.bold('Pumpkin of %{0} \u2014 %{1}'),
+  pumpkinOfYear: [md.bold('Pumpkin of %{0} \u2014 %{1}')],
 
-  replyWinner: [
+  replyForWinner: [
     "Pumpkins can't talk!",
     "By the way, you're a pumpkin :)",
     "Pumpkin's response!",
@@ -206,8 +208,8 @@ export const STRINGS = {
     'Hey pumpkin, got any seeds of wisdom?',
   ],
 
-  statsTitleAllTime: 'Top pumpkins of all time:',
-  statsTitleYear: 'Top pumpkins of this year:',
-  statsPlayer: md`${md.bold('%{0}.')} %{1} \u2014 %{2} times`,
-  statsCount: md.italic('Total participants \u2014 %{0}'),
+  statsTitleAllTime: ['Top pumpkins of all time:'],
+  statsTitleYear: ['Top pumpkins of this year:'],
+  statsPlayer: [md`${md.bold('%{0}.')} %{1} \u2014 %{2} times`],
+  statsTotalPlayers: [md.italic('Total participants \u2014 %{0}')],
 }
