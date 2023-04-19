@@ -2,22 +2,25 @@ import { asyncPause } from 'async-pause'
 import * as fns from 'date-fns'
 import { Composer, Context } from 'grammy'
 import { replyWithMarkdownPlugin } from 'grammy-reply-with-markdown'
-import { BotModule } from '../../types/module.js'
-import { getMention } from '../../utils/getMention.js'
-import { getRandomItem } from '../../utils/getRandomItem.js'
-import { interpolate } from '../../utils/interpolate.js'
-import { PumpkinManager } from './classes/PumpkinManager.js'
-import { PumpkinStringsManager } from './classes/PumpkinStringsManager.js'
-import { getIsDec31 } from './utils/getIsDec31.js'
-import { getStatsMessage } from './utils/getStatsMessage.js'
-import { getWinnerOfYearMessage } from './utils/getWinnerOfYearMessage.js'
+import { BotModule } from '../../types/module.ts'
+import { getMention } from '../../utils/getMention.ts'
+import { getRandomItem } from '../../utils/getRandomItem.ts'
+import { interpolate } from '../../utils/interpolate.ts'
+import { PumpkinStringsManager } from './classes/PumpkinStringsManager.ts'
+import { addWinner } from './utils/addWinner.ts'
+import { getIsDec31 } from './utils/getIsDec31.ts'
+import { getOrAddPlayer } from './utils/getOrAddPlayer.ts'
+import { getPlayers } from './utils/getPlayers.ts'
+import { getPumpkinOfYear } from './utils/getPumpkinOfYear.ts'
+import { getStatsMessage } from './utils/getStatsMessage.ts'
+import { getWinner } from './utils/getWinner.ts'
 
 const createComposer = () => {
   const bot = new Composer(replyWithMarkdownPlugin())
 
   bot.chatType(['group', 'supergroup']).command('pumpkin', async (ctx) => {
     const strings = await PumpkinStringsManager.load(ctx.chat.id)
-    const players = await PumpkinManager.findPlayers(ctx.chat.id)
+    const players = await getPlayers(ctx.chat.id)
 
     if (!players.length) {
       await ctx.replyWithMarkdown(strings.get('notEnoughPlayers'), {
@@ -28,7 +31,7 @@ const createComposer = () => {
 
     const date = new Date()
 
-    const earlyWinner = await PumpkinManager.findWinner(ctx.chat.id, date)
+    const earlyWinner = await getWinner(ctx.chat.id, date)
     if (earlyWinner) {
       await ctx.replyWithMarkdown(
         interpolate(strings.get('earlyWinner'), getMention(earlyWinner.user)),
@@ -38,7 +41,7 @@ const createComposer = () => {
     }
 
     const winner = getRandomItem(players)
-    await PumpkinManager.createWinner(winner.id, date)
+    await addWinner(winner.id, date)
 
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner1'), getMention(winner.user)),
@@ -76,7 +79,7 @@ const createComposer = () => {
   bot.chatType(['group', 'supergroup']).command('pumpkin_join', async (ctx) => {
     const strings = await PumpkinStringsManager.load(ctx.chat.id)
 
-    await PumpkinManager.findOrCreatePlayer(ctx.chat.id, ctx.from.id)
+    await getOrAddPlayer(ctx.chat.id, ctx.from.id)
 
     await ctx.replyWithMarkdown(strings.get('hello'), {
       disable_notification: true,
@@ -102,20 +105,19 @@ const createComposer = () => {
     })
 
   // TODO: https://grammy.dev/plugins/command-filter.html
-  void [2020, 2021, 2022, 2023].forEach((year) => {
+  ;[2020, 2021, 2022, 2023].forEach((year) => {
     bot
       .chatType(['group', 'supergroup'])
       .command(`pumpkin_${year}`, async (ctx) => {
-        await ctx.replyWithMarkdown(
-          await getWinnerOfYearMessage(ctx.chat.id, year),
-          { disable_notification: true }
-        )
+        await ctx.replyWithMarkdown(await getPumpkinOfYear(ctx.chat.id, year), {
+          disable_notification: true,
+        })
       })
   })
 
   bot.chatType(['group', 'supergroup']).on('message', async (ctx, next) => {
     const strings = await PumpkinStringsManager.load(ctx.chat.id)
-    const winner = await PumpkinManager.findWinner(ctx.chat.id, new Date())
+    const winner = await getWinner(ctx.chat.id, new Date())
 
     if (winner?.user.tgUserId === ctx.from.id && Math.random() < 0.1) {
       await ctx.replyWithMarkdown(strings.get('replyForWinner'), {

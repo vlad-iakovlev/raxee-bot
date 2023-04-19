@@ -1,8 +1,8 @@
 import * as R from 'remeda'
-import { POKER_COMBINATION_LEVEL_NAMES } from '../constants.js'
-import { POKER_COMBINATION_LEVEL } from '../types.js'
-import { PokerCard } from './PokerCard.js'
-import { PokerSubset } from './PokerSubset.js'
+import { POKER_COMBINATION_LEVEL_NAMES } from '../constants.ts'
+import { POKER_COMBINATION_LEVEL } from '../types.ts'
+import { getPokerCardValue } from '../utils/getPokerCardValue.ts'
+import { PokerSubset } from './PokerSubset.ts'
 
 export class PokerCombination {
   level: POKER_COMBINATION_LEVEL
@@ -16,11 +16,11 @@ export class PokerCombination {
   get weight() {
     return (
       this.level * 1e10 +
-      PokerCard.getValue(this.subset.cards[0]) * 1e8 +
-      PokerCard.getValue(this.subset.cards[1]) * 1e6 +
-      PokerCard.getValue(this.subset.cards[2]) * 1e4 +
-      PokerCard.getValue(this.subset.cards[3]) * 1e2 +
-      PokerCard.getValue(this.subset.cards[4])
+      getPokerCardValue(this.subset.cards[0]) * 1e8 +
+      getPokerCardValue(this.subset.cards[1]) * 1e6 +
+      getPokerCardValue(this.subset.cards[2]) * 1e4 +
+      getPokerCardValue(this.subset.cards[3]) * 1e2 +
+      getPokerCardValue(this.subset.cards[4])
     )
   }
 
@@ -40,15 +40,15 @@ export class PokerCombination {
       R.map((subset) => {
         // prettier-ignore
         return (
-          PokerCombination.build(POKER_COMBINATION_LEVEL.ROYAL_FLUSH, subset.royalFlush) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.STRAIGHT_FLUSH, subset.straightFlush) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.FOUR_OF_KIND, subset.fourOfKind) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.FULL_HOUSE, subset.fullHouse) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.FLUSH, subset.flush) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.STRAIGHT, subset.straight) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.THREE_OF_KIND, subset.threeOfKind) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.TWO_PAIR, subset.twoPair) ||
-          PokerCombination.build(POKER_COMBINATION_LEVEL.PAIR, subset.pair) ||
+          PokerCombination.build(POKER_COMBINATION_LEVEL.ROYAL_FLUSH, subset.royalFlush) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.STRAIGHT_FLUSH, subset.straightFlush) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.FOUR_OF_KIND, subset.fourOfKind) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.FULL_HOUSE, subset.fullHouse) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.FLUSH, subset.flush) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.STRAIGHT, subset.straight) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.THREE_OF_KIND, subset.threeOfKind) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.TWO_PAIR, subset.twoPair) ??
+          PokerCombination.build(POKER_COMBINATION_LEVEL.PAIR, subset.pair) ??
           PokerCombination.build(POKER_COMBINATION_LEVEL.HIGH_CARD, subset)
         )
       }),
@@ -58,16 +58,19 @@ export class PokerCombination {
   }
 
   private static build(
+    this: void,
     level: POKER_COMBINATION_LEVEL,
     subset: PokerSubset
   ): PokerCombination
 
   private static build(
+    this: void,
     level: POKER_COMBINATION_LEVEL,
     subset?: PokerSubset
   ): PokerCombination | undefined
 
   private static build(
+    this: void,
     level: POKER_COMBINATION_LEVEL,
     subset?: PokerSubset
   ): PokerCombination | undefined {

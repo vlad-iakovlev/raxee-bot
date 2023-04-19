@@ -1,12 +1,12 @@
 import { md } from 'telegram-md'
-import { getUserName } from '../../../utils/getUserName.js'
-import { interpolate } from '../../../utils/interpolate.js'
-import { PumpkinManager } from '../classes/PumpkinManager.js'
-import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.js'
+import { getUserName } from '../../../utils/getUserName.ts'
+import { interpolate } from '../../../utils/interpolate.ts'
+import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.ts'
+import { getStats } from './getStats.ts'
 
 export const getStatsMessage = async (tgChatId: number, year?: number) => {
   const strings = await PumpkinStringsManager.load(tgChatId)
-  const playersWithStats = await PumpkinManager.getStats(tgChatId, year)
+  const playersWithStats = await getStats(tgChatId, year)
 
   const playersWithWinnings = playersWithStats
     .filter((player) => player.winnings > 0)

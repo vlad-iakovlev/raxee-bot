@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv-flow'
 import { Composer } from 'grammy'
-import { createHelpModule } from '../modules/help/index.js'
-import { createPokerModule } from '../modules/poker/index.js'
-import { createPumpkinModule } from '../modules/pumpkin/index.js'
-import { createVoiceModule } from '../modules/voice/index.js'
-import { runBot } from '../utils/runBot.js'
+import { createHelpModule } from '../modules/help/index.ts'
+import { createPokerModule } from '../modules/poker/index.ts'
+import { createPumpkinModule } from '../modules/pumpkin/index.ts'
+import { createVoiceModule } from '../modules/voice/index.ts'
+import { runBot } from '../utils/runBot.ts'
 
 void (async () => {
   try {

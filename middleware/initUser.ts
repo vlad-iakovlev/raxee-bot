@@ -1,5 +1,5 @@
 import { MiddlewareFn } from 'grammy'
-import { prisma } from '../utils/prisma.js'
+import { prisma } from '../utils/prisma.ts'
 
 export const initUserMiddleware: MiddlewareFn = async (ctx, next) => {
   if (ctx.from) {

@@ -1,15 +1,12 @@
 import { md } from 'telegram-md'
-import { getMention } from '../../../utils/getMention.js'
-import { interpolate } from '../../../utils/interpolate.js'
-import { PumpkinManager } from '../classes/PumpkinManager.js'
-import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.js'
+import { getMention } from '../../../utils/getMention.ts'
+import { interpolate } from '../../../utils/interpolate.ts'
+import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.ts'
+import { getStats } from './getStats.ts'
 
-export const getWinnerOfYearMessage = async (
-  tgChatId: number,
-  year: number
-) => {
+export const getPumpkinOfYear = async (tgChatId: number, year: number) => {
   const strings = await PumpkinStringsManager.load(tgChatId)
-  const playersWithStats = await PumpkinManager.getStats(tgChatId, year)
+  const playersWithStats = await getStats(tgChatId, year)
 
   const maxWinnings = playersWithStats.reduce(
     (acc, player) => Math.max(acc, player.winnings),

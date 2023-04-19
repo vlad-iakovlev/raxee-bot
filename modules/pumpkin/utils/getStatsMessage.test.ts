@@ -1,9 +1,8 @@
 import { md } from 'telegram-md'
-import { PumpkinManager } from '../classes/PumpkinManager.js'
-import { PumpkinPlayerWithStats } from '../types.js'
-import { getStatsMessage } from './getStatsMessage.js'
+import { PumpkinPlayerWithStats } from '../types.ts'
+import { getStatsMessage } from './getStatsMessage.ts'
 
-jest.mock('../../../utils/prisma.js', () => ({
+jest.mock('../../../utils/prisma.ts', () => ({
   prisma: {
     pumpkinStrings: {
       findFirst: jest.fn(),
@@ -11,7 +10,8 @@ jest.mock('../../../utils/prisma.js', () => ({
   },
 }))
 
-const mockGetStats = jest.spyOn(PumpkinManager, 'getStats')
+jest.mock('./getStats.ts')
+const { getStats } = jest.requireMock('./getStats.ts')
 
 describe('#getStatsMessage', () => {
   beforeEach(() => {
@@ -52,11 +52,11 @@ describe('#getStatsMessage', () => {
         winnings: 0,
       },
     ] as PumpkinPlayerWithStats[]
-    mockGetStats.mockResolvedValueOnce(playersWithStats)
+    getStats.mockResolvedValueOnce(playersWithStats)
 
     const message = await getStatsMessage(tgChatId)
 
-    expect(mockGetStats).toBeCalledWith(tgChatId, undefined)
+    expect(getStats).toBeCalledWith(tgChatId, undefined)
     expect(message).toStrictEqual(
       md.join(
         [
@@ -107,11 +107,11 @@ describe('#getStatsMessage', () => {
         winnings: 0,
       },
     ] as PumpkinPlayerWithStats[]
-    mockGetStats.mockResolvedValueOnce(playersWithStats)
+    getStats.mockResolvedValueOnce(playersWithStats)
 
     const message = await getStatsMessage(tgChatId, year)
 
-    expect(mockGetStats).toBeCalledWith(tgChatId, year)
+    expect(getStats).toBeCalledWith(tgChatId, year)
     expect(message).toStrictEqual(
       md.join(
         [

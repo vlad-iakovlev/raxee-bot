@@ -1,12 +1,12 @@
 import { BotError, Context } from 'grammy'
-import { handleError } from './handleError.js'
+import { handleError } from './handleError.ts'
 
 afterEach(() => {
   jest.spyOn(global.console, 'error').mockRestore()
 })
 
 describe('#handleError', () => {
-  it('should console error and send reply', () => {
+  it('should console error and send reply', async () => {
     const error = new Error('some error')
 
     const consoleError = jest.fn()
@@ -14,7 +14,7 @@ describe('#handleError', () => {
 
     jest.spyOn(global.console, 'error').mockImplementation(consoleError)
 
-    handleError(
+    await handleError(
       new BotError(error, {
         reply,
         update: { update_id: 12345 },
@@ -31,7 +31,7 @@ describe('#handleError', () => {
     expect(reply).toBeCalledWith('Something went wrong ¯\\_(ツ)_/¯')
   })
 
-  it('should handle send reply error', () => {
+  it('should handle send reply error', async () => {
     const error = new Error('some error')
     const replyError = new Error('reply error')
 
@@ -42,7 +42,7 @@ describe('#handleError', () => {
 
     jest.spyOn(global.console, 'error').mockImplementation(consoleError)
 
-    handleError(
+    await handleError(
       new BotError(error, {
         reply,
         update: { update_id: 12345 },

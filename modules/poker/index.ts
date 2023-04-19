@@ -1,8 +1,8 @@
 import { Composer, Context } from 'grammy'
 import { replyWithMarkdownPlugin } from 'grammy-reply-with-markdown'
-import { BotModule } from '../../types/module.js'
-import { PokerStateManager } from './classes/PokerStateManager.js'
-import { MESSAGES } from './constants.js'
+import { BotModule } from '../../types/module.ts'
+import { PokerStateManager } from './classes/PokerStateManager.ts'
+import { MESSAGES } from './constants.ts'
 
 const createComposer = () => {
   const bot = new Composer(replyWithMarkdownPlugin())

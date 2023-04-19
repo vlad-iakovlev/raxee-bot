@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { POKER_ROUND, PokerPlayer, PokerState, User } from '@prisma/client'
 import { Api } from 'grammy'
-import { PokerPlayerManager } from './PokerPlayerManger.js'
-import { PokerStateManager } from './PokerStateManager.js'
+import { PokerPlayerManager } from './PokerPlayerManger.ts'
+import { PokerStateManager } from './PokerStateManager.ts'
 
-jest.mock('../../../utils/prisma.js', () => ({
+jest.mock('../../../utils/prisma.ts', () => ({
   prisma: {
     pokerPlayer: {
       create: jest.fn(),
@@ -16,7 +17,7 @@ jest.mock('../../../utils/prisma.js', () => ({
     },
   },
 }))
-const { prisma } = jest.requireMock('../../../utils/prisma.js')
+const { prisma } = jest.requireMock('../../../utils/prisma.ts')
 
 const mockUser = (index: number) =>
   ({
@@ -54,7 +55,7 @@ const mockStatePlayers = jest.fn(
       mockPlayer(2),
       mockPlayer(3),
       mockPlayer(4),
-    ] as Array<PokerPlayer & { user: User }>
+    ] as (PokerPlayer & { user: User })[]
 )
 const mockStateData = jest.fn(
   () =>
@@ -67,7 +68,7 @@ const mockStateData = jest.fn(
       dealerIndex: mockStateDealerIndex(),
       currentPlayerIndex: mockStateCurrentPlayerIndex(),
       players: mockStatePlayers(),
-    } as PokerState & { players: Array<PokerPlayer & { user: User }> })
+    } as PokerState & { players: (PokerPlayer & { user: User })[] })
 )
 
 const mockTgApi = jest.fn(
@@ -1769,8 +1770,8 @@ describe('PokerStateManager', () => {
   })
 
   describe('#broadcastMessage', () => {
-    it('should broadcast message to all players', () => {
-      state.broadcastMessage('test')
+    it('should broadcast message to all players', async () => {
+      await state.broadcastMessage('test')
 
       expect((state.tgApi.sendMessage as jest.Mock).mock.calls).toStrictEqual([
         [1230, 'test', { parse_mode: 'MarkdownV2' }],
@@ -1781,8 +1782,8 @@ describe('PokerStateManager', () => {
       ])
     })
 
-    it('should broadcast message only to given players', () => {
-      state.broadcastMessage('test', [state.players[0], state.players[1]])
+    it('should broadcast message only to given players', async () => {
+      await state.broadcastMessage('test', [state.players[0], state.players[1]])
 
       expect((state.tgApi.sendMessage as jest.Mock).mock.calls).toStrictEqual([
         [1230, 'test', { parse_mode: 'MarkdownV2' }],
@@ -1792,8 +1793,8 @@ describe('PokerStateManager', () => {
   })
 
   describe('#broadcastPlayerMessage', () => {
-    it('should broadcast message to all players except given one', () => {
-      state.broadcastPlayerMessage(state.players[3], 'test')
+    it('should broadcast message to all players except given one', async () => {
+      await state.broadcastPlayerMessage(state.players[3], 'test')
 
       expect((state.tgApi.sendMessage as jest.Mock).mock.calls).toStrictEqual([
         [1230, '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],

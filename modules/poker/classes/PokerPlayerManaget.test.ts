@@ -1,11 +1,11 @@
 import { POKER_ROUND, PokerPlayer, User } from '@prisma/client'
 import { Api } from 'grammy'
 import { md } from 'telegram-md'
-import { POKER_COMBINATION_LEVEL } from '../types.js'
-import { PokerCombination } from './PokerCombination.js'
-import { PokerPlayerManager } from './PokerPlayerManger.js'
-import { PokerStateManager } from './PokerStateManager.js'
-import { PokerSubset } from './PokerSubset.js'
+import { POKER_COMBINATION_LEVEL } from '../types.ts'
+import { PokerCombination } from './PokerCombination.ts'
+import { PokerPlayerManager } from './PokerPlayerManger.ts'
+import { PokerStateManager } from './PokerStateManager.ts'
+import { PokerSubset } from './PokerSubset.ts'
 
 const mockUserId = jest.fn(() => 'user-id')
 const mockUserTgUserId = jest.fn(() => 123456789)
@@ -429,9 +429,9 @@ describe('PokerPlayerManager', () => {
   })
 
   describe('#sendMessage', () => {
-    it('should send message without keyboard', () => {
+    it('should send message without keyboard', async () => {
       // prettier-ignore
-      player.sendMessage(md`Hello, World!`)
+      await player.sendMessage(md`Hello, World!`)
 
       expect(mockSendMessage).toHaveBeenCalledWith(
         123456789,
@@ -440,9 +440,9 @@ describe('PokerPlayerManager', () => {
       )
     })
 
-    it('should send message with keyboard', () => {
+    it('should send message with keyboard', async () => {
       // prettier-ignore
-      player.sendMessage(md`Hello, World!`, true)
+      await player.sendMessage(md`Hello, World!`, true)
 
       expect(mockSendMessage).toHaveBeenCalledWith(
         123456789,
@@ -463,8 +463,8 @@ describe('PokerPlayerManager', () => {
   })
 
   describe('#sendStickerAndRemoveKeyboard', () => {
-    it('should send sticker and remove keyboard', () => {
-      player.sendStickerAndRemoveKeyboard('sticker')
+    it('should send sticker and remove keyboard', async () => {
+      await player.sendStickerAndRemoveKeyboard('sticker')
 
       expect(mockSendSticker).toHaveBeenCalledWith(123456789, 'sticker', {
         reply_markup: { remove_keyboard: true },
@@ -473,11 +473,11 @@ describe('PokerPlayerManager', () => {
   })
 
   describe('#sendCurrentTurn', () => {
-    it('should send current turn', () => {
+    it('should send current turn', async () => {
       mockStateCurrentPlayer.mockReturnValueOnce(player)
       resetPlayer()
 
-      player.sendCurrentTurn()
+      await player.sendCurrentTurn()
 
       expect(mockSendMessage).toHaveBeenCalledWith(
         123456789,

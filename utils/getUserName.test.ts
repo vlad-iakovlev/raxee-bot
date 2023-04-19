@@ -1,4 +1,4 @@
-import { getUserName } from './getUserName.js'
+import { getUserName } from './getUserName.ts'
 
 describe('#getUserName', () => {
   it('should return username when presented', () => {

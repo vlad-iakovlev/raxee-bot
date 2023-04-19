@@ -1,10 +1,9 @@
 import { Composer } from 'grammy'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
-import { PumpkinManager } from './classes/PumpkinManager.js'
-import { createPumpkinModule } from './index.js'
-import { PumpkinPlayerWithUser } from './types.js'
+import { mockGrammyBot } from '../../testUtils/mockGrammyBot.ts'
+import { createPumpkinModule } from './index.ts'
+import { PumpkinPlayerWithUser } from './types.ts'
 
-jest.mock('../../utils/prisma.js', () => ({
+jest.mock('../../utils/prisma.ts', () => ({
   prisma: {
     pumpkinStrings: {
       findFirst: jest.fn(),
@@ -14,28 +13,23 @@ jest.mock('../../utils/prisma.js', () => ({
 
 jest.mock('async-pause', () => ({ asyncPause: jest.fn() }))
 
-const mockFindWinner = jest
-  .spyOn(PumpkinManager, 'findWinner')
-  .mockResolvedValue(null)
-const mockCreateWinner = jest
-  .spyOn(PumpkinManager, 'createWinner')
-  .mockResolvedValue()
-const mockFindPlayers = jest
-  .spyOn(PumpkinManager, 'findPlayers')
-  .mockResolvedValue([])
-const mockFindOrCreatePlayer = jest
-  .spyOn(PumpkinManager, 'findOrCreatePlayer')
-  .mockResolvedValue({} as PumpkinPlayerWithUser)
+jest.mock('./utils/addWinner.ts')
+const { addWinner } = jest.requireMock('./utils/addWinner.ts')
 
-jest.mock('./utils/getStatsMessage.ts', () => ({ getStatsMessage: jest.fn() }))
+jest.mock('./utils/getOrAddPlayer.ts')
+const { getOrAddPlayer } = jest.requireMock('./utils/getOrAddPlayer.ts')
+
+jest.mock('./utils/getPlayers.ts')
+const { getPlayers } = jest.requireMock('./utils/getPlayers.ts')
+
+jest.mock('./utils/getPumpkinOfYear.ts')
+const { getPumpkinOfYear } = jest.requireMock('./utils/getPumpkinOfYear.ts')
+
+jest.mock('./utils/getStatsMessage.ts')
 const { getStatsMessage } = jest.requireMock('./utils/getStatsMessage.ts')
 
-jest.mock('./utils/getWinnerOfYearMessage.ts', () => ({
-  getWinnerOfYearMessage: jest.fn(),
-}))
-const { getWinnerOfYearMessage } = jest.requireMock(
-  './utils/getWinnerOfYearMessage.ts'
-)
+jest.mock('./utils/getWinner.ts')
+const { getWinner } = jest.requireMock('./utils/getWinner.ts')
 
 describe('#createPumpkinModule', () => {
   beforeEach(() => {
@@ -80,7 +74,7 @@ describe('#createPumpkinModule', () => {
 
     it('should set winner and reply with winner', async () => {
       jest.setSystemTime(new Date('2023-04-14T22:08:00'))
-      mockFindPlayers.mockResolvedValueOnce([
+      getPlayers.mockResolvedValueOnce([
         {
           id: 'player-1-id',
           user: {
@@ -177,18 +171,18 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(mockFindPlayers).toBeCalledWith(123)
-      expect(mockFindWinner).toBeCalledWith(123, new Date())
-      expect(mockCreateWinner).toBeCalledWith('player-1-id', new Date())
+      expect(getPlayers).toBeCalledWith(123)
+      expect(getWinner).toBeCalledWith(123, new Date())
+      expect(addWinner).toBeCalledWith('player-1-id', new Date())
     })
 
-    it('should do nothing in private chat', () => {
+    it('should do nothing in private chat', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
-      bot.handleUpdate({
+      await bot.handleUpdate({
         update_id: 10000,
         message: {
           date: 1441645532,
@@ -223,7 +217,7 @@ describe('#createPumpkinModule', () => {
 
     it('should reply with earlier winner', async () => {
       jest.setSystemTime(new Date('2023-04-14T22:08:00'))
-      mockFindPlayers.mockResolvedValueOnce([
+      getPlayers.mockResolvedValueOnce([
         {
           id: 'player-1-id',
           user: {
@@ -245,7 +239,7 @@ describe('#createPumpkinModule', () => {
           },
         },
       ] as PumpkinPlayerWithUser[])
-      mockFindWinner.mockResolvedValueOnce({
+      getWinner.mockResolvedValueOnce({
         id: 'player-2-id',
         user: {
           id: 'user-2-id',
@@ -300,12 +294,13 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(mockFindPlayers).toBeCalledWith(123)
-      expect(mockFindWinner).toBeCalledWith(123, new Date())
-      expect(mockCreateWinner).not.toBeCalled()
+      expect(getPlayers).toBeCalledWith(123)
+      expect(getWinner).toBeCalledWith(123, new Date())
+      expect(addWinner).not.toBeCalled()
     })
 
     it('should reply with suggestion to add players', async () => {
+      getPlayers.mockResolvedValueOnce([])
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
@@ -351,14 +346,14 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(mockFindPlayers).toBeCalledWith(123)
-      expect(mockFindWinner).not.toBeCalled()
-      expect(mockCreateWinner).not.toBeCalled()
+      expect(getPlayers).toBeCalledWith(123)
+      expect(getWinner).not.toBeCalled()
+      expect(addWinner).not.toBeCalled()
     })
 
     it('should reply with suggestion to see year winner', async () => {
       jest.setSystemTime(new Date('2023-12-31T22:08:00'))
-      mockFindPlayers.mockResolvedValueOnce([
+      getPlayers.mockResolvedValueOnce([
         {
           id: 'player-1-id',
           user: {
@@ -465,9 +460,9 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(mockFindPlayers).toBeCalledWith(123)
-      expect(mockFindWinner).toBeCalledWith(123, new Date())
-      expect(mockCreateWinner).toBeCalledWith('player-1-id', new Date())
+      expect(getPlayers).toBeCalledWith(123)
+      expect(getWinner).toBeCalledWith(123, new Date())
+      expect(addWinner).toBeCalledWith('player-1-id', new Date())
     })
   })
 
@@ -480,7 +475,7 @@ describe('#createPumpkinModule', () => {
       jest.spyOn(global.Math, 'random').mockRestore()
     })
 
-    it('should call PumpkinManager.findOrCreatePlayer and reply with hello', async () => {
+    it('should call getOrAddPlayer and reply with hello', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
@@ -527,16 +522,16 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(mockFindOrCreatePlayer).toBeCalledWith(123, 1)
+      expect(getOrAddPlayer).toBeCalledWith(123, 1)
     })
 
-    it('should do nothing in private chat', () => {
+    it('should do nothing in private chat', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
-      bot.handleUpdate({
+      await bot.handleUpdate({
         update_id: 10000,
         message: {
           date: 1441645532,
@@ -621,13 +616,13 @@ describe('#createPumpkinModule', () => {
       expect(getStatsMessage).toBeCalledWith(123)
     })
 
-    it('should do nothing in private chat', () => {
+    it('should do nothing in private chat', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
-      bot.handleUpdate({
+      await bot.handleUpdate({
         update_id: 10000,
         message: {
           date: 1441645532,
@@ -721,13 +716,13 @@ describe('#createPumpkinModule', () => {
       expect(getStatsMessage).toBeCalledWith(123, 2023)
     })
 
-    it('should do nothing in private chat', () => {
+    it('should do nothing in private chat', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
-      bot.handleUpdate({
+      await bot.handleUpdate({
         update_id: 10000,
         message: {
           date: 1441645532,
@@ -762,8 +757,8 @@ describe('#createPumpkinModule', () => {
   })
 
   describe('/pumpkin_2023', () => {
-    it('should call getWinnerOfYearMessage and reply with its result', async () => {
-      getWinnerOfYearMessage.mockResolvedValueOnce('winner message')
+    it('should call getPumpkinOfYear and reply with its result', async () => {
+      getPumpkinOfYear.mockResolvedValueOnce('winner message')
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
@@ -809,16 +804,16 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getWinnerOfYearMessage).toBeCalledWith(123, 2023)
+      expect(getPumpkinOfYear).toBeCalledWith(123, 2023)
     })
 
-    it('should do nothing in private chat', () => {
+    it('should do nothing in private chat', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPumpkinModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
-      bot.handleUpdate({
+      await bot.handleUpdate({
         update_id: 10000,
         message: {
           date: 1441645532,
@@ -859,7 +854,7 @@ describe('#createPumpkinModule', () => {
 
     it('should reply if user is winner and random < 0.1', async () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(0.05)
-      mockFindWinner.mockResolvedValueOnce({
+      getWinner.mockResolvedValueOnce({
         id: 'player-1-id',
         user: {
           id: 'user-1-id',
@@ -912,7 +907,7 @@ describe('#createPumpkinModule', () => {
 
     it('should not reply if user is winner but random > 0.1', async () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(0.2)
-      mockFindWinner.mockResolvedValueOnce({
+      getWinner.mockResolvedValueOnce({
         id: 'player-1-id',
         user: {
           id: 'user-1-id',
@@ -953,7 +948,7 @@ describe('#createPumpkinModule', () => {
 
     it('should not reply if user is not winner', async () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(0.05)
-      mockFindWinner.mockResolvedValueOnce({
+      getWinner.mockResolvedValueOnce({
         id: 'player-2-id',
         user: {
           id: 'user-2-id',
@@ -1025,7 +1020,7 @@ describe('#createPumpkinModule', () => {
 
     it('should do nothing in private chat', async () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(0.05)
-      mockFindWinner.mockResolvedValueOnce({
+      getWinner.mockResolvedValueOnce({
         id: 'player-1-id',
         user: {
           id: 'user-1-id',
@@ -1064,7 +1059,7 @@ describe('#createPumpkinModule', () => {
       })
 
       expect(requests).toStrictEqual([])
-      expect(mockFindWinner).not.toBeCalled()
+      expect(getWinner).not.toBeCalled()
     })
   })
 })

@@ -1,6 +1,6 @@
 import { Composer } from 'grammy'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
-import { createPokerModule } from './index.js'
+import { mockGrammyBot } from '../../testUtils/mockGrammyBot.ts'
+import { createPokerModule } from './index.ts'
 
 jest.mock('./classes/PokerStateManager')
 const { PokerStateManager } = jest.requireMock('./classes/PokerStateManager')
@@ -779,7 +779,7 @@ describe('#createPokerModule', () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
       await bot.handleUpdate({
         update_id: 10000,
@@ -820,7 +820,7 @@ describe('#createPokerModule', () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
       await bot.handleUpdate({
         update_id: 10000,
@@ -871,7 +871,7 @@ describe('#createPokerModule', () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
       await bot.handleUpdate({
         update_id: 10000,
@@ -917,7 +917,7 @@ describe('#createPokerModule', () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
       await bot.handleUpdate({
         update_id: 10000,
@@ -947,7 +947,7 @@ describe('#createPokerModule', () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
-      bot.init()
+      await bot.init()
 
       await bot.handleUpdate({
         update_id: 10000,

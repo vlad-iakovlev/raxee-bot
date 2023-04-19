@@ -1,4 +1,4 @@
-import { getMention } from './getMention.js'
+import { getMention } from './getMention.ts'
 
 describe('#getMention', () => {
   it('should return simple mention when username is presented', () => {

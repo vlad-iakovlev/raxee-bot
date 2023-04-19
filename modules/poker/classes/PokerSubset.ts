@@ -1,6 +1,9 @@
 import * as R from 'remeda'
-import { POKER_CARD_VALUE } from '../types.js'
-import { PokerCard } from './PokerCard.js'
+import { POKER_CARD_VALUE } from '../types.ts'
+import { getPokerCardString } from '../utils/getPokerCardString.ts'
+import { getPokerCardValue } from '../utils/getPokerCardValue.ts'
+import { isPokerCardSuitEqual } from '../utils/isPokerCardSuitEqual.ts'
+import { isPokerCardValueEqual } from '../utils/isPokerCardValueEqual.ts'
 
 export class PokerSubset {
   cards: [number, number, number, number, number]
@@ -10,11 +13,11 @@ export class PokerSubset {
   }
 
   getString() {
-    return this.cards.map(PokerCard.getString).join(' ')
+    return this.cards.map(getPokerCardString).join(' ')
   }
 
   get royalFlush(): PokerSubset | undefined {
-    if (PokerCard.getValue(this.cards[0]) === POKER_CARD_VALUE.ACE) {
+    if (getPokerCardValue(this.cards[0]) === POKER_CARD_VALUE.ACE) {
       return this.straightFlush
     }
   }
@@ -29,9 +32,9 @@ export class PokerSubset {
         for (let k = j + 1; k < this.cards.length - 1; k += 1) {
           for (let l = k + 1; l < this.cards.length; l += 1) {
             if (
-              PokerCard.isValueEqual(this.cards[i], this.cards[j]) &&
-              PokerCard.isValueEqual(this.cards[i], this.cards[k]) &&
-              PokerCard.isValueEqual(this.cards[i], this.cards[l])
+              isPokerCardValueEqual(this.cards[i], this.cards[j]) &&
+              isPokerCardValueEqual(this.cards[i], this.cards[k]) &&
+              isPokerCardValueEqual(this.cards[i], this.cards[l])
             ) {
               return this.reorder([i, j, k, l])
             }
@@ -43,28 +46,28 @@ export class PokerSubset {
 
   get fullHouse(): PokerSubset | undefined {
     if (
-      PokerCard.isValueEqual(this.cards[0], this.cards[1]) &&
-      PokerCard.isValueEqual(this.cards[0], this.cards[2]) &&
-      PokerCard.isValueEqual(this.cards[3], this.cards[4])
+      isPokerCardValueEqual(this.cards[0], this.cards[1]) &&
+      isPokerCardValueEqual(this.cards[0], this.cards[2]) &&
+      isPokerCardValueEqual(this.cards[3], this.cards[4])
     ) {
       return this
     }
 
     if (
-      PokerCard.isValueEqual(this.cards[2], this.cards[3]) &&
-      PokerCard.isValueEqual(this.cards[2], this.cards[4]) &&
-      PokerCard.isValueEqual(this.cards[0], this.cards[1])
+      isPokerCardValueEqual(this.cards[2], this.cards[3]) &&
+      isPokerCardValueEqual(this.cards[2], this.cards[4]) &&
+      isPokerCardValueEqual(this.cards[0], this.cards[1])
     ) {
       return this.reorder([2, 3, 4])
     }
   }
 
-  get flush(): PokerSubset | undefined {
+  get flush(): this | undefined {
     if (
-      PokerCard.isSuitEqual(this.cards[0], this.cards[1]) &&
-      PokerCard.isSuitEqual(this.cards[0], this.cards[2]) &&
-      PokerCard.isSuitEqual(this.cards[0], this.cards[3]) &&
-      PokerCard.isSuitEqual(this.cards[0], this.cards[4])
+      isPokerCardSuitEqual(this.cards[0], this.cards[1]) &&
+      isPokerCardSuitEqual(this.cards[0], this.cards[2]) &&
+      isPokerCardSuitEqual(this.cards[0], this.cards[3]) &&
+      isPokerCardSuitEqual(this.cards[0], this.cards[4])
     ) {
       return this
     }
@@ -72,20 +75,20 @@ export class PokerSubset {
 
   get straight(): PokerSubset | undefined {
     if (
-      PokerCard.getValue(this.cards[0]) === POKER_CARD_VALUE.ACE &&
-      PokerCard.getValue(this.cards[1]) === POKER_CARD_VALUE.FIVE &&
-      PokerCard.getValue(this.cards[2]) === POKER_CARD_VALUE.FOUR &&
-      PokerCard.getValue(this.cards[3]) === POKER_CARD_VALUE.THREE &&
-      PokerCard.getValue(this.cards[4]) === POKER_CARD_VALUE.TWO
+      getPokerCardValue(this.cards[0]) === POKER_CARD_VALUE.ACE &&
+      getPokerCardValue(this.cards[1]) === POKER_CARD_VALUE.FIVE &&
+      getPokerCardValue(this.cards[2]) === POKER_CARD_VALUE.FOUR &&
+      getPokerCardValue(this.cards[3]) === POKER_CARD_VALUE.THREE &&
+      getPokerCardValue(this.cards[4]) === POKER_CARD_VALUE.TWO
     ) {
       return this.reorder([1, 2, 3, 4])
     }
 
     if (
-      PokerCard.isValueEqual(this.cards[0], this.cards[1] + 4) &&
-      PokerCard.isValueEqual(this.cards[1], this.cards[2] + 4) &&
-      PokerCard.isValueEqual(this.cards[2], this.cards[3] + 4) &&
-      PokerCard.isValueEqual(this.cards[3], this.cards[4] + 4)
+      isPokerCardValueEqual(this.cards[0], this.cards[1] + 4) &&
+      isPokerCardValueEqual(this.cards[1], this.cards[2] + 4) &&
+      isPokerCardValueEqual(this.cards[2], this.cards[3] + 4) &&
+      isPokerCardValueEqual(this.cards[3], this.cards[4] + 4)
     ) {
       return this
     }
@@ -96,8 +99,8 @@ export class PokerSubset {
       for (let j = i + 1; j < this.cards.length - 1; j += 1) {
         for (let k = j + 1; k < this.cards.length; k += 1) {
           if (
-            PokerCard.isValueEqual(this.cards[i], this.cards[j]) &&
-            PokerCard.isValueEqual(this.cards[i], this.cards[k])
+            isPokerCardValueEqual(this.cards[i], this.cards[j]) &&
+            isPokerCardValueEqual(this.cards[i], this.cards[k])
           ) {
             return this.reorder([i, j, k])
           }
@@ -112,8 +115,8 @@ export class PokerSubset {
         for (let k = j + 1; k < this.cards.length - 1; k += 1) {
           for (let l = k + 1; l < this.cards.length; l += 1) {
             if (
-              PokerCard.isValueEqual(this.cards[i], this.cards[j]) &&
-              PokerCard.isValueEqual(this.cards[k], this.cards[l])
+              isPokerCardValueEqual(this.cards[i], this.cards[j]) &&
+              isPokerCardValueEqual(this.cards[k], this.cards[l])
             ) {
               return this.reorder([i, j, k, l])
             }
@@ -126,14 +129,14 @@ export class PokerSubset {
   get pair(): PokerSubset | undefined {
     for (let i = 0; i < this.cards.length - 1; i += 1) {
       for (let j = i + 1; j < this.cards.length; j += 1) {
-        if (PokerCard.isValueEqual(this.cards[i], this.cards[j])) {
+        if (isPokerCardValueEqual(this.cards[i], this.cards[j])) {
           return this.reorder([i, j])
         }
       }
     }
   }
 
-  static getSubsets(cards: number[]): PokerSubset[] {
+  static getSubsets(this: void, cards: number[]): PokerSubset[] {
     const subsets: PokerSubset[] = []
 
     for (let i = 0; i < cards.length - 4; i += 1) {

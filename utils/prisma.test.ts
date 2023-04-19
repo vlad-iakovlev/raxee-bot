@@ -1,4 +1,4 @@
-import { prisma } from './prisma.js'
+import { prisma } from './prisma.ts'
 
 jest.mock('@prisma/client')
 const { PrismaClient } = jest.requireMock('@prisma/client')

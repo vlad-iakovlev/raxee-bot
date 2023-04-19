@@ -1,6 +1,6 @@
-import { POKER_COMBINATION_LEVEL } from '../types.js'
-import { PokerCombination } from './PokerCombination.js'
-import { PokerSubset } from './PokerSubset.js'
+import { POKER_COMBINATION_LEVEL } from '../types.ts'
+import { PokerCombination } from './PokerCombination.ts'
+import { PokerSubset } from './PokerSubset.ts'
 
 describe('PokerCombination', () => {
   describe('#constructor', () => {

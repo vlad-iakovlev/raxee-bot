@@ -1,6 +1,6 @@
 import { User } from '@prisma/client'
 import { Markdown, md } from 'telegram-md'
-import { getUserName } from './getUserName.js'
+import { getUserName } from './getUserName.ts'
 
 export const getMention = (user: User): Markdown => {
   if (user.username) return md`@${user.username}`

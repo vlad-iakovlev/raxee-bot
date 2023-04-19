@@ -1,13 +1,13 @@
-import { initUserMiddleware } from './initUser.js'
+import { initUserMiddleware } from './initUser.ts'
 
-jest.mock('../utils/prisma.js', () => ({
+jest.mock('../utils/prisma.ts', () => ({
   prisma: {
     user: {
       upsert: jest.fn(),
     },
   },
 }))
-const { prisma } = jest.requireMock('../utils/prisma.js')
+const { prisma } = jest.requireMock('../utils/prisma.ts')
 
 describe('#initUserMiddleware', () => {
   beforeEach(() => {

@@ -1,12 +1,12 @@
 import { md } from 'telegram-md'
-import { getMention } from '../../utils/getMention.js'
-import { PokerCard } from './classes/PokerCard.js'
-import { PokerPlayerManager } from './classes/PokerPlayerManger.js'
+import { getMention } from '../../utils/getMention.ts'
+import { PokerPlayerManager } from './classes/PokerPlayerManger.ts'
 import {
   POKER_CARD_SUIT,
   POKER_CARD_VALUE,
   POKER_COMBINATION_LEVEL,
-} from './types.js'
+} from './types.ts'
+import { getPokerCardString } from './utils/getPokerCardString.ts'
 
 export const DEFAULT_BALANCE = 1000
 
@@ -95,11 +95,11 @@ export const MESSAGES = {
     }) =>
       md.join(
         [
-          `Table: ${tableCards.map(PokerCard.getString).join(' ')}`,
+          `Table: ${tableCards.map(getPokerCardString).join(' ')}`,
           ...players.map((player) =>
             md.join(
               [
-                md`${getMention(player.user)}: ${player.cards.map(PokerCard.getString).join(' ')}`,
+                md`${getMention(player.user)}: ${player.cards.map(getPokerCardString).join(' ')}`,
                 [
                   player.bestCombination?.getString(),
                   player.hasFolded && STRINGS.fold,

@@ -1,10 +1,10 @@
 import { POKER_ROUND, PokerPlayer, User } from '@prisma/client'
 import * as R from 'remeda'
 import { Markdown, md } from 'telegram-md'
-import { MESSAGES, STRINGS } from '../constants.js'
-import { PokerCard } from './PokerCard.js'
-import { PokerCombination } from './PokerCombination.js'
-import { PokerStateManager } from './PokerStateManager.js'
+import { MESSAGES, STRINGS } from '../constants.ts'
+import { getPokerCardString } from '../utils/getPokerCardString.ts'
+import { PokerCombination } from './PokerCombination.ts'
+import { PokerStateManager } from './PokerStateManager.ts'
 
 export class PokerPlayerManager {
   id: string
@@ -79,16 +79,16 @@ export class PokerPlayerManager {
 
       case POKER_ROUND.FLOP:
         return this.pokerState.cards
-          .map(PokerCard.getString)
+          .map(getPokerCardString)
           .map((card, index) => (index < 3 ? card : ' '))
 
       case POKER_ROUND.TURN:
         return this.pokerState.cards
-          .map(PokerCard.getString)
+          .map(getPokerCardString)
           .map((card, index) => (index < 4 ? card : ' '))
 
       case POKER_ROUND.RIVER:
-        return this.pokerState.cards.map(PokerCard.getString)
+        return this.pokerState.cards.map(getPokerCardString)
     }
   }
 
@@ -101,7 +101,7 @@ export class PokerPlayerManager {
       return undefined
     }
 
-    return [...this.cards.map(PokerCard.getString), `${this.balance} 🪙`]
+    return [...this.cards.map(getPokerCardString), `${this.balance} 🪙`]
   }
 
   get keyboardActions(): string[] | undefined {

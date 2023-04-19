@@ -1,7 +1,7 @@
 import { Markdown } from 'telegram-md'
-import { getRandomItem } from '../../../utils/getRandomItem.js'
-import { prisma } from '../../../utils/prisma.js'
-import { STRINGS } from '../constants.js'
+import { getRandomItem } from '../../../utils/getRandomItem.ts'
+import { prisma } from '../../../utils/prisma.ts'
+import { STRINGS } from '../constants.ts'
 
 interface Strings {
   hello: (string | Markdown)[]
@@ -27,7 +27,7 @@ export class PumpkinStringsManager {
     this.chatStrings = chatStrings
   }
 
-  static async load(tgChatId: number) {
+  static async load(this: void, tgChatId: number) {
     const chatStrings = await prisma.pumpkinStrings.findFirst({
       where: {
         tgChatIds: {
@@ -36,7 +36,7 @@ export class PumpkinStringsManager {
       },
     })
 
-    return new PumpkinStringsManager(chatStrings || {})
+    return new PumpkinStringsManager(chatStrings ?? {})
   }
 
   get(key: keyof Strings): string | Markdown {
