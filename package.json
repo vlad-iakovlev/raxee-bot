@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "ts-node --esm -r dotenv-expand/config bin/bot.ts",
+    "start": "ts-node --esm -r dotenv/config bin/bot.ts",
     "generate-models": "prisma generate",
     "prepare": "husky install",
     "compile": "tsc",
@@ -22,7 +22,6 @@
     "async-pause": "^1.0.0",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
-    "dotenv-expand": "^10.0.0",
     "grammy": "^1.15.3",
     "grammy-reply-with-markdown": "^1.0.0",
     "remeda": "^1.12.0",
