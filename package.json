@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "ts-node --esm bin/bot.ts",
+    "start": "ts-node --esm -r dotenv-expand/config bin/bot.ts",
     "generate-models": "prisma generate",
     "prepare": "husky install",
     "compile": "tsc",
@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^16.18.23",
     "async-pause": "^1.0.0",
     "date-fns": "^2.29.3",
-    "dotenv-flow": "^3.2.0",
+    "dotenv-expand": "^10.0.0",
     "grammy": "^1.15.3",
     "grammy-reply-with-markdown": "^1.0.0",
     "remeda": "^1.12.0",
@@ -29,9 +31,6 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-    "@types/dotenv-flow": "^3.2.0",
-    "@types/jest": "^29.5.1",
-    "@types/node": "^16.18.23",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",

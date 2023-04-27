@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv-flow'
+import assert from 'assert'
 import { Composer } from 'grammy'
 import { createHelpModule } from '../modules/help/index.ts'
 import { createPokerModule } from '../modules/poker/index.ts'
@@ -8,17 +8,12 @@ import { runBot } from '../utils/runBot.ts'
 
 void (async () => {
   try {
-    dotenv.config()
-
-    const botToken = process.env.BOT_TOKEN
-    if (!botToken) {
-      throw new Error('You should set BOT_TOKEN in .env file')
-    }
+    assert(process.env.BOT_TOKEN, 'BOT_TOKEN is not defined')
 
     const helpModule = createHelpModule()
 
     await runBot({
-      botToken,
+      botToken: process.env.BOT_TOKEN,
       modules: [
         {
           commands: [],
