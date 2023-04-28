@@ -24,7 +24,7 @@
     "dotenv": "^16.0.3",
     "grammy": "^1.15.3",
     "grammy-reply-with-markdown": "^1.0.0",
-    "remeda": "^1.12.0",
+    "remeda": "^1.14.0",
     "telegram-md": "^1.2.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
