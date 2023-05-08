@@ -47,7 +47,7 @@ jobs:
           envs: SHA
           script_stop: true
           script: |
-            cd Projects/expense
+            cd Projects/raxee-bot
             git fetch --prune --prune-tags --verbose
             git checkout $SHA
             docker compose up -d --build
