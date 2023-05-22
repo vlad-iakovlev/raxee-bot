@@ -16,7 +16,7 @@
     "test:ci": "jest"
   },
   "dependencies": {
-    "@prisma/client": "^4.14.0",
+    "@prisma/client": "^4.14.1",
     "@types/jest": "^29.5.1",
     "@types/node": "^20.1.4",
     "async-pause": "^1.0.0",
