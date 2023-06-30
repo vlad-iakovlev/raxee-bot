@@ -39,7 +39,7 @@
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "prisma": "^4.14.1",
-    "ts-jest": "^29.1.0"
+    "ts-jest": "^29.1.1"
   },
   "eslintConfig": {
     "plugins": [
