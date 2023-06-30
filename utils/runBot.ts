@@ -10,8 +10,16 @@ export interface RunBotOptions {
 
 export const runBot = async ({ botToken, modules }: RunBotOptions) => {
   const bot = new Bot(botToken)
+
   await bot.api.setMyCommands(modules.map((module) => module.commands).flat())
   bot.use(initUserMiddleware, ...modules.map((module) => module.composer))
   bot.catch(handleError)
+
+  // Stopping the bot when the Node.js process is about to be terminated
+  // istanbul ignore next
+  process.once('SIGINT', () => void bot.stop())
+  // istanbul ignore next
+  process.once('SIGTERM', () => void bot.stop())
+
   await bot.start()
 }
