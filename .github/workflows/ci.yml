@@ -31,8 +31,40 @@ jobs:
       - name: Run ${{ matrix.check }}
         run: npm run ${{ matrix.check }}
 
-  deploy:
+  build:
     needs: checks
+    if: startsWith(github.repository, 'vlad-yakovlev/') && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            latest
+            ${{ github.sha }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    needs: build
     if: startsWith(github.repository, 'vlad-yakovlev/') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -50,4 +82,4 @@ jobs:
             cd Projects/raxee-bot
             git fetch --prune --prune-tags --verbose
             git checkout $SHA
-            docker compose up -d --build
+            docker compose up -d

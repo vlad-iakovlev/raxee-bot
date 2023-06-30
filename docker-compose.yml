@@ -4,9 +4,12 @@ networks:
 
 services:
   raxee-bot:
+    image: ghcr.io/vlad-yakovlev/raxee-bot:latest
+    pull_policy: always
     build: .
     networks:
       - vlad-yakovlev-dev
+    env_file: .env
     environment:
       DATABASE_URL: mongodb://mongo:27017/raxee-bot
     restart: always
