@@ -1,3 +1,4 @@
+import { autoRetry } from '@grammyjs/auto-retry'
 import assert from 'assert'
 import { Bot, Composer } from 'grammy'
 import { initUserMiddleware } from '../middleware/initUser.ts'
@@ -27,6 +28,7 @@ void (async () => {
     ]
 
     const bot = new Bot(process.env.BOT_TOKEN)
+    bot.api.config.use(autoRetry())
     process.once('SIGINT', () => void bot.stop())
     process.once('SIGTERM', () => void bot.stop())
 

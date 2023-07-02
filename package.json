@@ -16,6 +16,7 @@
     "test:ci": "jest"
   },
   "dependencies": {
+    "@grammyjs/auto-retry": "^1.1.1",
     "@prisma/client": "^4.16.1",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.2",
