@@ -10,7 +10,7 @@ const createComposer = () => {
   bot.chatType(['group', 'supergroup']).command('poker_join', async (ctx) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
       ctx.from.id,
-      ctx.api
+      ctx.api,
     )
 
     if (senderPokerState) {
@@ -30,7 +30,7 @@ const createComposer = () => {
 
     const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
       ctx.chat.id,
-      ctx.api
+      ctx.api,
     )
 
     if (pokerState.dealsCount > 0) {
@@ -60,7 +60,7 @@ const createComposer = () => {
   bot.chatType(['group', 'supergroup']).command('poker_start', async (ctx) => {
     const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
       ctx.chat.id,
-      ctx.api
+      ctx.api,
     )
 
     if (pokerState.dealsCount > 0) {
@@ -90,7 +90,7 @@ const createComposer = () => {
   bot.chatType(['group', 'supergroup']).command('poker_stop', async (ctx) => {
     const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
       ctx.chat.id,
-      ctx.api
+      ctx.api,
     )
     await pokerState.endGame()
 
@@ -101,14 +101,14 @@ const createComposer = () => {
       {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
-      }
+      },
     )
   })
 
   bot.chatType('private').command('poker_stop', async (ctx) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
       ctx.from.id,
-      ctx.api
+      ctx.api,
     )
 
     if (senderPokerState) {
@@ -121,12 +121,12 @@ const createComposer = () => {
   bot.chatType('private').on('message:text', async (ctx, next) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
       ctx.from.id,
-      ctx.api
+      ctx.api,
     )
 
     if (senderPokerState) {
       const sender = senderPokerState.players.find(
-        (player) => player.user.tgUserId === ctx.from.id
+        (player) => player.user.tgUserId === ctx.from.id,
       )
       // istanbul ignore next
       if (!sender) throw new Error('Player not found')

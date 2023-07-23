@@ -18,13 +18,13 @@ describe('#handleError', () => {
       new BotError(error, {
         reply,
         update: { update_id: 12345 },
-      } as unknown as Context)
+      } as unknown as Context),
     )
 
     expect(consoleError).toBeCalledTimes(1)
     expect(consoleError).toBeCalledWith(
       'Error while handling update 12345:',
-      error
+      error,
     )
 
     expect(reply).toBeCalledTimes(1)
@@ -46,7 +46,7 @@ describe('#handleError', () => {
       new BotError(error, {
         reply,
         update: { update_id: 12345 },
-      } as unknown as Context)
+      } as unknown as Context),
     )
 
     expect(consoleError).toBeCalledTimes(2)

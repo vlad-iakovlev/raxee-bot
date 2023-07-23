@@ -4,7 +4,7 @@ import { PumpkinPlayerWithUser } from '../types.ts'
 
 export const getWinner = async (
   tgChatId: number,
-  date: Date
+  date: Date,
 ): Promise<PumpkinPlayerWithUser | null> => {
   const stats = await prisma.pumpkinStats.findMany({
     where: {

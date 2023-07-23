@@ -26,7 +26,7 @@ const mockUser = (index: number) =>
     firstName: `user-${index}-first-name`,
     lastName: `user-${index}-last-name`,
     username: `user-${index}-username`,
-  } as User)
+  }) as User
 
 const mockPlayer = (index: number) =>
   ({
@@ -38,7 +38,7 @@ const mockPlayer = (index: number) =>
     hasLost: false,
     hasTurned: false,
     user: mockUser(index),
-  } as PokerPlayer & { user: User })
+  }) as PokerPlayer & { user: User }
 
 const mockStateId = jest.fn(() => 'state-id')
 const mockStateTgChatId = jest.fn(() => 123)
@@ -55,7 +55,7 @@ const mockStatePlayers = jest.fn(
       mockPlayer(2),
       mockPlayer(3),
       mockPlayer(4),
-    ] as (PokerPlayer & { user: User })[]
+    ] as (PokerPlayer & { user: User })[],
 )
 const mockStateData = jest.fn(
   () =>
@@ -68,7 +68,7 @@ const mockStateData = jest.fn(
       dealerIndex: mockStateDealerIndex(),
       currentPlayerIndex: mockStateCurrentPlayerIndex(),
       players: mockStatePlayers(),
-    } as PokerState & { players: (PokerPlayer & { user: User })[] })
+    }) as PokerState & { players: (PokerPlayer & { user: User })[] },
 )
 
 const mockTgApi = jest.fn(
@@ -76,7 +76,7 @@ const mockTgApi = jest.fn(
     ({
       sendMessage: jest.fn() as Api['sendMessage'],
       sendSticker: jest.fn() as Api['sendSticker'],
-    } as Api)
+    }) as Api,
 )
 
 describe('PokerStateManager', () => {
@@ -120,7 +120,7 @@ describe('PokerStateManager', () => {
 
       const newState = await PokerStateManager.loadByTgChatIdOrCreate(
         tgChatId,
-        mockTgApi()
+        mockTgApi(),
       )
 
       expect(prisma.pokerState.upsert).toBeCalledWith({
@@ -155,7 +155,7 @@ describe('PokerStateManager', () => {
 
       const newState = await PokerStateManager.loadByTgUserId(
         tgUserId,
-        mockTgApi()
+        mockTgApi(),
       )
 
       expect(prisma.pokerState.findFirst).toBeCalledWith({
@@ -185,7 +185,7 @@ describe('PokerStateManager', () => {
 
       const newState = await PokerStateManager.loadByTgUserId(
         tgUserId,
-        mockTgApi()
+        mockTgApi(),
       )
 
       expect(prisma.pokerState.findFirst).toBeCalledWith({
@@ -878,7 +878,7 @@ describe('PokerStateManager', () => {
 
       expect(state.handleFoldMessage).toBeCalledWith(
         state.players[0],
-        '❌ Fold'
+        '❌ Fold',
       )
     })
 
@@ -887,7 +887,7 @@ describe('PokerStateManager', () => {
 
       expect(state.handleCheckMessage).toBeCalledWith(
         state.players[0],
-        '✊ Check'
+        '✊ Check',
       )
     })
 
@@ -905,7 +905,7 @@ describe('PokerStateManager', () => {
 
       expect(state.handleAllInMessage).toBeCalledWith(
         state.players[0],
-        '💰 All in'
+        '💰 All in',
       )
     })
 
@@ -914,7 +914,7 @@ describe('PokerStateManager', () => {
 
       expect(state.handleOtherMessage).toBeCalledWith(
         state.players[0],
-        'Some message'
+        'Some message',
       )
     })
   })
@@ -926,14 +926,14 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleFoldMessage(
         state.players[0],
-        '❌ Fold'
+        '❌ Fold',
       )
 
       expect(response).toBeUndefined()
       expect(state.players[0].hasFolded).toBe(true)
       expect(state.broadcastPlayerMessage).toBeCalledWith(
         state.players[0],
-        '❌ Fold'
+        '❌ Fold',
       )
       expect(state.nextTurn).toBeCalledWith()
     })
@@ -945,7 +945,7 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleFoldMessage(
         state.players[0],
-        '❌ Fold'
+        '❌ Fold',
       )
 
       expect(response).toBe('Folding is not allowed')
@@ -962,13 +962,13 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleCheckMessage(
         state.players[0],
-        '✊ Check'
+        '✊ Check',
       )
 
       expect(response).toBeUndefined()
       expect(state.broadcastPlayerMessage).toBeCalledWith(
         state.players[0],
-        '✊ Check'
+        '✊ Check',
       )
       expect(state.nextTurn).toBeCalledWith()
     })
@@ -980,7 +980,7 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleCheckMessage(
         state.players[0],
-        '✊ Check'
+        '✊ Check',
       )
 
       expect(response).toBe('Checking is not allowed')
@@ -1002,7 +1002,7 @@ describe('PokerStateManager', () => {
       expect(state.players[0].betAmount).toBe(100)
       expect(state.broadcastPlayerMessage).toBeCalledWith(
         state.players[0],
-        '✅ 50'
+        '✅ 50',
       )
       expect(state.nextTurn).toBeCalledWith()
     })
@@ -1031,14 +1031,14 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleAllInMessage(
         state.players[0],
-        '💰 All in'
+        '💰 All in',
       )
 
       expect(response).toBeUndefined()
       expect(state.players[0].betAmount).toBe(1050)
       expect(state.broadcastPlayerMessage).toBeCalledWith(
         state.players[0],
-        '💰 All in'
+        '💰 All in',
       )
       expect(state.nextTurn).toBeCalledWith()
     })
@@ -1051,7 +1051,7 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleAllInMessage(
         state.players[0],
-        '💰 All in'
+        '💰 All in',
       )
 
       expect(response).toBe('Going all in is not allowed')
@@ -1067,15 +1067,15 @@ describe('PokerStateManager', () => {
 
       const response = await state.handleOtherMessage(
         state.players[0],
-        'Some message'
+        'Some message',
       )
 
       expect(response).toBe(
-        "I didn't understand you, but I shared your message with everyone"
+        "I didn't understand you, but I shared your message with everyone",
       )
       expect(state.broadcastPlayerMessage).toBeCalledWith(
         state.players[0],
-        'Some message'
+        'Some message',
       )
     })
 
@@ -1089,7 +1089,7 @@ describe('PokerStateManager', () => {
       expect(state.players[0].betAmount).toBe(150)
       expect(state.broadcastPlayerMessage).toBeCalledWith(
         state.players[0],
-        '100'
+        '100',
       )
     })
 

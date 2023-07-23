@@ -27,7 +27,7 @@ export class PokerStateManager {
 
   constructor(
     stateData: PokerState & { players: (PokerPlayer & { user: User })[] },
-    tgApi: Api
+    tgApi: Api,
   ) {
     this.id = stateData.id
     this.tgChatId = stateData.tgChatId
@@ -37,7 +37,7 @@ export class PokerStateManager {
     this.dealerIndex = stateData.dealerIndex
     this.currentPlayerIndex = stateData.currentPlayerIndex
     this.players = stateData.players.map(
-      (playerData) => new PokerPlayerManager(this, playerData)
+      (playerData) => new PokerPlayerManager(this, playerData),
     )
     this.tgApi = tgApi
   }
@@ -45,7 +45,7 @@ export class PokerStateManager {
   static async loadByTgChatIdOrCreate(
     this: void,
     tgChatId: number,
-    tgApi: Api
+    tgApi: Api,
   ): Promise<PokerStateManager> {
     const stateData = await prisma.pokerState.upsert({
       where: {
@@ -75,7 +75,7 @@ export class PokerStateManager {
   static async loadByTgUserId(
     this: void,
     tgUserId: number,
-    tgApi: Api
+    tgApi: Api,
   ): Promise<PokerStateManager | undefined> {
     const stateData = await prisma.pokerState.findFirst({
       where: {
@@ -143,7 +143,7 @@ export class PokerStateManager {
 
   get isAllIn(): boolean {
     return this.players.some(
-      (player) => !player.hasLost && player.balance === 0
+      (player) => !player.hasLost && player.balance === 0,
     )
   }
 
@@ -185,13 +185,13 @@ export class PokerStateManager {
         player.hasLost ||
         player.hasFolded ||
         player.balance === 0 ||
-        (player.hasTurned && player.betAmount === this.requiredBetAmount)
+        (player.hasTurned && player.betAmount === this.requiredBetAmount),
     )
   }
 
   get bestCombinationWeight(): number {
     return Math.max(
-      ...this.players.map((player) => player.bestCombinationWeight)
+      ...this.players.map((player) => player.bestCombinationWeight),
     )
   }
 
@@ -249,7 +249,7 @@ export class PokerStateManager {
         dealer: this.dealer,
         small: this.small,
         big: this.big,
-      })
+      }),
     )
     await this.broadcastCurrentTurn()
   }
@@ -259,8 +259,8 @@ export class PokerStateManager {
 
     await Promise.all(
       this.players.map((player) =>
-        player.sendStickerAndRemoveKeyboard(getRandomItem(STICKERS))
-      )
+        player.sendStickerAndRemoveKeyboard(getRandomItem(STICKERS)),
+      ),
     )
 
     await prisma.pokerState.delete({
@@ -272,7 +272,7 @@ export class PokerStateManager {
 
   async handleMessage(
     sender: PokerPlayerManager,
-    message: string
+    message: string,
   ): Promise<string | undefined> {
     switch (message) {
       case STRINGS.fold:
@@ -379,12 +379,12 @@ export class PokerStateManager {
       MESSAGES._.dealEnded({
         tableCards: this.cards,
         players: this.players.filter((player) => !player.hasLost),
-      })
+      }),
     )
 
     const winnersCount = this.players.reduce(
       (acc, player) => (player.isWinner ? acc + 1 : acc),
-      0
+      0,
     )
     const winAmount = this.potAmount / winnersCount
 
@@ -427,7 +427,7 @@ export class PokerStateManager {
   async broadcastPlayerMessage(sender: PokerPlayerManager, message: string) {
     await this.broadcastMessage(
       MESSAGES._.playerMessage(sender, message),
-      this.players.filter((player) => player.id !== sender.id)
+      this.players.filter((player) => player.id !== sender.id),
     )
   }
 

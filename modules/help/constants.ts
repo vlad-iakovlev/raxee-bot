@@ -21,7 +21,7 @@ export const STRINGS = {
       md.bold('Poker Rules:'),
       md`The game follows ${md.link(
         "Texas Hold'em",
-        'https://en.wikipedia.org/wiki/Texas_hold_%27em'
+        'https://en.wikipedia.org/wiki/Texas_hold_%27em',
       )} rules.`,
       'Once the game starts, the normal keypad will be replaced with a poker keypad:',
       '\u2022 The first line displays the table cards;',
@@ -34,9 +34,9 @@ export const STRINGS = {
       '',
       md`Find the source code on ${md.link(
         'GitHub',
-        'https://github.com/vlad-yakovlev/raxee-bot'
+        'https://github.com/vlad-yakovlev/raxee-bot',
       )}`,
     ],
-    '\n'
+    '\n',
   ),
 }

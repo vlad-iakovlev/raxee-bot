@@ -53,26 +53,26 @@ export class PokerCombination {
         )
       }),
       R.sort((a, b) => a.weight - b.weight),
-      R.last()
+      R.last(),
     )
   }
 
   private static build(
     this: void,
     level: POKER_COMBINATION_LEVEL,
-    subset: PokerSubset
+    subset: PokerSubset,
   ): PokerCombination
 
   private static build(
     this: void,
     level: POKER_COMBINATION_LEVEL,
-    subset?: PokerSubset
+    subset?: PokerSubset,
   ): PokerCombination | undefined
 
   private static build(
     this: void,
     level: POKER_COMBINATION_LEVEL,
-    subset?: PokerSubset
+    subset?: PokerSubset,
   ): PokerCombination | undefined {
     if (subset) {
       return new PokerCombination(level, subset)

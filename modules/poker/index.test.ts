@@ -802,7 +802,7 @@ describe('#createPokerModule', () => {
 
       expect(mockHandleMessage).toBeCalledWith(
         { id: 'player-1-id', user: { tgUserId: 123456789 } },
-        'test'
+        'test',
       )
       expect(mockBroadcastPlayerMessage).not.toBeCalled()
       expect(requests).toStrictEqual([])
@@ -843,7 +843,7 @@ describe('#createPokerModule', () => {
 
       expect(mockHandleMessage).toBeCalledWith(
         { id: 'player-1-id', user: { tgUserId: 123456789 } },
-        'test'
+        'test',
       )
       expect(mockBroadcastPlayerMessage).not.toBeCalled()
       expect(requests).toStrictEqual([
@@ -895,7 +895,7 @@ describe('#createPokerModule', () => {
       expect(mockHandleMessage).not.lastCalledWith()
       expect(mockBroadcastPlayerMessage).toBeCalledWith(
         { id: 'player-1-id', user: { tgUserId: 123456789 } },
-        'test'
+        'test',
       )
       expect(requests).toStrictEqual([
         {

@@ -67,8 +67,8 @@ describe('#getStatsMessage', () => {
           '',
           md.italic('Total participants \u2014 3'),
         ],
-        '\n'
-      )
+        '\n',
+      ),
     )
   })
 
@@ -122,8 +122,8 @@ describe('#getStatsMessage', () => {
           '',
           md.italic('Total participants \u2014 3'),
         ],
-        '\n'
-      )
+        '\n',
+      ),
     )
   })
 })

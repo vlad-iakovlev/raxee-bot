@@ -21,12 +21,12 @@ export const getStatsMessage = async (tgChatId: number, year?: number) => {
           strings.get('statsPlayer'),
           index + 1,
           getUserName(player.user),
-          player.winnings
-        )
+          player.winnings,
+        ),
       ),
       '',
       interpolate(strings.get('statsTotalPlayers'), playersWithStats.length),
     ],
-    '\n'
+    '\n',
   )
 }

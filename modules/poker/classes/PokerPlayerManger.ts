@@ -19,7 +19,7 @@ export class PokerPlayerManager {
 
   constructor(
     pokerState: PokerStateManager,
-    playerData: PokerPlayer & { user: User }
+    playerData: PokerPlayer & { user: User },
   ) {
     this.id = playerData.id
     this.cards = playerData.cards
@@ -139,7 +139,7 @@ export class PokerPlayerManager {
       {
         parse_mode: 'MarkdownV2',
         ...(withKeyboard && { reply_markup: { keyboard: this.keyboard } }),
-      }
+      },
     )
   }
 
@@ -152,7 +152,7 @@ export class PokerPlayerManager {
   async sendCurrentTurn() {
     await this.sendMessage(
       MESSAGES._.userTurn(this.pokerState.currentPlayer),
-      true
+      true,
     )
   }
 }

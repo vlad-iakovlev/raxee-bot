@@ -10,11 +10,11 @@ export const getPumpkinOfYear = async (tgChatId: number, year: number) => {
 
   const maxWinnings = playersWithStats.reduce(
     (acc, player) => Math.max(acc, player.winnings),
-    0
+    0,
   )
 
   const winners = playersWithStats.filter(
-    (player) => player.winnings > 0 && player.winnings === maxWinnings
+    (player) => player.winnings > 0 && player.winnings === maxWinnings,
   )
 
   return interpolate(
@@ -23,8 +23,8 @@ export const getPumpkinOfYear = async (tgChatId: number, year: number) => {
     winners.length
       ? md.join(
           winners.map((player) => getMention(player.user)),
-          ', '
+          ', ',
         )
-      : 'IDK'
+      : 'IDK',
   )
 }

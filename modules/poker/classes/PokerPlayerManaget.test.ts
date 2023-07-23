@@ -20,7 +20,7 @@ const mockUser = jest.fn(
       firstName: mockUserFirstName(),
       lastName: mockUserLastName(),
       username: mockUserUsername(),
-    } as User)
+    }) as User,
 )
 
 const mockPlayerId = jest.fn(() => 'player-id')
@@ -41,7 +41,7 @@ const mockPokerPlayer = jest.fn(
       hasLost: mockPlayerHasLost(),
       hasTurned: mockPlayerHasTurned(),
       user: mockUser(),
-    } as PokerPlayer & { user: User })
+    }) as PokerPlayer & { user: User },
 )
 
 const mockSendMessage = jest.fn()
@@ -51,7 +51,7 @@ const mockTgApi = jest.fn(
     ({
       sendMessage: mockSendMessage as Api['sendMessage'],
       sendSticker: mockSendSticker as Api['sendSticker'],
-    } as Api)
+    }) as Api,
 )
 
 const mockStateId = jest.fn(() => 'state-id')
@@ -67,7 +67,7 @@ const mockPotAmount = jest.fn(() => 100)
 const mockRequiredBetAmount = jest.fn(() => 20)
 const mockIsAllIn = jest.fn(() => false)
 const mockStateCurrentPlayer = jest.fn(
-  () => ({ id: 'player-id' } as PokerPlayerManager)
+  () => ({ id: 'player-id' }) as PokerPlayerManager,
 )
 const mockBestCombinationWeight = jest.fn(() => 1e12)
 const mockPokerStateManager = jest.fn(
@@ -88,7 +88,7 @@ const mockPokerStateManager = jest.fn(
       isAllIn: mockIsAllIn(),
       currentPlayer: mockStateCurrentPlayer(),
       bestCombinationWeight: mockBestCombinationWeight(),
-    } as PokerStateManager)
+    }) as PokerStateManager,
 )
 
 describe('PokerPlayerManager', () => {
@@ -216,8 +216,8 @@ describe('PokerPlayerManager', () => {
       expect(player.bestCombination).toStrictEqual(
         new PokerCombination(
           POKER_COMBINATION_LEVEL.FOUR_OF_KIND,
-          new PokerSubset([7, 6, 5, 4, 1])
-        )
+          new PokerSubset([7, 6, 5, 4, 1]),
+        ),
       )
     })
   })
@@ -436,7 +436,7 @@ describe('PokerPlayerManager', () => {
       expect(mockSendMessage).toHaveBeenCalledWith(
         123456789,
         'Hello, World\\!',
-        { parse_mode: 'MarkdownV2' }
+        { parse_mode: 'MarkdownV2' },
       )
     })
 
@@ -457,7 +457,7 @@ describe('PokerPlayerManager', () => {
               ['❌ Fold', '✅ 10', '💰 All in'],
             ],
           },
-        }
+        },
       )
     })
   })
@@ -492,7 +492,7 @@ describe('PokerPlayerManager', () => {
               ['❌ Fold', '✅ 10', '💰 All in'],
             ],
           },
-        }
+        },
       )
     })
   })

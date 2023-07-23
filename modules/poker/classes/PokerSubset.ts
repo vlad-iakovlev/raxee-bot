@@ -151,7 +151,7 @@ export class PokerSubset {
                   cards[k],
                   cards[l],
                   cards[m],
-                ])
+                ]),
               )
             }
           }
@@ -164,7 +164,7 @@ export class PokerSubset {
 
   private reorder(priorityIndexes: number[]): PokerSubset {
     const newSubset = new PokerSubset(
-      [] as unknown as [number, number, number, number, number]
+      [] as unknown as [number, number, number, number, number],
     )
     const otherIndexes = new Set(R.range(0, this.cards.length))
 

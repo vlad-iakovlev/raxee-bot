@@ -3,7 +3,7 @@ import { PumpkinPlayerWithUser } from '../types.ts'
 
 export const getOrAddPlayer = async (
   tgChatId: number,
-  tgUserId: number
+  tgUserId: number,
 ): Promise<PumpkinPlayerWithUser> => {
   const existingPlayer = await prisma.pumpkinPlayer.findFirst({
     where: {

@@ -35,7 +35,7 @@ const createComposer = () => {
     if (earlyWinner) {
       await ctx.replyWithMarkdown(
         interpolate(strings.get('earlyWinner'), getMention(earlyWinner.user)),
-        { disable_notification: true }
+        { disable_notification: true },
       )
       return
     }
@@ -45,22 +45,22 @@ const createComposer = () => {
 
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner1'), getMention(winner.user)),
-      { disable_notification: true }
+      { disable_notification: true },
     )
     await asyncPause(2500)
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner2'), getMention(winner.user)),
-      { disable_notification: true }
+      { disable_notification: true },
     )
     await asyncPause(2500)
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner3'), getMention(winner.user)),
-      { disable_notification: true }
+      { disable_notification: true },
     )
     await asyncPause(4000)
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner4'), getMention(winner.user)),
-      { disable_notification: true }
+      { disable_notification: true },
     )
 
     if (getIsDec31(date)) {
@@ -69,9 +69,9 @@ const createComposer = () => {
         interpolate(
           strings.get('newWinnerNewYear'),
           getMention(winner.user),
-          fns.getYear(date)
+          fns.getYear(date),
         ),
-        { disable_notification: true }
+        { disable_notification: true },
       )
     }
   })
@@ -100,7 +100,7 @@ const createComposer = () => {
     .command('pumpkin_stats_year', async (ctx) => {
       await ctx.replyWithMarkdown(
         await getStatsMessage(ctx.chat.id, fns.getYear(new Date())),
-        { disable_notification: true }
+        { disable_notification: true },
       )
     })
 

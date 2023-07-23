@@ -59,7 +59,7 @@ describe('#getPumpkinOfYear', () => {
 
     expect(getStats).toBeCalledWith(tgChatId, year)
     expect(message).toStrictEqual(
-      md.bold('Pumpkin of 2023 \u2014 @john_doe, @jane_roe')
+      md.bold('Pumpkin of 2023 \u2014 @john_doe, @jane_roe'),
     )
   })
 
