@@ -19,7 +19,7 @@ beforeEach(() => {
 
 describe('#getStats', () => {
   it('should call prisma.pumpkinPlayer.findMany, prisma.pumpkinStats.groupBy and return stats', async () => {
-    const tgChatId = 123
+    const tgChatId = '123'
     prisma.pumpkinPlayer.findMany.mockResolvedValueOnce([
       { id: 'player-1-mock' },
       { id: 'player-2-mock' },
@@ -59,7 +59,7 @@ describe('#getStats', () => {
   })
 
   it('should call prisma.pumpkinPlayer.findMany, prisma.pumpkinStats.groupBy and return stats filtered by year', async () => {
-    const tgChatId = 123
+    const tgChatId = '123'
     prisma.pumpkinPlayer.findMany.mockResolvedValueOnce([
       { id: 'player-1-mock' },
       { id: 'player-2-mock' },

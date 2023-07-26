@@ -19,13 +19,13 @@ describe('#getPumpkinOfYear', () => {
   })
 
   it('should return a message with winners of year', async () => {
-    const tgChatId = 123
+    const tgChatId = '123'
     const year = 2023
     const playersWithStats = [
       {
         user: {
           id: 'user-1-id',
-          tgUserId: 1,
+          tgUserId: '1',
           firstName: 'John',
           lastName: 'Doe',
           username: 'john_doe',
@@ -35,7 +35,7 @@ describe('#getPumpkinOfYear', () => {
       {
         user: {
           id: 'user-2-id',
-          tgUserId: 2,
+          tgUserId: '2',
           firstName: 'Jane',
           lastName: 'Roe',
           username: 'jane_roe',
@@ -45,7 +45,7 @@ describe('#getPumpkinOfYear', () => {
       {
         user: {
           id: 'user-3-id',
-          tgUserId: 3,
+          tgUserId: '3',
           firstName: 'Mary',
           lastName: 'Lou',
           username: 'mary_lou',
@@ -64,13 +64,13 @@ describe('#getPumpkinOfYear', () => {
   })
 
   it('should return IDK if no winners', async () => {
-    const tgChatId = 123
+    const tgChatId = '123'
     const year = 2023
     const playersWithStats = [
       {
         user: {
           id: 'user-1-id',
-          tgUserId: 1,
+          tgUserId: '1',
           firstName: 'John',
           lastName: 'Doe',
           username: 'john_doe',
@@ -80,7 +80,7 @@ describe('#getPumpkinOfYear', () => {
       {
         user: {
           id: 'user-2-id',
-          tgUserId: 2,
+          tgUserId: '2',
           firstName: 'Jane',
           lastName: 'Roe',
           username: 'jane_roe',
@@ -90,7 +90,7 @@ describe('#getPumpkinOfYear', () => {
       {
         user: {
           id: 'user-3-id',
-          tgUserId: 3,
+          tgUserId: '3',
           firstName: 'Mary',
           lastName: 'Lou',
           username: 'mary_lou',

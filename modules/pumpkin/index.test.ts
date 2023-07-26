@@ -79,7 +79,7 @@ describe('#createPumpkinModule', () => {
           id: 'player-1-id',
           user: {
             id: 'user-1-id',
-            tgUserId: 1,
+            tgUserId: '1',
             firstName: 'John',
             lastName: 'Doe',
             username: 'john_doe',
@@ -89,7 +89,7 @@ describe('#createPumpkinModule', () => {
           id: 'player-2-id',
           user: {
             id: 'user-2-id',
-            tgUserId: 2,
+            tgUserId: '2',
             firstName: 'Jane',
             lastName: 'Doe',
             username: 'jane_doe',
@@ -171,8 +171,8 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith(123)
-      expect(getWinner).toBeCalledWith(123, new Date())
+      expect(getPlayers).toBeCalledWith('123')
+      expect(getWinner).toBeCalledWith('123', new Date())
       expect(addWinner).toBeCalledWith('player-1-id', new Date())
     })
 
@@ -222,7 +222,7 @@ describe('#createPumpkinModule', () => {
           id: 'player-1-id',
           user: {
             id: 'user-1-id',
-            tgUserId: 1,
+            tgUserId: '1',
             firstName: 'John',
             lastName: 'Doe',
             username: 'john_doe',
@@ -232,7 +232,7 @@ describe('#createPumpkinModule', () => {
           id: 'player-2-id',
           user: {
             id: 'user-2-id',
-            tgUserId: 2,
+            tgUserId: '2',
             firstName: 'Jane',
             lastName: 'Doe',
             username: 'jane_doe',
@@ -243,7 +243,7 @@ describe('#createPumpkinModule', () => {
         id: 'player-2-id',
         user: {
           id: 'user-2-id',
-          tgUserId: 2,
+          tgUserId: '2',
           firstName: 'Jane',
           lastName: 'Doe',
           username: 'jane_doe',
@@ -294,8 +294,8 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith(123)
-      expect(getWinner).toBeCalledWith(123, new Date())
+      expect(getPlayers).toBeCalledWith('123')
+      expect(getWinner).toBeCalledWith('123', new Date())
       expect(addWinner).not.toBeCalled()
     })
 
@@ -346,7 +346,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith(123)
+      expect(getPlayers).toBeCalledWith('123')
       expect(getWinner).not.toBeCalled()
       expect(addWinner).not.toBeCalled()
     })
@@ -358,7 +358,7 @@ describe('#createPumpkinModule', () => {
           id: 'player-1-id',
           user: {
             id: 'user-1-id',
-            tgUserId: 1,
+            tgUserId: '1',
             firstName: 'John',
             lastName: 'Doe',
             username: 'john_doe',
@@ -368,7 +368,7 @@ describe('#createPumpkinModule', () => {
           id: 'player-2-id',
           user: {
             id: 'user-2-id',
-            tgUserId: 2,
+            tgUserId: '2',
             firstName: 'Jane',
             lastName: 'Doe',
             username: 'jane_doe',
@@ -460,8 +460,8 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith(123)
-      expect(getWinner).toBeCalledWith(123, new Date())
+      expect(getPlayers).toBeCalledWith('123')
+      expect(getWinner).toBeCalledWith('123', new Date())
       expect(addWinner).toBeCalledWith('player-1-id', new Date())
     })
   })
@@ -522,7 +522,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getOrAddPlayer).toBeCalledWith(123, 1)
+      expect(getOrAddPlayer).toBeCalledWith('123', '1')
     })
 
     it('should do nothing in private chat', async () => {
@@ -613,7 +613,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getStatsMessage).toBeCalledWith(123)
+      expect(getStatsMessage).toBeCalledWith('123')
     })
 
     it('should do nothing in private chat', async () => {
@@ -713,7 +713,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getStatsMessage).toBeCalledWith(123, 2023)
+      expect(getStatsMessage).toBeCalledWith('123', 2023)
     })
 
     it('should do nothing in private chat', async () => {
@@ -804,7 +804,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPumpkinOfYear).toBeCalledWith(123, 2023)
+      expect(getPumpkinOfYear).toBeCalledWith('123', 2023)
     })
 
     it('should do nothing in private chat', async () => {
@@ -858,7 +858,7 @@ describe('#createPumpkinModule', () => {
         id: 'player-1-id',
         user: {
           id: 'user-1-id',
-          tgUserId: 1,
+          tgUserId: '1',
           firstName: 'John',
           lastName: 'Doe',
           username: 'john_doe',
@@ -911,7 +911,7 @@ describe('#createPumpkinModule', () => {
         id: 'player-1-id',
         user: {
           id: 'user-1-id',
-          tgUserId: 1,
+          tgUserId: '1',
           firstName: 'John',
           lastName: 'Doe',
           username: 'john_doe',
@@ -952,7 +952,7 @@ describe('#createPumpkinModule', () => {
         id: 'player-2-id',
         user: {
           id: 'user-2-id',
-          tgUserId: 2,
+          tgUserId: '2',
           firstName: 'Jane',
           lastName: 'Doe',
           username: 'jane_doe',
@@ -1024,7 +1024,7 @@ describe('#createPumpkinModule', () => {
         id: 'player-1-id',
         user: {
           id: 'user-1-id',
-          tgUserId: 1,
+          tgUserId: '1',
           firstName: 'John',
           lastName: 'Doe',
           username: 'john_doe',

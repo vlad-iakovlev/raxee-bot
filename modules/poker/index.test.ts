@@ -72,7 +72,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockAddPlayer).toBeCalledWith(123456789)
+      expect(mockAddPlayer).toBeCalledWith('123456789')
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -136,7 +136,7 @@ describe('#createPokerModule', () => {
     it('should reply with error if user is already registered (same chat)', async () => {
       const mockAddPlayer = jest.fn()
       PokerStateManager.loadByTgUserId.mockReturnValueOnce({
-        tgChatId: 1111111,
+        tgChatId: '1111111',
       })
       PokerStateManager.loadByTgChatIdOrCreate.mockReturnValueOnce({
         mockAddPlayer,
@@ -191,7 +191,7 @@ describe('#createPokerModule', () => {
     it('should reply with error if user is already registered (other chat)', async () => {
       const mockAddPlayer = jest.fn()
       PokerStateManager.loadByTgUserId.mockReturnValueOnce({
-        tgChatId: 2222222,
+        tgChatId: '2222222',
       })
       PokerStateManager.loadByTgChatIdOrCreate.mockReturnValueOnce({
         mockAddPlayer,
@@ -771,7 +771,7 @@ describe('#createPokerModule', () => {
       const mockHandleMessage = jest.fn()
       const mockBroadcastPlayerMessage = jest.fn()
       PokerStateManager.loadByTgUserId.mockReturnValueOnce({
-        players: [{ id: 'player-1-id', user: { tgUserId: 123456789 } }],
+        players: [{ id: 'player-1-id', user: { tgUserId: '123456789' } }],
         currentPlayer: { id: 'player-1-id' },
         handleMessage: mockHandleMessage,
         broadcastPlayerMessage: mockBroadcastPlayerMessage,
@@ -801,7 +801,7 @@ describe('#createPokerModule', () => {
       })
 
       expect(mockHandleMessage).toBeCalledWith(
-        { id: 'player-1-id', user: { tgUserId: 123456789 } },
+        { id: 'player-1-id', user: { tgUserId: '123456789' } },
         'test',
       )
       expect(mockBroadcastPlayerMessage).not.toBeCalled()
@@ -812,7 +812,7 @@ describe('#createPokerModule', () => {
       const mockHandleMessage = jest.fn(() => 'test response')
       const mockBroadcastPlayerMessage = jest.fn()
       PokerStateManager.loadByTgUserId.mockReturnValueOnce({
-        players: [{ id: 'player-1-id', user: { tgUserId: 123456789 } }],
+        players: [{ id: 'player-1-id', user: { tgUserId: '123456789' } }],
         currentPlayer: { id: 'player-1-id' },
         handleMessage: mockHandleMessage,
         broadcastPlayerMessage: mockBroadcastPlayerMessage,
@@ -842,7 +842,7 @@ describe('#createPokerModule', () => {
       })
 
       expect(mockHandleMessage).toBeCalledWith(
-        { id: 'player-1-id', user: { tgUserId: 123456789 } },
+        { id: 'player-1-id', user: { tgUserId: '123456789' } },
         'test',
       )
       expect(mockBroadcastPlayerMessage).not.toBeCalled()
@@ -863,7 +863,7 @@ describe('#createPokerModule', () => {
       const mockHandleMessage = jest.fn()
       const mockBroadcastPlayerMessage = jest.fn()
       PokerStateManager.loadByTgUserId.mockReturnValueOnce({
-        players: [{ id: 'player-1-id', user: { tgUserId: 123456789 } }],
+        players: [{ id: 'player-1-id', user: { tgUserId: '123456789' } }],
         currentPlayer: { id: 'player-2-id' },
         handleMessage: mockHandleMessage,
         broadcastPlayerMessage: mockBroadcastPlayerMessage,
@@ -894,7 +894,7 @@ describe('#createPokerModule', () => {
 
       expect(mockHandleMessage).not.lastCalledWith()
       expect(mockBroadcastPlayerMessage).toBeCalledWith(
-        { id: 'player-1-id', user: { tgUserId: 123456789 } },
+        { id: 'player-1-id', user: { tgUserId: '123456789' } },
         'test',
       )
       expect(requests).toStrictEqual([

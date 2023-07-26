@@ -19,8 +19,8 @@ const createComposer = () => {
   const bot = new Composer(replyWithMarkdownPlugin())
 
   bot.chatType(['group', 'supergroup']).command('pumpkin', async (ctx) => {
-    const strings = await PumpkinStringsManager.load(ctx.chat.id)
-    const players = await getPlayers(ctx.chat.id)
+    const strings = await PumpkinStringsManager.load(String(ctx.chat.id))
+    const players = await getPlayers(String(ctx.chat.id))
 
     if (!players.length) {
       await ctx.replyWithMarkdown(strings.get('notEnoughPlayers'), {
@@ -31,7 +31,7 @@ const createComposer = () => {
 
     const date = new Date()
 
-    const earlyWinner = await getWinner(ctx.chat.id, date)
+    const earlyWinner = await getWinner(String(ctx.chat.id), date)
     if (earlyWinner) {
       await ctx.replyWithMarkdown(
         interpolate(strings.get('earlyWinner'), getMention(earlyWinner.user)),
@@ -77,9 +77,9 @@ const createComposer = () => {
   })
 
   bot.chatType(['group', 'supergroup']).command('pumpkin_join', async (ctx) => {
-    const strings = await PumpkinStringsManager.load(ctx.chat.id)
+    const strings = await PumpkinStringsManager.load(String(ctx.chat.id))
 
-    await getOrAddPlayer(ctx.chat.id, ctx.from.id)
+    await getOrAddPlayer(String(ctx.chat.id), String(ctx.from.id))
 
     await ctx.replyWithMarkdown(strings.get('hello'), {
       disable_notification: true,
@@ -90,7 +90,7 @@ const createComposer = () => {
   bot
     .chatType(['group', 'supergroup'])
     .command('pumpkin_stats', async (ctx) => {
-      await ctx.replyWithMarkdown(await getStatsMessage(ctx.chat.id), {
+      await ctx.replyWithMarkdown(await getStatsMessage(String(ctx.chat.id)), {
         disable_notification: true,
       })
     })
@@ -99,7 +99,7 @@ const createComposer = () => {
     .chatType(['group', 'supergroup'])
     .command('pumpkin_stats_year', async (ctx) => {
       await ctx.replyWithMarkdown(
-        await getStatsMessage(ctx.chat.id, fns.getYear(new Date())),
+        await getStatsMessage(String(ctx.chat.id), fns.getYear(new Date())),
         { disable_notification: true },
       )
     })
@@ -109,17 +109,20 @@ const createComposer = () => {
     bot
       .chatType(['group', 'supergroup'])
       .command(`pumpkin_${year}`, async (ctx) => {
-        await ctx.replyWithMarkdown(await getPumpkinOfYear(ctx.chat.id, year), {
-          disable_notification: true,
-        })
+        await ctx.replyWithMarkdown(
+          await getPumpkinOfYear(String(ctx.chat.id), year),
+          {
+            disable_notification: true,
+          },
+        )
       })
   })
 
   bot.chatType(['group', 'supergroup']).on('message', async (ctx, next) => {
-    const strings = await PumpkinStringsManager.load(ctx.chat.id)
-    const winner = await getWinner(ctx.chat.id, new Date())
+    const strings = await PumpkinStringsManager.load(String(ctx.chat.id))
+    const winner = await getWinner(String(ctx.chat.id), new Date())
 
-    if (winner?.user.tgUserId === ctx.from.id && Math.random() < 0.1) {
+    if (winner?.user.tgUserId === String(ctx.from.id) && Math.random() < 0.1) {
       await ctx.replyWithMarkdown(strings.get('replyForWinner'), {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,

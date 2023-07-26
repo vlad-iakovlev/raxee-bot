@@ -22,7 +22,7 @@ const { prisma } = jest.requireMock('../../../utils/prisma.ts')
 const mockUser = (index: number) =>
   ({
     id: `user-${index}-id`,
-    tgUserId: 1230 + index,
+    tgUserId: '1230' + index,
     firstName: `user-${index}-first-name`,
     lastName: `user-${index}-last-name`,
     username: `user-${index}-username`,
@@ -41,7 +41,7 @@ const mockPlayer = (index: number) =>
   }) as PokerPlayer & { user: User }
 
 const mockStateId = jest.fn(() => 'state-id')
-const mockStateTgChatId = jest.fn(() => 123)
+const mockStateTgChatId = jest.fn(() => '123')
 const mockStateCards = jest.fn(() => [1, 2, 3, 4, 5])
 const mockStateRound = jest.fn(() => POKER_ROUND.TURN as POKER_ROUND)
 const mockStateDealsCount = jest.fn(() => 0)
@@ -116,7 +116,7 @@ describe('PokerStateManager', () => {
   describe('#loadByTgChatIdOrCreate', () => {
     it('should call prisma.pokerState.upsert and return new PokerStateManager instance', async () => {
       prisma.pokerState.upsert.mockReturnValueOnce(mockStateData())
-      const tgChatId = 100500
+      const tgChatId = '100500'
 
       const newState = await PokerStateManager.loadByTgChatIdOrCreate(
         tgChatId,
@@ -151,7 +151,7 @@ describe('PokerStateManager', () => {
   describe('#loadByTgUserId', () => {
     it('should call prisma.pokerState.findFirst and return new PokerStateManager instance', async () => {
       prisma.pokerState.findFirst.mockReturnValueOnce(mockStateData())
-      const tgUserId = 100500
+      const tgUserId = '100500'
 
       const newState = await PokerStateManager.loadByTgUserId(
         tgUserId,
@@ -181,7 +181,7 @@ describe('PokerStateManager', () => {
 
     it('should call prisma.pokerState.findFirst and return undefined', async () => {
       prisma.pokerState.findFirst.mockReturnValueOnce(undefined)
-      const tgUserId = 100500
+      const tgUserId = '100500'
 
       const newState = await PokerStateManager.loadByTgUserId(
         tgUserId,
@@ -662,7 +662,7 @@ describe('PokerStateManager', () => {
   describe('#addPlayer', () => {
     it('should add call prisma.pokerPlayer.create and add player to players', async () => {
       prisma.pokerPlayer.create.mockReturnValueOnce(mockPlayer(10))
-      const tgUserId = 1240
+      const tgUserId = '1240'
 
       await state.addPlayer(tgUserId)
 
@@ -833,27 +833,27 @@ describe('PokerStateManager', () => {
       expect(state.broadcastMessage).toBeCalledWith('Game over, folks!')
       expect((state.tgApi.sendSticker as jest.Mock).mock.calls).toStrictEqual([
         [
-          1230,
+          '12300',
           'CAACAgIAAxkBAAIMa2LDXc4nM_5Np3x6QrD_CSCbpl-0AALbAQACPQ3oBNXTF0r9yu1QKQQ',
           { reply_markup: { remove_keyboard: true } },
         ],
         [
-          1231,
+          '12301',
           'CAACAgIAAxkBAAIMTWLDXSBtPvO6simMAoERFOb3h4-qAAJcAQACPQ3oBAABMsv78bItBCkE',
           { reply_markup: { remove_keyboard: true } },
         ],
         [
-          1232,
+          '12302',
           'CAACAgIAAxkBAAIMg2LDXjq2VYi_IzAHFfWpHeoqk9TdAALRAQACPQ3oBPCyBQkFuchBKQQ',
           { reply_markup: { remove_keyboard: true } },
         ],
         [
-          1233,
+          '12303',
           'CAACAgIAAxkBAAIMdWLDXftIWvgGXI1T-I-Eso9xktcSAAIUDwAC1I9gS7jbkdj0UX0_KQQ',
           { reply_markup: { remove_keyboard: true } },
         ],
         [
-          1234,
+          '12304',
           'CAACAgIAAxkBAAIMYWLDXaBwflUtgQHDBEZs70t7BlXrAAJlAQACPQ3oBIxK4cJVO_rzKQQ',
           { reply_markup: { remove_keyboard: true } },
         ],
@@ -1774,11 +1774,11 @@ describe('PokerStateManager', () => {
       await state.broadcastMessage('test')
 
       expect((state.tgApi.sendMessage as jest.Mock).mock.calls).toStrictEqual([
-        [1230, 'test', { parse_mode: 'MarkdownV2' }],
-        [1231, 'test', { parse_mode: 'MarkdownV2' }],
-        [1232, 'test', { parse_mode: 'MarkdownV2' }],
-        [1233, 'test', { parse_mode: 'MarkdownV2' }],
-        [1234, 'test', { parse_mode: 'MarkdownV2' }],
+        ['12300', 'test', { parse_mode: 'MarkdownV2' }],
+        ['12301', 'test', { parse_mode: 'MarkdownV2' }],
+        ['12302', 'test', { parse_mode: 'MarkdownV2' }],
+        ['12303', 'test', { parse_mode: 'MarkdownV2' }],
+        ['12304', 'test', { parse_mode: 'MarkdownV2' }],
       ])
     })
 
@@ -1786,8 +1786,8 @@ describe('PokerStateManager', () => {
       await state.broadcastMessage('test', [state.players[0], state.players[1]])
 
       expect((state.tgApi.sendMessage as jest.Mock).mock.calls).toStrictEqual([
-        [1230, 'test', { parse_mode: 'MarkdownV2' }],
-        [1231, 'test', { parse_mode: 'MarkdownV2' }],
+        ['12300', 'test', { parse_mode: 'MarkdownV2' }],
+        ['12301', 'test', { parse_mode: 'MarkdownV2' }],
       ])
     })
   })
@@ -1797,10 +1797,10 @@ describe('PokerStateManager', () => {
       await state.broadcastPlayerMessage(state.players[3], 'test')
 
       expect((state.tgApi.sendMessage as jest.Mock).mock.calls).toStrictEqual([
-        [1230, '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
-        [1231, '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
-        [1232, '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
-        [1234, '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
+        ['12300', '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
+        ['12301', '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
+        ['12302', '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
+        ['12304', '@user\\-3\\-username: test', { parse_mode: 'MarkdownV2' }],
       ])
     })
   })
@@ -1811,7 +1811,7 @@ describe('PokerStateManager', () => {
 
       expect((state.tgApi.sendMessage as jest.Mock).mock.calls).toStrictEqual([
         [
-          1230,
+          '12300',
           '@user\\-3\\-username, your turn\\!',
           {
             parse_mode: 'MarkdownV2',
@@ -1825,7 +1825,7 @@ describe('PokerStateManager', () => {
           },
         ],
         [
-          1231,
+          '12301',
           '@user\\-3\\-username, your turn\\!',
           {
             parse_mode: 'MarkdownV2',
@@ -1839,7 +1839,7 @@ describe('PokerStateManager', () => {
           },
         ],
         [
-          1232,
+          '12302',
           '@user\\-3\\-username, your turn\\!',
           {
             parse_mode: 'MarkdownV2',
@@ -1853,7 +1853,7 @@ describe('PokerStateManager', () => {
           },
         ],
         [
-          1233,
+          '12303',
           '@user\\-3\\-username, your turn\\!',
           {
             parse_mode: 'MarkdownV2',
@@ -1868,7 +1868,7 @@ describe('PokerStateManager', () => {
           },
         ],
         [
-          1234,
+          '12304',
           '@user\\-3\\-username, your turn\\!',
           {
             parse_mode: 'MarkdownV2',

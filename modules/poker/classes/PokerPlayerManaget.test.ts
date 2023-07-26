@@ -8,7 +8,7 @@ import { PokerStateManager } from './PokerStateManager.ts'
 import { PokerSubset } from './PokerSubset.ts'
 
 const mockUserId = jest.fn(() => 'user-id')
-const mockUserTgUserId = jest.fn(() => 123456789)
+const mockUserTgUserId = jest.fn(() => '123456789')
 const mockUserFirstName = jest.fn(() => 'FirstName')
 const mockUserLastName = jest.fn(() => 'LastName')
 const mockUserUsername = jest.fn(() => 'username')
@@ -55,7 +55,7 @@ const mockTgApi = jest.fn(
 )
 
 const mockStateId = jest.fn(() => 'state-id')
-const mockStateTgChatId = jest.fn(() => 123456789)
+const mockStateTgChatId = jest.fn(() => '123456789')
 const mockStateCards = jest.fn(() => [1, 2, 3, 4, 5])
 const mockStateRound = jest.fn(() => POKER_ROUND.TURN as POKER_ROUND)
 const mockStateDealsCount = jest.fn(() => 3)
@@ -434,7 +434,7 @@ describe('PokerPlayerManager', () => {
       await player.sendMessage(md`Hello, World!`)
 
       expect(mockSendMessage).toHaveBeenCalledWith(
-        123456789,
+        '123456789',
         'Hello, World\\!',
         { parse_mode: 'MarkdownV2' },
       )
@@ -445,7 +445,7 @@ describe('PokerPlayerManager', () => {
       await player.sendMessage(md`Hello, World!`, true)
 
       expect(mockSendMessage).toHaveBeenCalledWith(
-        123456789,
+        '123456789',
         'Hello, World\\!',
         {
           parse_mode: 'MarkdownV2',
@@ -466,7 +466,7 @@ describe('PokerPlayerManager', () => {
     it('should send sticker and remove keyboard', async () => {
       await player.sendStickerAndRemoveKeyboard('sticker')
 
-      expect(mockSendSticker).toHaveBeenCalledWith(123456789, 'sticker', {
+      expect(mockSendSticker).toHaveBeenCalledWith('123456789', 'sticker', {
         reply_markup: { remove_keyboard: true },
       })
     })
@@ -480,7 +480,7 @@ describe('PokerPlayerManager', () => {
       await player.sendCurrentTurn()
 
       expect(mockSendMessage).toHaveBeenCalledWith(
-        123456789,
+        '123456789',
         '@username, your turn\\!',
         {
           parse_mode: 'MarkdownV2',

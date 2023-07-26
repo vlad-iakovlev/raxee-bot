@@ -16,7 +16,7 @@ beforeEach(() => {
 
 describe('#getWinner', () => {
   it('should call prisma.pumpkinStats.findMany and return first player', async () => {
-    const tgChatId = 123
+    const tgChatId = '123'
     const date = new Date()
     prisma.pumpkinStats.findMany.mockResolvedValueOnce([
       { player: 'player-1-mock' },
@@ -51,7 +51,7 @@ describe('#getWinner', () => {
   })
 
   it('should call prisma.pumpkinStats.findMany and return null if no stats found', async () => {
-    const tgChatId = 123
+    const tgChatId = '123'
     const date = new Date()
     prisma.pumpkinStats.findMany.mockResolvedValueOnce([])
 

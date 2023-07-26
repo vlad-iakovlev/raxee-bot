@@ -3,7 +3,7 @@ import { prisma } from '../../../utils/prisma.ts'
 import { PumpkinPlayerWithUser } from '../types.ts'
 
 export const getWinner = async (
-  tgChatId: number,
+  tgChatId: string,
   date: Date,
 ): Promise<PumpkinPlayerWithUser | null> => {
   const stats = await prisma.pumpkinStats.findMany({
