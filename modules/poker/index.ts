@@ -9,12 +9,12 @@ const createComposer = () => {
 
   bot.chatType(['group', 'supergroup']).command('poker_join', async (ctx) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
-      ctx.from.id,
+      String(ctx.from.id),
       ctx.api,
     )
 
     if (senderPokerState) {
-      if (senderPokerState.tgChatId === ctx.chat.id) {
+      if (senderPokerState.tgChatId === String(ctx.chat.id)) {
         await ctx.replyWithMarkdown(MESSAGES.pokerJoin.duplicateSameChat, {
           disable_notification: true,
           reply_to_message_id: ctx.message.message_id,
@@ -29,7 +29,7 @@ const createComposer = () => {
     }
 
     const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
-      ctx.chat.id,
+      String(ctx.chat.id),
       ctx.api,
     )
 
@@ -49,7 +49,7 @@ const createComposer = () => {
       return
     }
 
-    await pokerState.addPlayer(ctx.from.id)
+    await pokerState.addPlayer(String(ctx.from.id))
 
     await ctx.replyWithMarkdown(MESSAGES.pokerJoin.registered, {
       disable_notification: true,
@@ -59,7 +59,7 @@ const createComposer = () => {
 
   bot.chatType(['group', 'supergroup']).command('poker_start', async (ctx) => {
     const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
-      ctx.chat.id,
+      String(ctx.chat.id),
       ctx.api,
     )
 
@@ -89,7 +89,7 @@ const createComposer = () => {
 
   bot.chatType(['group', 'supergroup']).command('poker_stop', async (ctx) => {
     const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
-      ctx.chat.id,
+      String(ctx.chat.id),
       ctx.api,
     )
     await pokerState.endGame()
@@ -107,7 +107,7 @@ const createComposer = () => {
 
   bot.chatType('private').command('poker_stop', async (ctx) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
-      ctx.from.id,
+      String(ctx.from.id),
       ctx.api,
     )
 
@@ -120,13 +120,13 @@ const createComposer = () => {
 
   bot.chatType('private').on('message:text', async (ctx, next) => {
     const senderPokerState = await PokerStateManager.loadByTgUserId(
-      ctx.from.id,
+      String(ctx.from.id),
       ctx.api,
     )
 
     if (senderPokerState) {
       const sender = senderPokerState.players.find(
-        (player) => player.user.tgUserId === ctx.from.id,
+        (player) => player.user.tgUserId === String(ctx.from.id),
       )
       // istanbul ignore next
       if (!sender) throw new Error('Player not found')

@@ -16,7 +16,7 @@ import { PokerPlayerManager } from './PokerPlayerManger.ts'
 
 export class PokerStateManager {
   id: string
-  tgChatId: number
+  tgChatId: string
   cards: number[]
   round: POKER_ROUND
   dealsCount: number
@@ -44,7 +44,7 @@ export class PokerStateManager {
 
   static async loadByTgChatIdOrCreate(
     this: void,
-    tgChatId: number,
+    tgChatId: string,
     tgApi: Api,
   ): Promise<PokerStateManager> {
     const stateData = await prisma.pokerState.upsert({
@@ -74,7 +74,7 @@ export class PokerStateManager {
 
   static async loadByTgUserId(
     this: void,
-    tgUserId: number,
+    tgUserId: string,
     tgApi: Api,
   ): Promise<PokerStateManager | undefined> {
     const stateData = await prisma.pokerState.findFirst({
@@ -195,7 +195,7 @@ export class PokerStateManager {
     )
   }
 
-  async addPlayer(tgUserId: number) {
+  async addPlayer(tgUserId: string) {
     const playerData = await prisma.pokerPlayer.create({
       data: {
         cards: [],

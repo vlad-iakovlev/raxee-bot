@@ -2,8 +2,8 @@ import { prisma } from '../../../utils/prisma.ts'
 import { PumpkinPlayerWithUser } from '../types.ts'
 
 export const getOrAddPlayer = async (
-  tgChatId: number,
-  tgUserId: number,
+  tgChatId: string,
+  tgUserId: string,
 ): Promise<PumpkinPlayerWithUser> => {
   const existingPlayer = await prisma.pumpkinPlayer.findFirst({
     where: {

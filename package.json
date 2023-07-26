@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "ts-node --esm -r dotenv/config bin/bot.ts",
-    "start:prod": "prisma db push && npm run start",
+    "start:prod": "prisma migrate deploy && npm run start",
     "prepare": "husky install",
     "compile": "tsc",
     "lint": "eslint .",

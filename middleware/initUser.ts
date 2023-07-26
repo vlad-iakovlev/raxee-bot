@@ -5,10 +5,10 @@ export const initUserMiddleware: MiddlewareFn = async (ctx, next) => {
   if (ctx.from) {
     await prisma.user.upsert({
       where: {
-        tgUserId: ctx.from.id,
+        tgUserId: String(ctx.from.id),
       },
       create: {
-        tgUserId: ctx.from.id,
+        tgUserId: String(ctx.from.id),
         firstName: ctx.from.first_name,
         lastName: ctx.from.last_name,
         username: ctx.from.username,

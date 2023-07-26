@@ -4,7 +4,7 @@ describe('#getMention', () => {
   it('should return simple mention when username is presented', () => {
     const mention = getMention({
       id: 'user-id',
-      tgUserId: 12345,
+      tgUserId: '12345',
       firstName: 'bar',
       lastName: null,
       username: 'foo',
@@ -16,7 +16,7 @@ describe('#getMention', () => {
   it('should return simple mention with escaped username', () => {
     const mention = getMention({
       id: 'user-id',
-      tgUserId: 12345,
+      tgUserId: '12345',
       firstName: 'bar',
       lastName: null,
       username: 'foo_foo',
@@ -28,7 +28,7 @@ describe('#getMention', () => {
   it('should return link mention with first and last name when no username presented', () => {
     const mention = getMention({
       id: 'user-id',
-      tgUserId: 12345,
+      tgUserId: '12345',
       firstName: 'bar',
       lastName: 'baz',
       username: null,
@@ -40,7 +40,7 @@ describe('#getMention', () => {
   it('should return link mention with first name when no username and last name presented', () => {
     const mention = getMention({
       id: 'user-id',
-      tgUserId: 12345,
+      tgUserId: '12345',
       firstName: 'bar',
       lastName: null,
       username: null,

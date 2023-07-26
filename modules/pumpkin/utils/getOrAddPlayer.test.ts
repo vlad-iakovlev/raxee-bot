@@ -16,8 +16,8 @@ beforeEach(() => {
 
 describe('#getOrAddPlayer', () => {
   it('should call prisma.pumpkinPlayer.findFirst and return player', async () => {
-    const tgChatId = 123
-    const tgUserId = 456
+    const tgChatId = '123'
+    const tgUserId = '456'
     prisma.pumpkinPlayer.findFirst.mockResolvedValueOnce('player-mock')
 
     const player = await getOrAddPlayer(tgChatId, tgUserId)
@@ -37,8 +37,8 @@ describe('#getOrAddPlayer', () => {
   })
 
   it('should call prisma.pumpkinPlayer.create and return player', async () => {
-    const tgChatId = 123
-    const tgUserId = 456
+    const tgChatId = '123'
+    const tgUserId = '456'
     prisma.pumpkinPlayer.findFirst.mockResolvedValueOnce(null)
     prisma.pumpkinPlayer.create.mockResolvedValueOnce('player-mock')
 

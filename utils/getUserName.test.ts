@@ -4,7 +4,7 @@ describe('#getUserName', () => {
   it('should return username when presented', () => {
     const userName = getUserName({
       id: 'user-id',
-      tgUserId: 12345,
+      tgUserId: '12345',
       firstName: 'bar',
       lastName: null,
       username: 'foo',
@@ -16,7 +16,7 @@ describe('#getUserName', () => {
   it('should return first and last name when no username presented', () => {
     const userName = getUserName({
       id: 'user-id',
-      tgUserId: 12345,
+      tgUserId: '12345',
       firstName: 'bar',
       lastName: 'baz',
       username: null,
@@ -28,7 +28,7 @@ describe('#getUserName', () => {
   it('should return first name when no username and last name presented', () => {
     const userName = getUserName({
       id: 'user-id',
-      tgUserId: 12345,
+      tgUserId: '12345',
       firstName: 'bar',
       lastName: null,
       username: null,

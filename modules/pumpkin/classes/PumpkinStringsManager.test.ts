@@ -26,7 +26,7 @@ describe('PumpkinStringsManager', () => {
 
   describe('#load', () => {
     it('should load chat strings', async () => {
-      const tgChatId = 123
+      const tgChatId = '123'
       const chatStrings = { hello: ['hello'] }
       prisma.pumpkinStrings.findFirst.mockResolvedValue(chatStrings)
 
@@ -36,7 +36,7 @@ describe('PumpkinStringsManager', () => {
     })
 
     it('should set empty object if no chat strings', async () => {
-      const tgChatId = 123
+      const tgChatId = '123'
       prisma.pumpkinStrings.findFirst.mockResolvedValue(null)
 
       const manager = await PumpkinStringsManager.load(tgChatId)

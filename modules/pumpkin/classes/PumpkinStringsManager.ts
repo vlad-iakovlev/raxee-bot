@@ -27,7 +27,7 @@ export class PumpkinStringsManager {
     this.chatStrings = chatStrings
   }
 
-  static async load(this: void, tgChatId: number) {
+  static async load(this: void, tgChatId: string) {
     const chatStrings = await prisma.pumpkinStrings.findFirst({
       where: {
         tgChatIds: {

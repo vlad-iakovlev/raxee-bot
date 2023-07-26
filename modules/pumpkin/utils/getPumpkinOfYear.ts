@@ -4,7 +4,7 @@ import { interpolate } from '../../../utils/interpolate.ts'
 import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.ts'
 import { getStats } from './getStats.ts'
 
-export const getPumpkinOfYear = async (tgChatId: number, year: number) => {
+export const getPumpkinOfYear = async (tgChatId: string, year: number) => {
   const strings = await PumpkinStringsManager.load(tgChatId)
   const playersWithStats = await getStats(tgChatId, year)
 

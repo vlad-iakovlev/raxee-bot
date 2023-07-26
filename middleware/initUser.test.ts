@@ -29,10 +29,10 @@ describe('#initUserMiddleware', () => {
 
     expect(prisma.user.upsert).toBeCalledWith({
       where: {
-        tgUserId: 123456789,
+        tgUserId: '123456789',
       },
       create: {
-        tgUserId: 123456789,
+        tgUserId: '123456789',
         firstName: 'John',
         lastName: 'Doe',
         username: 'cool_john',
