@@ -1,0 +1,534 @@
+[
+  {
+    "_id": {
+      "$oid": "6439d8aedb3e2bcd583a330f"
+    },
+    "tgUserId": 1233067599,
+    "firstName": "Александра",
+    "lastName": "Яковлева"
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3318"
+    },
+    "tgUserId": 259510644,
+    "firstName": "Elena",
+    "username": "serpensa"
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a331a"
+    },
+    "tgUserId": 528039368,
+    "firstName": "Элла",
+    "username": "BeAspera"
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a331c"
+    },
+    "tgUserId": 116850268,
+    "firstName": "Марина",
+    "username": "bubei"
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a331e"
+    },
+    "tgUserId": 104553567,
+    "firstName": "Vadim",
+    "username": "vadimtheslayer"
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a331f"
+    },
+    "tgUserId": 6906652,
+    "firstName": "Aleksandr",
+    "lastName": "Pezikov",
+    "username": "alexahdp"
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3322"
+    },
+    "tgUserId": 287339702,
+    "firstName": "Vladislav",
+    "lastName": "Yakovlev",
+    "username": "vladyakovlev"
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3324"
+    },
+    "tgUserId": 313357801,
+    "firstName": "Viktor",
+    "lastName": "Kadnikov",
+    "username": "followsummer"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba2"
+    },
+    "tgUserId": 82811552,
+    "firstName": "Дмитрий",
+    "lastName": "Третий",
+    "username": "dima3u"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6b9f"
+    },
+    "tgUserId": 480598963,
+    "firstName": "Мих",
+    "lastName": "Хехе",
+    "username": "m14xa1"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba0"
+    },
+    "tgUserId": 308433704,
+    "firstName": "Jucharo",
+    "username": "Jucharo"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6b9e"
+    },
+    "tgUserId": 139930515,
+    "firstName": "Ivan",
+    "lastName": "Balashov",
+    "username": "alashka13"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba1"
+    },
+    "tgUserId": 197205924,
+    "firstName": "Alex",
+    "lastName": "Tuor4eg",
+    "username": "vA_Tuor4eg"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba4"
+    },
+    "tgUserId": 703532382,
+    "firstName": "Мявсик"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba5"
+    },
+    "tgUserId": 107413752,
+    "firstName": "Evgeniy",
+    "username": "zepper747"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba3"
+    },
+    "tgUserId": 466401973,
+    "firstName": "Базелик Киберскотч",
+    "username": "RoumZ"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba7"
+    },
+    "tgUserId": 425256220,
+    "firstName": "Ваня",
+    "lastName": "Соловьев",
+    "username": "zhoskii"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bab"
+    },
+    "tgUserId": 1127698634,
+    "firstName": "Глеб",
+    "lastName": "Кожин",
+    "username": "BlackJack171"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bb0"
+    },
+    "tgUserId": 500103321,
+    "firstName": "Viсtor",
+    "lastName": "Khabovskii",
+    "username": "Khabasan"
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bb1"
+    },
+    "tgUserId": 278794219,
+    "firstName": "Max",
+    "lastName": "Slastuhin ツ",
+    "username": "vsemagush"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c4f"
+    },
+    "tgUserId": 29462028,
+    "firstName": "Ilia",
+    "username": "cherya"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c50"
+    },
+    "tgUserId": 80592167,
+    "firstName": "Oleg",
+    "lastName": "Afanasev",
+    "username": "dude1phoenix"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c52"
+    },
+    "tgUserId": 735054,
+    "firstName": "Doge_rar",
+    "username": "Doge_rar"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c54"
+    },
+    "tgUserId": 253778927,
+    "firstName": "pom6ac",
+    "username": "pom6ac"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c51"
+    },
+    "tgUserId": 49101785,
+    "firstName": "Nikita",
+    "lastName": "Kuznetsov",
+    "username": "nikitakuznetsoff"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c53"
+    },
+    "tgUserId": 66430453,
+    "firstName": "Konstantin",
+    "username": "kbogdash"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c55"
+    },
+    "tgUserId": 225820634,
+    "firstName": "Eugene",
+    "lastName": "Trigubov",
+    "username": "evgentrigub"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c56"
+    },
+    "tgUserId": 235987812,
+    "firstName": "Alexandra",
+    "username": "skinroog"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c58"
+    },
+    "tgUserId": 262376049,
+    "firstName": "Сергей",
+    "username": "GreyYar"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c57"
+    },
+    "tgUserId": 320815148,
+    "firstName": "Ivan",
+    "lastName": "Vlasenko",
+    "username": "redspecialist"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c59"
+    },
+    "tgUserId": 289810050,
+    "firstName": "Karina",
+    "lastName": "Gorodnitskaya",
+    "username": "karina_gorodnitskaya"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c5a"
+    },
+    "tgUserId": 42769609,
+    "firstName": "Artem",
+    "lastName": "Malyshkin",
+    "username": "artikyar"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c5d"
+    },
+    "tgUserId": 704262563,
+    "firstName": "Marina",
+    "lastName": "Kuritsyna",
+    "username": "mykuritsyna"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c66"
+    },
+    "tgUserId": 95539358,
+    "firstName": "Maria",
+    "lastName": "Sergeeva",
+    "username": "Inepta"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c67"
+    },
+    "tgUserId": 191435283,
+    "firstName": "Nikita",
+    "lastName": "Safonov",
+    "username": "sofer_eg"
+  },
+  {
+    "_id": {
+      "$oid": "6439d9515eaa85c938d82a82"
+    },
+    "tgUserId": 469059139,
+    "firstName": "Alexandra",
+    "username": "amivanova",
+    "lastName": "Ivanova"
+  },
+  {
+    "_id": {
+      "$oid": "643ce5e894a54846462fc875"
+    },
+    "tgUserId": 84121048,
+    "firstName": "Никита",
+    "username": "nikita_1024"
+  },
+  {
+    "_id": {
+      "$oid": "643ea9aa94a54846462fc87b"
+    },
+    "tgUserId": 173395953,
+    "firstName": "Sergei",
+    "lastName": "Savin",
+    "username": "ssavin88"
+  },
+  {
+    "_id": {
+      "$oid": "643eca6494a54846462fc87c"
+    },
+    "tgUserId": 45565537,
+    "firstName": "Alexander",
+    "lastName": "Konstantinov",
+    "username": "konstantinof"
+  },
+  {
+    "_id": {
+      "$oid": "643ef9de94a54846462fc87e"
+    },
+    "tgUserId": 1087968824,
+    "firstName": "Group",
+    "username": "GroupAnonymousBot"
+  },
+  {
+    "_id": {
+      "$oid": "643f068294a54846462fc87f"
+    },
+    "tgUserId": 527425868,
+    "firstName": "Галя",
+    "lastName": "Константинова",
+    "username": "galikisss"
+  },
+  {
+    "_id": {
+      "$oid": "6441e693e8722e137e06533a"
+    },
+    "tgUserId": 1151929198,
+    "firstName": "Seyidali",
+    "username": "Seyid1e"
+  },
+  {
+    "_id": {
+      "$oid": "6448f3c7e8722e137e065351"
+    },
+    "tgUserId": 70391314,
+    "firstName": "Alexander",
+    "lastName": "Koroteev",
+    "username": "slppls"
+  },
+  {
+    "_id": {
+      "$oid": "644c1d4b6d3732fec10a36db"
+    },
+    "tgUserId": 137821073,
+    "firstName": "Alexey",
+    "lastName": "Guskov",
+    "username": "lexaguskov"
+  },
+  {
+    "_id": {
+      "$oid": "644f7bc36d3732fec10a36e0"
+    },
+    "tgUserId": 722335479,
+    "firstName": "Haladdin",
+    "username": "Haladdin"
+  },
+  {
+    "_id": {
+      "$oid": "644fe8f1e6c60cd57ab01b06"
+    },
+    "tgUserId": 779108237,
+    "firstName": "⏤͟͞𝐁𝐎𝐁",
+    "lastName": "⁪⁬⁮⁮⁮⁮ ‌‌‌‌",
+    "username": "F_L_J"
+  },
+  {
+    "_id": {
+      "$oid": "644fe945e6c60cd57ab01b08"
+    },
+    "tgUserId": {
+      "$numberLong": "5234182588"
+    },
+    "firstName": "Mikel",
+    "username": "Jdjd83l"
+  },
+  {
+    "_id": {
+      "$oid": "645cc3468d0ec49d97338142"
+    },
+    "tgUserId": 98964312,
+    "firstName": "anastasia🪐konovalova",
+    "username": "betaniyaho"
+  },
+  {
+    "_id": {
+      "$oid": "6460c1af8d0ec49d9733814a"
+    },
+    "tgUserId": 1132911161,
+    "firstName": "Thwadare",
+    "username": "Thwadare"
+  },
+  {
+    "_id": {
+      "$oid": "6469d7d3c9afa96cbbed6c69"
+    },
+    "tgUserId": 1636333938,
+    "firstName": "Shuhaib",
+    "lastName": "Shuhaib"
+  },
+  {
+    "_id": {
+      "$oid": "646b56efc9afa96cbbed6c6e"
+    },
+    "tgUserId": 637495284,
+    "firstName": "Вовка 🚀",
+    "username": "chesanov_m"
+  },
+  {
+    "_id": {
+      "$oid": "6475e4b02a6ff76bc836ac87"
+    },
+    "tgUserId": 299582607,
+    "firstName": "Artem",
+    "lastName": "Krasotin",
+    "username": "ar_toons"
+  },
+  {
+    "_id": {
+      "$oid": "6479a2f92a6ff76bc836ac92"
+    },
+    "tgUserId": 113914203,
+    "firstName": "Влад",
+    "lastName": "Чистяков",
+    "username": "vladbonk"
+  },
+  {
+    "_id": {
+      "$oid": "6479a9892a6ff76bc836ac93"
+    },
+    "tgUserId": 487194483,
+    "firstName": "Евгений",
+    "username": "Irdis01"
+  },
+  {
+    "_id": {
+      "$oid": "647af0722a6ff76bc836ac95"
+    },
+    "tgUserId": 278158263,
+    "firstName": "Dmitrii",
+    "username": "edyspb"
+  },
+  {
+    "_id": {
+      "$oid": "647f7a8e7a5e8ad5277fdd7d"
+    },
+    "tgUserId": 354146462,
+    "firstName": "Alex",
+    "lastName": "Shepard",
+    "username": "AlexShepard89"
+  },
+  {
+    "_id": {
+      "$oid": "64804d607a5e8ad5277fdd81"
+    },
+    "tgUserId": 286452581,
+    "firstName": "Drtg",
+    "username": "jdvsa"
+  },
+  {
+    "_id": {
+      "$oid": "648c5dac7a5e8ad5277fdd99"
+    },
+    "tgUserId": 231173923,
+    "firstName": "Andrey",
+    "lastName": "Noskov",
+    "username": "Dante_yar"
+  },
+  {
+    "_id": {
+      "$oid": "6496cba37a5e8ad5277fddad"
+    },
+    "tgUserId": 834097399,
+    "firstName": "Artur",
+    "username": "artur_pflb"
+  },
+  {
+    "_id": {
+      "$oid": "649f5747bb0a3f18eb37f23f"
+    },
+    "tgUserId": {
+      "$numberLong": "5907968971"
+    },
+    "firstName": "Merlin 🧙‍♂️",
+    "lastName": "https://t.me/abcnwogiqp",
+    "username": "whompmywillow"
+  },
+  {
+    "_id": {
+      "$oid": "64a175e4bb0a3f18eb37f243"
+    },
+    "tgUserId": {
+      "$numberLong": "5220805930"
+    },
+    "firstName": "Phenomenal @"
+  },
+  {
+    "_id": {
+      "$oid": "64acbb8815540bd7ff40beba"
+    },
+    "tgUserId": 684032767,
+    "firstName": "~root",
+    "username": "noname_root"
+  }
+]

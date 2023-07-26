@@ -1,0 +1,508 @@
+[
+  {
+    "_id": {
+      "$oid": "6439d8aedb3e2bcd583a3317"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8aedb3e2bcd583a330f"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3319"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a3318"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a331b"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a331a"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a331d"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a331c"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3320"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a331e"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3321"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a331f"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3323"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a3322"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d8badb3e2bcd583a3325"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a3324"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba8"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6ba2"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba6"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6b9e"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6ba9"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6b9f"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6baa"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6ba0"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bac"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6ba3"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bae"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6ba5"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6baf"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6ba7"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bad"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6ba4"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bb3"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6bab"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bb2"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6ba1"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bb4"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6bb0"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d91944f21afc91ec6bb5"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6bb1"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c4e"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d91944f21afc91ec6b9e"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c5b"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c4f"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c5c"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c51"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c5e"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c54"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c5f"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c52"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c61"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c56"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c60"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c53"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c63"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c55"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c62"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c58"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c65"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a3322"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c64"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c50"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c68"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c5d"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c69"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c5a"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c6a"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c66"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c6b"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c67"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c6c"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c57"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9324a5dfa9984c64c6d"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001491955350"
+    },
+    "userId": {
+      "$oid": "6439d9324a5dfa9984c64c59"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9515eaa85c938d82a80"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001895708120"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a3322"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9515eaa85c938d82a7f"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001895708120"
+    },
+    "userId": {
+      "$oid": "6439d8badb3e2bcd583a331c"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9515eaa85c938d82a81"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001895708120"
+    },
+    "userId": {
+      "$oid": "6439d8aedb3e2bcd583a330f"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6439d9515eaa85c938d82a83"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001895708120"
+    },
+    "userId": {
+      "$oid": "6439d9515eaa85c938d82a82"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "644fe92ee6c60cd57ab01b07"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001808853594"
+    },
+    "userId": {
+      "$oid": "644fe8f1e6c60cd57ab01b06"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "644fe945e6c60cd57ab01b09"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001808853594"
+    },
+    "userId": {
+      "$oid": "644fe945e6c60cd57ab01b08"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6481bf187a5e8ad5277fdd84"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001363177259"
+    },
+    "userId": {
+      "$oid": "64804d607a5e8ad5277fdd81"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6496cba37a5e8ad5277fddae"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001895708120"
+    },
+    "userId": {
+      "$oid": "6496cba37a5e8ad5277fddad"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64a6787fe9aeaf90df3f6918"
+    },
+    "tgChatId": {
+      "$numberLong": "-1001888534161"
+    },
+    "userId": {
+      "$oid": "643eca6494a54846462fc87c"
+    }
+  }
+]
