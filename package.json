@@ -20,7 +20,7 @@
     "@grammyjs/runner": "^2.0.3",
     "@prisma/client": "^5.3.1",
     "@types/jest": "^29.5.5",
-    "@types/node": "^20.7.0",
+    "@types/node": "^20.8.0",
     "async-pause": "^1.0.0",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
