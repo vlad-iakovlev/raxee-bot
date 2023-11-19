@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { POKER_ROUND, PokerPlayer, PokerState, User } from '@prisma/client'
 import { Api } from 'grammy'
-import { PokerPlayerManager } from './PokerPlayerManger.ts'
-import { PokerStateManager } from './PokerStateManager.ts'
+import { PokerPlayerManager } from './PokerPlayerManger.js'
+import { PokerStateManager } from './PokerStateManager.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pokerPlayer: {
       create: jest.fn(),
@@ -17,7 +17,7 @@ jest.mock('../../../utils/prisma.ts', () => ({
     },
   },
 }))
-const { prisma } = jest.requireMock('../../../utils/prisma.ts')
+const { prisma } = jest.requireMock('../../../utils/prisma.js')
 
 const mockUser = (index: number) =>
   ({
@@ -123,7 +123,7 @@ describe('PokerStateManager', () => {
         mockTgApi(),
       )
 
-      expect(prisma.pokerState.upsert).toBeCalledWith({
+      expect(prisma.pokerState.upsert).toHaveBeenCalledWith({
         where: {
           tgChatId,
         },
@@ -158,7 +158,7 @@ describe('PokerStateManager', () => {
         mockTgApi(),
       )
 
-      expect(prisma.pokerState.findFirst).toBeCalledWith({
+      expect(prisma.pokerState.findFirst).toHaveBeenCalledWith({
         where: {
           players: {
             some: {
@@ -188,7 +188,7 @@ describe('PokerStateManager', () => {
         mockTgApi(),
       )
 
-      expect(prisma.pokerState.findFirst).toBeCalledWith({
+      expect(prisma.pokerState.findFirst).toHaveBeenCalledWith({
         where: {
           players: {
             some: {
@@ -214,7 +214,7 @@ describe('PokerStateManager', () => {
     it('should call prisma.pokerState.update', async () => {
       await state.save()
 
-      expect(prisma.pokerState.update).toBeCalledWith({
+      expect(prisma.pokerState.update).toHaveBeenCalledWith({
         where: {
           id: state.id,
         },
@@ -343,7 +343,7 @@ describe('PokerStateManager', () => {
       state.getNextPlayerIndex = jest.fn().mockReturnValueOnce(456)
 
       expect(state.smallIndex).toBe(456)
-      expect(state.getNextPlayerIndex).toBeCalledWith(123)
+      expect(state.getNextPlayerIndex).toHaveBeenCalledWith(123)
     })
   })
 
@@ -364,8 +364,8 @@ describe('PokerStateManager', () => {
         .mockReturnValueOnce(789)
 
       expect(state.bigIndex).toBe(789)
-      expect(state.getNextPlayerIndex).toBeCalledWith(123)
-      expect(state.getNextPlayerIndex).toBeCalledWith(456)
+      expect(state.getNextPlayerIndex).toHaveBeenCalledWith(123)
+      expect(state.getNextPlayerIndex).toHaveBeenCalledWith(456)
     })
   })
 
@@ -666,7 +666,7 @@ describe('PokerStateManager', () => {
 
       await state.addPlayer(tgUserId)
 
-      expect(prisma.pokerPlayer.create).toBeCalledWith({
+      expect(prisma.pokerPlayer.create).toHaveBeenCalledWith({
         data: {
           cards: [],
           balance: 1000,
@@ -796,8 +796,8 @@ describe('PokerStateManager', () => {
       ])
       expect(state.dealerIndex).toStrictEqual(3)
       expect(state.currentPlayerIndex).toStrictEqual(7)
-      expect(state.save).toBeCalledWith()
-      expect(state.broadcastMessage).toBeCalledWith({
+      expect(state.save).toHaveBeenCalledWith()
+      expect(state.broadcastMessage).toHaveBeenCalledWith({
         value: [
           '*Who is in the game:*',
           '• @user\\-0\\-username \\(1000 🪙\\)',
@@ -813,7 +813,7 @@ describe('PokerStateManager', () => {
           '*Big:* @user\\-6\\-username \\(35 🪙\\)',
         ].join('\n'),
       })
-      expect(state.broadcastCurrentTurn).toBeCalledWith()
+      expect(state.broadcastCurrentTurn).toHaveBeenCalledWith()
     })
   })
 
@@ -830,7 +830,7 @@ describe('PokerStateManager', () => {
 
       await state.endGame()
 
-      expect(state.broadcastMessage).toBeCalledWith('Game over, folks!')
+      expect(state.broadcastMessage).toHaveBeenCalledWith('Game over, folks!')
       expect((state.tgApi.sendSticker as jest.Mock).mock.calls).toStrictEqual([
         [
           '12300',
@@ -858,7 +858,7 @@ describe('PokerStateManager', () => {
           { reply_markup: { remove_keyboard: true } },
         ],
       ])
-      expect(prisma.pokerState.delete).toBeCalledWith({
+      expect(prisma.pokerState.delete).toHaveBeenCalledWith({
         where: { id: 'state-id' },
       })
     })
@@ -876,7 +876,7 @@ describe('PokerStateManager', () => {
     it('should handle fold message', async () => {
       await state.handleMessage(state.players[0], '❌ Fold')
 
-      expect(state.handleFoldMessage).toBeCalledWith(
+      expect(state.handleFoldMessage).toHaveBeenCalledWith(
         state.players[0],
         '❌ Fold',
       )
@@ -885,7 +885,7 @@ describe('PokerStateManager', () => {
     it('should handle check message', async () => {
       await state.handleMessage(state.players[0], '✊ Check')
 
-      expect(state.handleCheckMessage).toBeCalledWith(
+      expect(state.handleCheckMessage).toHaveBeenCalledWith(
         state.players[0],
         '✊ Check',
       )
@@ -897,13 +897,16 @@ describe('PokerStateManager', () => {
 
       await state.handleMessage(state.players[0], '✅ 50')
 
-      expect(state.handleCallMessage).toBeCalledWith(state.players[0], '✅ 50')
+      expect(state.handleCallMessage).toHaveBeenCalledWith(
+        state.players[0],
+        '✅ 50',
+      )
     })
 
     it('should handle all in message', async () => {
       await state.handleMessage(state.players[0], '💰 All in')
 
-      expect(state.handleAllInMessage).toBeCalledWith(
+      expect(state.handleAllInMessage).toHaveBeenCalledWith(
         state.players[0],
         '💰 All in',
       )
@@ -912,7 +915,7 @@ describe('PokerStateManager', () => {
     it('should handle other message', async () => {
       await state.handleMessage(state.players[0], 'Some message')
 
-      expect(state.handleOtherMessage).toBeCalledWith(
+      expect(state.handleOtherMessage).toHaveBeenCalledWith(
         state.players[0],
         'Some message',
       )
@@ -931,11 +934,11 @@ describe('PokerStateManager', () => {
 
       expect(response).toBeUndefined()
       expect(state.players[0].hasFolded).toBe(true)
-      expect(state.broadcastPlayerMessage).toBeCalledWith(
+      expect(state.broadcastPlayerMessage).toHaveBeenCalledWith(
         state.players[0],
         '❌ Fold',
       )
-      expect(state.nextTurn).toBeCalledWith()
+      expect(state.nextTurn).toHaveBeenCalledWith()
     })
 
     it('should not set hasFolded, broadcast message or call nextTurn if player cannot fold', async () => {
@@ -950,8 +953,8 @@ describe('PokerStateManager', () => {
 
       expect(response).toBe('Folding is not allowed')
       expect(state.players[0].hasFolded).toBe(false)
-      expect(state.broadcastPlayerMessage).not.toBeCalled()
-      expect(state.nextTurn).not.toBeCalled()
+      expect(state.broadcastPlayerMessage).not.toHaveBeenCalled()
+      expect(state.nextTurn).not.toHaveBeenCalled()
     })
   })
 
@@ -966,11 +969,11 @@ describe('PokerStateManager', () => {
       )
 
       expect(response).toBeUndefined()
-      expect(state.broadcastPlayerMessage).toBeCalledWith(
+      expect(state.broadcastPlayerMessage).toHaveBeenCalledWith(
         state.players[0],
         '✊ Check',
       )
-      expect(state.nextTurn).toBeCalledWith()
+      expect(state.nextTurn).toHaveBeenCalledWith()
     })
 
     it('should not broadcast message or call nextTurn if player cannot check', async () => {
@@ -984,8 +987,8 @@ describe('PokerStateManager', () => {
       )
 
       expect(response).toBe('Checking is not allowed')
-      expect(state.broadcastPlayerMessage).not.toBeCalled()
-      expect(state.nextTurn).not.toBeCalled()
+      expect(state.broadcastPlayerMessage).not.toHaveBeenCalled()
+      expect(state.nextTurn).not.toHaveBeenCalled()
     })
   })
 
@@ -1000,11 +1003,11 @@ describe('PokerStateManager', () => {
 
       expect(response).toBeUndefined()
       expect(state.players[0].betAmount).toBe(100)
-      expect(state.broadcastPlayerMessage).toBeCalledWith(
+      expect(state.broadcastPlayerMessage).toHaveBeenCalledWith(
         state.players[0],
         '✅ 50',
       )
-      expect(state.nextTurn).toBeCalledWith()
+      expect(state.nextTurn).toHaveBeenCalledWith()
     })
 
     it('should not increase bet, broadcast message or call nextTurn if player cannot call', async () => {
@@ -1018,8 +1021,8 @@ describe('PokerStateManager', () => {
 
       expect(response).toBe('Calling is not allowed')
       expect(state.players[0].betAmount).toBe(50)
-      expect(state.broadcastPlayerMessage).not.toBeCalled()
-      expect(state.nextTurn).not.toBeCalled()
+      expect(state.broadcastPlayerMessage).not.toHaveBeenCalled()
+      expect(state.nextTurn).not.toHaveBeenCalled()
     })
   })
 
@@ -1036,11 +1039,11 @@ describe('PokerStateManager', () => {
 
       expect(response).toBeUndefined()
       expect(state.players[0].betAmount).toBe(1050)
-      expect(state.broadcastPlayerMessage).toBeCalledWith(
+      expect(state.broadcastPlayerMessage).toHaveBeenCalledWith(
         state.players[0],
         '💰 All in',
       )
-      expect(state.nextTurn).toBeCalledWith()
+      expect(state.nextTurn).toHaveBeenCalledWith()
     })
 
     it('should not increase bet, broadcast message or call nextTurn if player cannot all in', async () => {
@@ -1056,8 +1059,8 @@ describe('PokerStateManager', () => {
 
       expect(response).toBe('Going all in is not allowed')
       expect(state.players[0].betAmount).toBe(50)
-      expect(state.broadcastPlayerMessage).not.toBeCalled()
-      expect(state.nextTurn).not.toBeCalled()
+      expect(state.broadcastPlayerMessage).not.toHaveBeenCalled()
+      expect(state.nextTurn).not.toHaveBeenCalled()
     })
   })
 
@@ -1073,7 +1076,7 @@ describe('PokerStateManager', () => {
       expect(response).toBe(
         "I didn't understand you, but I shared your message with everyone",
       )
-      expect(state.broadcastPlayerMessage).toBeCalledWith(
+      expect(state.broadcastPlayerMessage).toHaveBeenCalledWith(
         state.players[0],
         'Some message',
       )
@@ -1087,7 +1090,7 @@ describe('PokerStateManager', () => {
 
       expect(response).toBeUndefined()
       expect(state.players[0].betAmount).toBe(150)
-      expect(state.broadcastPlayerMessage).toBeCalledWith(
+      expect(state.broadcastPlayerMessage).toHaveBeenCalledWith(
         state.players[0],
         '100',
       )
@@ -1102,7 +1105,7 @@ describe('PokerStateManager', () => {
 
       expect(response).toBe('Raising is not allowed')
       expect(state.players[0].betAmount).toBe(50)
-      expect(state.broadcastPlayerMessage).not.toBeCalled()
+      expect(state.broadcastPlayerMessage).not.toHaveBeenCalled()
     })
 
     it('should not increase bet or broadcast message if suggested raise is too big', async () => {
@@ -1113,7 +1116,7 @@ describe('PokerStateManager', () => {
 
       expect(response).toBe('That bet is too large')
       expect(state.players[0].betAmount).toBe(50)
-      expect(state.broadcastPlayerMessage).not.toBeCalled()
+      expect(state.broadcastPlayerMessage).not.toHaveBeenCalled()
     })
 
     it('should not increase bet or broadcast message if suggested raise is too small', async () => {
@@ -1124,7 +1127,7 @@ describe('PokerStateManager', () => {
 
       expect(response).toBe('That bet is too small')
       expect(state.players[0].betAmount).toBe(50)
-      expect(state.broadcastPlayerMessage).not.toBeCalled()
+      expect(state.broadcastPlayerMessage).not.toHaveBeenCalled()
     })
   })
 
@@ -1186,8 +1189,8 @@ describe('PokerStateManager', () => {
         }),
       ])
       expect(state.currentPlayerIndex).toBe(4)
-      expect(state.save).toBeCalledWith()
-      expect(state.broadcastCurrentTurn).toBeCalledWith()
+      expect(state.save).toHaveBeenCalledWith()
+      expect(state.broadcastCurrentTurn).toHaveBeenCalledWith()
     })
 
     it('should switch to next round if all players have turned', async () => {
@@ -1249,8 +1252,8 @@ describe('PokerStateManager', () => {
         }),
       ])
       expect(state.currentPlayerIndex).toBe(2)
-      expect(state.save).toBeCalledWith()
-      expect(state.broadcastCurrentTurn).toBeCalledWith()
+      expect(state.save).toHaveBeenCalledWith()
+      expect(state.broadcastCurrentTurn).toHaveBeenCalledWith()
     })
 
     it('should call endDeal if all players have turned on river', async () => {
@@ -1287,9 +1290,9 @@ describe('PokerStateManager', () => {
 
       await state.nextTurn()
 
-      expect(state.endDeal).toBeCalledWith()
-      expect(state.save).not.toBeCalled()
-      expect(state.broadcastCurrentTurn).not.toBeCalled()
+      expect(state.endDeal).toHaveBeenCalledWith()
+      expect(state.save).not.toHaveBeenCalled()
+      expect(state.broadcastCurrentTurn).not.toHaveBeenCalled()
     })
 
     it('should call endDeal if all players have turned and isAllIn', async () => {
@@ -1326,9 +1329,9 @@ describe('PokerStateManager', () => {
 
       await state.nextTurn()
 
-      expect(state.endDeal).toBeCalledWith()
-      expect(state.save).not.toBeCalled()
-      expect(state.broadcastCurrentTurn).not.toBeCalled()
+      expect(state.endDeal).toHaveBeenCalledWith()
+      expect(state.save).not.toHaveBeenCalled()
+      expect(state.broadcastCurrentTurn).not.toHaveBeenCalled()
     })
 
     it('should call endDeal if only one player left', async () => {
@@ -1339,9 +1342,9 @@ describe('PokerStateManager', () => {
 
       await state.nextTurn()
 
-      expect(state.endDeal).toBeCalledWith()
-      expect(state.save).not.toBeCalled()
-      expect(state.broadcastCurrentTurn).not.toBeCalled()
+      expect(state.endDeal).toHaveBeenCalledWith()
+      expect(state.save).not.toHaveBeenCalled()
+      expect(state.broadcastCurrentTurn).not.toHaveBeenCalled()
     })
   })
 
@@ -1379,7 +1382,7 @@ describe('PokerStateManager', () => {
 
       await state.endDeal()
 
-      expect(state.broadcastMessage).toBeCalledWith({
+      expect(state.broadcastMessage).toHaveBeenCalledWith({
         value: [
           'Table: ♦️2 ♥️2 ♠️2 ♣️3 ♦️3',
           '',
@@ -1422,8 +1425,8 @@ describe('PokerStateManager', () => {
           hasTurned: true,
         }),
       ])
-      expect(state.dealCards).toBeCalledWith()
-      expect(state.endGame).not.toBeCalled()
+      expect(state.dealCards).toHaveBeenCalledWith()
+      expect(state.endGame).not.toHaveBeenCalled()
     })
 
     it('should split pot between winners', async () => {
@@ -1461,7 +1464,7 @@ describe('PokerStateManager', () => {
 
       await state.endDeal()
 
-      expect(state.broadcastMessage).toBeCalledWith({
+      expect(state.broadcastMessage).toHaveBeenCalledWith({
         value: [
           'Table: ♣️7 ♥️10 ♥️Q ♥️K ♦️A',
           '',
@@ -1506,8 +1509,8 @@ describe('PokerStateManager', () => {
           hasTurned: true,
         }),
       ])
-      expect(state.dealCards).toBeCalledWith()
-      expect(state.endGame).not.toBeCalled()
+      expect(state.dealCards).toHaveBeenCalledWith()
+      expect(state.endGame).not.toHaveBeenCalled()
     })
 
     it('should set hasLost for players with zero balance', async () => {
@@ -1544,7 +1547,7 @@ describe('PokerStateManager', () => {
 
       await state.endDeal()
 
-      expect(state.broadcastMessage).toBeCalledWith({
+      expect(state.broadcastMessage).toHaveBeenCalledWith({
         value: [
           'Table: ♦️2 ♥️2 ♠️2 ♣️3 ♦️3',
           '',
@@ -1589,8 +1592,8 @@ describe('PokerStateManager', () => {
           hasTurned: true,
         }),
       ])
-      expect(state.dealCards).toBeCalledWith()
-      expect(state.endGame).not.toBeCalled()
+      expect(state.dealCards).toHaveBeenCalledWith()
+      expect(state.endGame).not.toHaveBeenCalled()
     })
 
     it('should not set hasLost for players with zero balance who won', async () => {
@@ -1627,7 +1630,7 @@ describe('PokerStateManager', () => {
 
       await state.endDeal()
 
-      expect(state.broadcastMessage).toBeCalledWith({
+      expect(state.broadcastMessage).toHaveBeenCalledWith({
         value: [
           'Table: ♦️2 ♥️2 ♠️2 ♣️3 ♦️3',
           '',
@@ -1670,8 +1673,8 @@ describe('PokerStateManager', () => {
           hasTurned: true,
         }),
       ])
-      expect(state.dealCards).toBeCalledWith()
-      expect(state.endGame).not.toBeCalled()
+      expect(state.dealCards).toHaveBeenCalledWith()
+      expect(state.endGame).not.toHaveBeenCalled()
     })
 
     it('should end game if only one player is left', async () => {
@@ -1695,7 +1698,7 @@ describe('PokerStateManager', () => {
 
       await state.endDeal()
 
-      expect(state.broadcastMessage).toBeCalledWith({
+      expect(state.broadcastMessage).toHaveBeenCalledWith({
         value: [
           'Table: ♦️2 ♥️2 ♠️2 ♣️3 ♦️3',
           '',
@@ -1721,8 +1724,8 @@ describe('PokerStateManager', () => {
           hasLost: true,
         }),
       ])
-      expect(state.dealCards).not.toBeCalledWith()
-      expect(state.endGame).toBeCalled()
+      expect(state.dealCards).not.toHaveBeenCalledWith()
+      expect(state.endGame).toHaveBeenCalled()
     })
   })
 

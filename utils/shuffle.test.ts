@@ -1,4 +1,4 @@
-import { shuffle } from './shuffle.ts'
+import { shuffle } from './shuffle.js'
 
 describe('#shuffle', () => {
   beforeEach(() => {

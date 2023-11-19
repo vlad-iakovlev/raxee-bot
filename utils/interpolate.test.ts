@@ -1,5 +1,5 @@
-import { Markdown, md } from 'telegram-md'
-import { interpolate } from './interpolate.ts'
+import { Markdown, md } from '@vlad-yakovlev/telegram-md'
+import { interpolate } from './interpolate.js'
 
 describe('#interpolate', () => {
   it('should interpolate over markdown', () => {

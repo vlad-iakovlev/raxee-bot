@@ -1,14 +1,14 @@
-import { md } from 'telegram-md'
-import { PumpkinStringsManager } from './PumpkinStringsManager.ts'
+import { md } from '@vlad-yakovlev/telegram-md'
+import { PumpkinStringsManager } from './PumpkinStringsManager.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pumpkinStrings: {
       findFirst: jest.fn(),
     },
   },
 }))
-const { prisma } = jest.requireMock('../../../utils/prisma.ts')
+const { prisma } = jest.requireMock('../../../utils/prisma.js')
 
 describe('PumpkinStringsManager', () => {
   beforeEach(() => {

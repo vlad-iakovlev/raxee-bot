@@ -1,4 +1,4 @@
-import { getIsDec31 } from './getIsDec31.ts'
+import { getIsDec31 } from './getIsDec31.js'
 
 describe('#getIsDec31', () => {
   it('should return true if date is Dec 31', () => {

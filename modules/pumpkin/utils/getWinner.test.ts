@@ -1,14 +1,14 @@
 import * as fns from 'date-fns'
-import { getWinner } from './getWinner.ts'
+import { getWinner } from './getWinner.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pumpkinStats: {
       findMany: jest.fn(),
     },
   },
 }))
-const { prisma } = jest.requireMock('../../../utils/prisma.ts')
+const { prisma } = jest.requireMock('../../../utils/prisma.js')
 
 beforeEach(() => {
   jest.clearAllMocks()
@@ -25,7 +25,7 @@ describe('#getWinner', () => {
 
     const winner = await getWinner(tgChatId, date)
 
-    expect(prisma.pumpkinStats.findMany).toBeCalledWith({
+    expect(prisma.pumpkinStats.findMany).toHaveBeenCalledWith({
       where: {
         date: {
           gte: fns.startOfDay(date),
@@ -57,7 +57,7 @@ describe('#getWinner', () => {
 
     const winner = await getWinner(tgChatId, date)
 
-    expect(prisma.pumpkinStats.findMany).toBeCalledWith({
+    expect(prisma.pumpkinStats.findMany).toHaveBeenCalledWith({
       where: {
         date: {
           gte: fns.startOfDay(date),

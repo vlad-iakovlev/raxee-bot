@@ -1,19 +1,18 @@
-import { asyncPause } from 'async-pause'
+import { replyWithMarkdownPlugin } from '@vlad-yakovlev/grammy-reply-with-markdown'
 import * as fns from 'date-fns'
 import { Composer, Context } from 'grammy'
-import { replyWithMarkdownPlugin } from 'grammy-reply-with-markdown'
-import { BotModule } from '../../types/module.ts'
-import { getMention } from '../../utils/getMention.ts'
-import { getRandomItem } from '../../utils/getRandomItem.ts'
-import { interpolate } from '../../utils/interpolate.ts'
-import { PumpkinStringsManager } from './classes/PumpkinStringsManager.ts'
-import { addWinner } from './utils/addWinner.ts'
-import { getIsDec31 } from './utils/getIsDec31.ts'
-import { getOrAddPlayer } from './utils/getOrAddPlayer.ts'
-import { getPlayers } from './utils/getPlayers.ts'
-import { getPumpkinOfYear } from './utils/getPumpkinOfYear.ts'
-import { getStatsMessage } from './utils/getStatsMessage.ts'
-import { getWinner } from './utils/getWinner.ts'
+import { BotModule } from '../../types/module.js'
+import { getMention } from '../../utils/getMention.js'
+import { getRandomItem } from '../../utils/getRandomItem.js'
+import { interpolate } from '../../utils/interpolate.js'
+import { PumpkinStringsManager } from './classes/PumpkinStringsManager.js'
+import { addWinner } from './utils/addWinner.js'
+import { getIsDec31 } from './utils/getIsDec31.js'
+import { getOrAddPlayer } from './utils/getOrAddPlayer.js'
+import { getPlayers } from './utils/getPlayers.js'
+import { getPumpkinOfYear } from './utils/getPumpkinOfYear.js'
+import { getStatsMessage } from './utils/getStatsMessage.js'
+import { getWinner } from './utils/getWinner.js'
 
 const createComposer = () => {
   const bot = new Composer(replyWithMarkdownPlugin())
@@ -47,24 +46,27 @@ const createComposer = () => {
       interpolate(strings.get('newWinner1'), getMention(winner.user)),
       { disable_notification: true },
     )
-    await asyncPause(2500)
+
+    await new Promise((resolve) => setTimeout(resolve, 2500))
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner2'), getMention(winner.user)),
       { disable_notification: true },
     )
-    await asyncPause(2500)
+
+    await new Promise((resolve) => setTimeout(resolve, 2500))
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner3'), getMention(winner.user)),
       { disable_notification: true },
     )
-    await asyncPause(4000)
+
+    await new Promise((resolve) => setTimeout(resolve, 4000))
     await ctx.replyWithMarkdown(
       interpolate(strings.get('newWinner4'), getMention(winner.user)),
       { disable_notification: true },
     )
 
     if (getIsDec31(date)) {
-      await asyncPause(10000)
+      await new Promise((resolve) => setTimeout(resolve, 10000))
       await ctx.replyWithMarkdown(
         interpolate(
           strings.get('newWinnerNewYear'),

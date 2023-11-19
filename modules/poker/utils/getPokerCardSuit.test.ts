@@ -1,4 +1,4 @@
-import { getPokerCardSuit } from './getPokerCardSuit.ts'
+import { getPokerCardSuit } from './getPokerCardSuit.js'
 
 describe('#getPokerCardSuit', () => {
   it('should return the suit of a card', () => {

@@ -1,9 +1,9 @@
 import { Composer } from 'grammy'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot.ts'
-import { createPumpkinModule } from './index.ts'
-import { PumpkinPlayerWithUser } from './types.ts'
+import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
+import { createPumpkinModule } from './index.js'
+import { PumpkinPlayerWithUser } from './types.js'
 
-jest.mock('../../utils/prisma.ts', () => ({
+jest.mock('../../utils/prisma.js', () => ({
   prisma: {
     pumpkinStrings: {
       findFirst: jest.fn(),
@@ -11,25 +11,23 @@ jest.mock('../../utils/prisma.ts', () => ({
   },
 }))
 
-jest.mock('async-pause', () => ({ asyncPause: jest.fn() }))
+jest.mock('./utils/addWinner.js')
+const { addWinner } = jest.requireMock('./utils/addWinner.js')
 
-jest.mock('./utils/addWinner.ts')
-const { addWinner } = jest.requireMock('./utils/addWinner.ts')
+jest.mock('./utils/getOrAddPlayer.js')
+const { getOrAddPlayer } = jest.requireMock('./utils/getOrAddPlayer.js')
 
-jest.mock('./utils/getOrAddPlayer.ts')
-const { getOrAddPlayer } = jest.requireMock('./utils/getOrAddPlayer.ts')
+jest.mock('./utils/getPlayers.js')
+const { getPlayers } = jest.requireMock('./utils/getPlayers.js')
 
-jest.mock('./utils/getPlayers.ts')
-const { getPlayers } = jest.requireMock('./utils/getPlayers.ts')
+jest.mock('./utils/getPumpkinOfYear.js')
+const { getPumpkinOfYear } = jest.requireMock('./utils/getPumpkinOfYear.js')
 
-jest.mock('./utils/getPumpkinOfYear.ts')
-const { getPumpkinOfYear } = jest.requireMock('./utils/getPumpkinOfYear.ts')
+jest.mock('./utils/getStatsMessage.js')
+const { getStatsMessage } = jest.requireMock('./utils/getStatsMessage.js')
 
-jest.mock('./utils/getStatsMessage.ts')
-const { getStatsMessage } = jest.requireMock('./utils/getStatsMessage.ts')
-
-jest.mock('./utils/getWinner.ts')
-const { getWinner } = jest.requireMock('./utils/getWinner.ts')
+jest.mock('./utils/getWinner.js')
+const { getWinner } = jest.requireMock('./utils/getWinner.js')
 
 describe('#createPumpkinModule', () => {
   beforeEach(() => {
@@ -64,6 +62,9 @@ describe('#createPumpkinModule', () => {
   describe('/pumpkin', () => {
     beforeEach(() => {
       jest.useFakeTimers()
+      jest
+        .spyOn(global, 'setTimeout')
+        .mockImplementation((cb) => cb() as unknown as NodeJS.Timeout)
       jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
     })
 
@@ -171,9 +172,9 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith('123')
-      expect(getWinner).toBeCalledWith('123', new Date())
-      expect(addWinner).toBeCalledWith('player-1-id', new Date())
+      expect(getPlayers).toHaveBeenCalledWith('123')
+      expect(getWinner).toHaveBeenCalledWith('123', new Date())
+      expect(addWinner).toHaveBeenCalledWith('player-1-id', new Date())
     })
 
     it('should do nothing in private chat', async () => {
@@ -294,9 +295,9 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith('123')
-      expect(getWinner).toBeCalledWith('123', new Date())
-      expect(addWinner).not.toBeCalled()
+      expect(getPlayers).toHaveBeenCalledWith('123')
+      expect(getWinner).toHaveBeenCalledWith('123', new Date())
+      expect(addWinner).not.toHaveBeenCalled()
     })
 
     it('should reply with suggestion to add players', async () => {
@@ -346,9 +347,9 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith('123')
-      expect(getWinner).not.toBeCalled()
-      expect(addWinner).not.toBeCalled()
+      expect(getPlayers).toHaveBeenCalledWith('123')
+      expect(getWinner).not.toHaveBeenCalled()
+      expect(addWinner).not.toHaveBeenCalled()
     })
 
     it('should reply with suggestion to see year winner', async () => {
@@ -460,9 +461,9 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPlayers).toBeCalledWith('123')
-      expect(getWinner).toBeCalledWith('123', new Date())
-      expect(addWinner).toBeCalledWith('player-1-id', new Date())
+      expect(getPlayers).toHaveBeenCalledWith('123')
+      expect(getWinner).toHaveBeenCalledWith('123', new Date())
+      expect(addWinner).toHaveBeenCalledWith('player-1-id', new Date())
     })
   })
 
@@ -522,7 +523,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getOrAddPlayer).toBeCalledWith('123', '1')
+      expect(getOrAddPlayer).toHaveBeenCalledWith('123', '1')
     })
 
     it('should do nothing in private chat', async () => {
@@ -613,7 +614,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getStatsMessage).toBeCalledWith('123')
+      expect(getStatsMessage).toHaveBeenCalledWith('123')
     })
 
     it('should do nothing in private chat', async () => {
@@ -713,7 +714,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getStatsMessage).toBeCalledWith('123', 2023)
+      expect(getStatsMessage).toHaveBeenCalledWith('123', 2023)
     })
 
     it('should do nothing in private chat', async () => {
@@ -804,7 +805,7 @@ describe('#createPumpkinModule', () => {
           signal: undefined,
         },
       ])
-      expect(getPumpkinOfYear).toBeCalledWith('123', 2023)
+      expect(getPumpkinOfYear).toHaveBeenCalledWith('123', 2023)
     })
 
     it('should do nothing in private chat', async () => {
@@ -1059,7 +1060,7 @@ describe('#createPumpkinModule', () => {
       })
 
       expect(requests).toStrictEqual([])
-      expect(getWinner).not.toBeCalled()
+      expect(getWinner).not.toHaveBeenCalled()
     })
   })
 })

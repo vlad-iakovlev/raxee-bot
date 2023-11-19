@@ -1,5 +1,5 @@
 import { BotError, Context } from 'grammy'
-import { handleError } from './handleError.ts'
+import { handleError } from './handleError.js'
 
 afterEach(() => {
   jest.spyOn(global.console, 'error').mockRestore()
@@ -21,14 +21,14 @@ describe('#handleError', () => {
       } as unknown as Context),
     )
 
-    expect(consoleError).toBeCalledTimes(1)
-    expect(consoleError).toBeCalledWith(
+    expect(consoleError).toHaveBeenCalledTimes(1)
+    expect(consoleError).toHaveBeenCalledWith(
       'Error while handling update 12345:',
       error,
     )
 
-    expect(reply).toBeCalledTimes(1)
-    expect(reply).toBeCalledWith('Something went wrong ¯\\_(ツ)_/¯')
+    expect(reply).toHaveBeenCalledTimes(1)
+    expect(reply).toHaveBeenCalledWith('Something went wrong ¯\\_(ツ)_/¯')
   })
 
   it('should handle send reply error', async () => {
@@ -49,14 +49,14 @@ describe('#handleError', () => {
       } as unknown as Context),
     )
 
-    expect(consoleError).toBeCalledTimes(2)
+    expect(consoleError).toHaveBeenCalledTimes(2)
     expect(consoleError.mock.calls[0]).toStrictEqual([
       'Error while handling update 12345:',
       error,
     ])
     expect(consoleError.mock.calls[1]).toStrictEqual([replyError])
 
-    expect(reply).toBeCalledTimes(1)
-    expect(reply).toBeCalledWith('Something went wrong ¯\\_(ツ)_/¯')
+    expect(reply).toHaveBeenCalledTimes(1)
+    expect(reply).toHaveBeenCalledWith('Something went wrong ¯\\_(ツ)_/¯')
   })
 })

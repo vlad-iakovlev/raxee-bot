@@ -1,7 +1,7 @@
-import { Markdown } from 'telegram-md'
-import { getRandomItem } from '../../../utils/getRandomItem.ts'
-import { prisma } from '../../../utils/prisma.ts'
-import { STRINGS } from '../constants.ts'
+import { Markdown } from '@vlad-yakovlev/telegram-md'
+import { getRandomItem } from '../../../utils/getRandomItem.js'
+import { prisma } from '../../../utils/prisma.js'
+import { STRINGS } from '../constants.js'
 
 interface Strings {
   hello: (string | Markdown)[]

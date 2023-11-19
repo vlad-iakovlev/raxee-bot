@@ -1,6 +1,6 @@
-import { POKER_CARD_SUIT_NAMES, POKER_CARD_VALUE_NAMES } from '../constants.ts'
-import { getPokerCardSuit } from './getPokerCardSuit.ts'
-import { getPokerCardValue } from './getPokerCardValue.ts'
+import { POKER_CARD_SUIT_NAMES, POKER_CARD_VALUE_NAMES } from '../constants.js'
+import { getPokerCardSuit } from './getPokerCardSuit.js'
+import { getPokerCardValue } from './getPokerCardValue.js'
 
 export const getPokerCardString = (card: number): string => {
   const suit = getPokerCardSuit(card)

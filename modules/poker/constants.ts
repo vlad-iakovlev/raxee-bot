@@ -1,12 +1,12 @@
-import { md } from 'telegram-md'
-import { getMention } from '../../utils/getMention.ts'
-import { PokerPlayerManager } from './classes/PokerPlayerManger.ts'
+import { md } from '@vlad-yakovlev/telegram-md'
+import { getMention } from '../../utils/getMention.js'
+import { PokerPlayerManager } from './classes/PokerPlayerManger.js'
 import {
   POKER_CARD_SUIT,
   POKER_CARD_VALUE,
   POKER_COMBINATION_LEVEL,
-} from './types.ts'
-import { getPokerCardString } from './utils/getPokerCardString.ts'
+} from './types.js'
+import { getPokerCardString } from './utils/getPokerCardString.js'
 
 export const DEFAULT_BALANCE = 1000
 

@@ -1,6 +1,6 @@
 import * as fns from 'date-fns'
-import { prisma } from '../../../utils/prisma.ts'
-import { PumpkinPlayerWithStats } from '../types.ts'
+import { prisma } from '../../../utils/prisma.js'
+import { PumpkinPlayerWithStats } from '../types.js'
 
 export const getStats = async (
   tgChatId: string,

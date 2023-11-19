@@ -1,6 +1,6 @@
-import { getOrAddPlayer } from './getOrAddPlayer.ts'
+import { getOrAddPlayer } from './getOrAddPlayer.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pumpkinPlayer: {
       create: jest.fn(),
@@ -8,7 +8,7 @@ jest.mock('../../../utils/prisma.ts', () => ({
     },
   },
 }))
-const { prisma } = jest.requireMock('../../../utils/prisma.ts')
+const { prisma } = jest.requireMock('../../../utils/prisma.js')
 
 beforeEach(() => {
   jest.clearAllMocks()
@@ -22,7 +22,7 @@ describe('#getOrAddPlayer', () => {
 
     const player = await getOrAddPlayer(tgChatId, tgUserId)
 
-    expect(prisma.pumpkinPlayer.findFirst).toBeCalledWith({
+    expect(prisma.pumpkinPlayer.findFirst).toHaveBeenCalledWith({
       where: {
         tgChatId,
         user: {
@@ -44,7 +44,7 @@ describe('#getOrAddPlayer', () => {
 
     const player = await getOrAddPlayer(tgChatId, tgUserId)
 
-    expect(prisma.pumpkinPlayer.findFirst).toBeCalledWith({
+    expect(prisma.pumpkinPlayer.findFirst).toHaveBeenCalledWith({
       where: {
         tgChatId,
         user: {
@@ -55,7 +55,7 @@ describe('#getOrAddPlayer', () => {
         user: true,
       },
     })
-    expect(prisma.pumpkinPlayer.create).toBeCalledWith({
+    expect(prisma.pumpkinPlayer.create).toHaveBeenCalledWith({
       data: {
         tgChatId,
         user: {

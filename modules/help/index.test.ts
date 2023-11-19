@@ -1,6 +1,6 @@
 import { Composer } from 'grammy'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot.ts'
-import { createHelpModule } from './index.ts'
+import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
+import { createHelpModule } from './index.js'
 
 describe('#createPokerModule', () => {
   beforeEach(() => {

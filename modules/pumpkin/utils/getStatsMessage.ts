@@ -1,8 +1,8 @@
-import { md } from 'telegram-md'
-import { getUserName } from '../../../utils/getUserName.ts'
-import { interpolate } from '../../../utils/interpolate.ts'
-import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.ts'
-import { getStats } from './getStats.ts'
+import { md } from '@vlad-yakovlev/telegram-md'
+import { getUserName } from '../../../utils/getUserName.js'
+import { interpolate } from '../../../utils/interpolate.js'
+import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.js'
+import { getStats } from './getStats.js'
 
 export const getStatsMessage = async (tgChatId: string, year?: number) => {
   const strings = await PumpkinStringsManager.load(tgChatId)

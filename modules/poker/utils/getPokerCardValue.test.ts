@@ -1,4 +1,4 @@
-import { getPokerCardValue } from './getPokerCardValue.ts'
+import { getPokerCardValue } from './getPokerCardValue.js'
 
 describe('#getPokerCardValue', () => {
   it('should return the value of a card', () => {

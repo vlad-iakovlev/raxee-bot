@@ -1,13 +1,13 @@
-import { getPlayers } from './getPlayers.ts'
+import { getPlayers } from './getPlayers.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pumpkinPlayer: {
       findMany: jest.fn(),
     },
   },
 }))
-const { prisma } = jest.requireMock('../../../utils/prisma.ts')
+const { prisma } = jest.requireMock('../../../utils/prisma.js')
 
 beforeEach(() => {
   jest.clearAllMocks()
@@ -23,7 +23,7 @@ describe('#getPlayers', () => {
 
     const players = await getPlayers(tgChatId)
 
-    expect(prisma.pumpkinPlayer.findMany).toBeCalledWith({
+    expect(prisma.pumpkinPlayer.findMany).toHaveBeenCalledWith({
       where: {
         tgChatId,
       },

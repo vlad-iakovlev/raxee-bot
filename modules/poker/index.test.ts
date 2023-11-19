@@ -1,6 +1,6 @@
 import { Composer } from 'grammy'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot.ts'
-import { createPokerModule } from './index.ts'
+import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
+import { createPokerModule } from './index.js'
 
 jest.mock('./classes/PokerStateManager')
 const { PokerStateManager } = jest.requireMock('./classes/PokerStateManager')
@@ -72,7 +72,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockAddPlayer).toBeCalledWith('123456789')
+      expect(mockAddPlayer).toHaveBeenCalledWith('123456789')
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -129,7 +129,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockAddPlayer).not.toBeCalled()
+      expect(mockAddPlayer).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([])
     })
 
@@ -172,7 +172,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockAddPlayer).not.toBeCalled()
+      expect(mockAddPlayer).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -227,7 +227,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockAddPlayer).not.toBeCalled()
+      expect(mockAddPlayer).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -284,7 +284,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockAddPlayer).not.toBeCalled()
+      expect(mockAddPlayer).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -341,7 +341,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockAddPlayer).not.toBeCalled()
+      expect(mockAddPlayer).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -399,7 +399,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockDealCards).toBeCalledWith()
+      expect(mockDealCards).toHaveBeenCalledWith()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -455,7 +455,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockDealCards).not.toBeCalled()
+      expect(mockDealCards).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([])
     })
 
@@ -499,7 +499,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockDealCards).not.toBeCalled()
+      expect(mockDealCards).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -555,7 +555,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockDealCards).not.toBeCalled()
+      expect(mockDealCards).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -610,7 +610,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockEndGame).toBeCalledWith()
+      expect(mockEndGame).toHaveBeenCalledWith()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -663,7 +663,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockEndGame).toBeCalledWith()
+      expect(mockEndGame).toHaveBeenCalledWith()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -715,7 +715,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockEndGame).toBeCalledWith()
+      expect(mockEndGame).toHaveBeenCalledWith()
       expect(requests).toStrictEqual([])
     })
 
@@ -800,11 +800,11 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockHandleMessage).toBeCalledWith(
+      expect(mockHandleMessage).toHaveBeenCalledWith(
         { id: 'player-1-id', user: { tgUserId: '123456789' } },
         'test',
       )
-      expect(mockBroadcastPlayerMessage).not.toBeCalled()
+      expect(mockBroadcastPlayerMessage).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([])
     })
 
@@ -841,11 +841,11 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockHandleMessage).toBeCalledWith(
+      expect(mockHandleMessage).toHaveBeenCalledWith(
         { id: 'player-1-id', user: { tgUserId: '123456789' } },
         'test',
       )
-      expect(mockBroadcastPlayerMessage).not.toBeCalled()
+      expect(mockBroadcastPlayerMessage).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([
         {
           method: 'sendMessage',
@@ -892,8 +892,8 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockHandleMessage).not.lastCalledWith()
-      expect(mockBroadcastPlayerMessage).toBeCalledWith(
+      expect(mockHandleMessage).not.toHaveBeenLastCalledWith()
+      expect(mockBroadcastPlayerMessage).toHaveBeenCalledWith(
         { id: 'player-1-id', user: { tgUserId: '123456789' } },
         'test',
       )
@@ -938,8 +938,8 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(mockHandleMessage).not.toBeCalled()
-      expect(mockBroadcastPlayerMessage).not.toBeCalled()
+      expect(mockHandleMessage).not.toHaveBeenCalled()
+      expect(mockBroadcastPlayerMessage).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([])
     })
 
@@ -968,7 +968,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(PokerStateManager.loadByTgUserId).not.toBeCalled()
+      expect(PokerStateManager.loadByTgUserId).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([])
     })
   })

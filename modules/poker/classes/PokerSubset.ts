@@ -1,9 +1,9 @@
 import * as R from 'remeda'
-import { POKER_CARD_VALUE } from '../types.ts'
-import { getPokerCardString } from '../utils/getPokerCardString.ts'
-import { getPokerCardValue } from '../utils/getPokerCardValue.ts'
-import { isPokerCardSuitEqual } from '../utils/isPokerCardSuitEqual.ts'
-import { isPokerCardValueEqual } from '../utils/isPokerCardValueEqual.ts'
+import { POKER_CARD_VALUE } from '../types.js'
+import { getPokerCardString } from '../utils/getPokerCardString.js'
+import { getPokerCardValue } from '../utils/getPokerCardValue.js'
+import { isPokerCardSuitEqual } from '../utils/isPokerCardSuitEqual.js'
+import { isPokerCardValueEqual } from '../utils/isPokerCardValueEqual.js'
 
 export class PokerSubset {
   cards: [number, number, number, number, number]

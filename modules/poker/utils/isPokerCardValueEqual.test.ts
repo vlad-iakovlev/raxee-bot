@@ -1,4 +1,4 @@
-import { isPokerCardValueEqual } from './isPokerCardValueEqual.ts'
+import { isPokerCardValueEqual } from './isPokerCardValueEqual.js'
 
 describe('#isPokerCardValueEqual', () => {
   it('should return true if the values of two cards are equal', () => {

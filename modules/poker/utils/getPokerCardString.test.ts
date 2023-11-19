@@ -1,4 +1,4 @@
-import { getPokerCardString } from './getPokerCardString.ts'
+import { getPokerCardString } from './getPokerCardString.js'
 
 describe('#getPokerCardString', () => {
   it('should return the string representation of a card', () => {

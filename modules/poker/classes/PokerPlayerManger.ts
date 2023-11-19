@@ -1,10 +1,10 @@
 import { POKER_ROUND, PokerPlayer, User } from '@prisma/client'
+import { Markdown, md } from '@vlad-yakovlev/telegram-md'
 import * as R from 'remeda'
-import { Markdown, md } from 'telegram-md'
-import { MESSAGES, STRINGS } from '../constants.ts'
-import { getPokerCardString } from '../utils/getPokerCardString.ts'
-import { PokerCombination } from './PokerCombination.ts'
-import { PokerStateManager } from './PokerStateManager.ts'
+import { MESSAGES, STRINGS } from '../constants.js'
+import { getPokerCardString } from '../utils/getPokerCardString.js'
+import { PokerCombination } from './PokerCombination.js'
+import { PokerStateManager } from './PokerStateManager.js'
 
 export class PokerPlayerManager {
   id: string

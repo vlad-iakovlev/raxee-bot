@@ -1,8 +1,8 @@
-import { md } from 'telegram-md'
-import { PumpkinPlayerWithStats } from '../types.ts'
-import { getStatsMessage } from './getStatsMessage.ts'
+import { md } from '@vlad-yakovlev/telegram-md'
+import { PumpkinPlayerWithStats } from '../types.js'
+import { getStatsMessage } from './getStatsMessage.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pumpkinStrings: {
       findFirst: jest.fn(),
@@ -10,8 +10,8 @@ jest.mock('../../../utils/prisma.ts', () => ({
   },
 }))
 
-jest.mock('./getStats.ts')
-const { getStats } = jest.requireMock('./getStats.ts')
+jest.mock('./getStats.js')
+const { getStats } = jest.requireMock('./getStats.js')
 
 describe('#getStatsMessage', () => {
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe('#getStatsMessage', () => {
 
     const message = await getStatsMessage(tgChatId)
 
-    expect(getStats).toBeCalledWith(tgChatId, undefined)
+    expect(getStats).toHaveBeenCalledWith(tgChatId, undefined)
     expect(message).toStrictEqual(
       md.join(
         [
@@ -111,7 +111,7 @@ describe('#getStatsMessage', () => {
 
     const message = await getStatsMessage(tgChatId, year)
 
-    expect(getStats).toBeCalledWith(tgChatId, year)
+    expect(getStats).toHaveBeenCalledWith(tgChatId, year)
     expect(message).toStrictEqual(
       md.join(
         [

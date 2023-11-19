@@ -1,13 +1,13 @@
-import { initUserMiddleware } from './initUser.ts'
+import { initUserMiddleware } from './initUser.js'
 
-jest.mock('../utils/prisma.ts', () => ({
+jest.mock('../utils/prisma.js', () => ({
   prisma: {
     user: {
       upsert: jest.fn(),
     },
   },
 }))
-const { prisma } = jest.requireMock('../utils/prisma.ts')
+const { prisma } = jest.requireMock('../utils/prisma.js')
 
 describe('#initUserMiddleware', () => {
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('#initUserMiddleware', () => {
 
     await initUserMiddleware(ctx, next)
 
-    expect(prisma.user.upsert).toBeCalledWith({
+    expect(prisma.user.upsert).toHaveBeenCalledWith({
       where: {
         tgUserId: '123456789',
       },
@@ -46,7 +46,7 @@ describe('#initUserMiddleware', () => {
         id: true,
       },
     })
-    expect(next).toBeCalledWith()
+    expect(next).toHaveBeenCalledWith()
   })
 
   it('should not call prisma.user.upsert when ctx.from is null', async () => {
@@ -57,7 +57,7 @@ describe('#initUserMiddleware', () => {
 
     await initUserMiddleware(ctx, next)
 
-    expect(prisma.user.upsert).not.toBeCalled()
-    expect(next).toBeCalledWith()
+    expect(prisma.user.upsert).not.toHaveBeenCalled()
+    expect(next).toHaveBeenCalledWith()
   })
 })

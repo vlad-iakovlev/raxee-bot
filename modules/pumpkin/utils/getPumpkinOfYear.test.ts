@@ -1,8 +1,8 @@
-import { md } from 'telegram-md'
-import { PumpkinPlayerWithStats } from '../types.ts'
-import { getPumpkinOfYear } from './getPumpkinOfYear.ts'
+import { md } from '@vlad-yakovlev/telegram-md'
+import { PumpkinPlayerWithStats } from '../types.js'
+import { getPumpkinOfYear } from './getPumpkinOfYear.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pumpkinStrings: {
       findFirst: jest.fn(),
@@ -10,8 +10,8 @@ jest.mock('../../../utils/prisma.ts', () => ({
   },
 }))
 
-jest.mock('./getStats.ts')
-const { getStats } = jest.requireMock('./getStats.ts')
+jest.mock('./getStats.js')
+const { getStats } = jest.requireMock('./getStats.js')
 
 describe('#getPumpkinOfYear', () => {
   beforeEach(() => {
@@ -57,7 +57,7 @@ describe('#getPumpkinOfYear', () => {
 
     const message = await getPumpkinOfYear(tgChatId, year)
 
-    expect(getStats).toBeCalledWith(tgChatId, year)
+    expect(getStats).toHaveBeenCalledWith(tgChatId, year)
     expect(message).toStrictEqual(
       md.bold('Pumpkin of 2023 \u2014 @john_doe, @jane_roe'),
     )
@@ -102,7 +102,7 @@ describe('#getPumpkinOfYear', () => {
 
     const message = await getPumpkinOfYear(tgChatId, year)
 
-    expect(getStats).toBeCalledWith(tgChatId, year)
+    expect(getStats).toHaveBeenCalledWith(tgChatId, year)
     expect(message).toStrictEqual(md.bold('Pumpkin of 2023 \u2014 IDK'))
   })
 })

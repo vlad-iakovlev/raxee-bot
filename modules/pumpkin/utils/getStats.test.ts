@@ -1,7 +1,7 @@
 import * as fns from 'date-fns'
-import { getStats } from './getStats.ts'
+import { getStats } from './getStats.js'
 
-jest.mock('../../../utils/prisma.ts', () => ({
+jest.mock('../../../utils/prisma.js', () => ({
   prisma: {
     pumpkinPlayer: {
       findMany: jest.fn(),
@@ -11,7 +11,7 @@ jest.mock('../../../utils/prisma.ts', () => ({
     },
   },
 }))
-const { prisma } = jest.requireMock('../../../utils/prisma.ts')
+const { prisma } = jest.requireMock('../../../utils/prisma.js')
 
 beforeEach(() => {
   jest.clearAllMocks()
@@ -32,7 +32,7 @@ describe('#getStats', () => {
 
     const stats = await getStats(tgChatId)
 
-    expect(prisma.pumpkinPlayer.findMany).toBeCalledWith({
+    expect(prisma.pumpkinPlayer.findMany).toHaveBeenCalledWith({
       where: {
         tgChatId,
       },
@@ -40,7 +40,7 @@ describe('#getStats', () => {
         user: true,
       },
     })
-    expect(prisma.pumpkinStats.groupBy).toBeCalledWith({
+    expect(prisma.pumpkinStats.groupBy).toHaveBeenCalledWith({
       by: ['playerId'],
       where: {
         player: {
@@ -72,7 +72,7 @@ describe('#getStats', () => {
 
     const stats = await getStats(tgChatId, 2023)
 
-    expect(prisma.pumpkinPlayer.findMany).toBeCalledWith({
+    expect(prisma.pumpkinPlayer.findMany).toHaveBeenCalledWith({
       where: {
         tgChatId,
       },
@@ -80,7 +80,7 @@ describe('#getStats', () => {
         user: true,
       },
     })
-    expect(prisma.pumpkinStats.groupBy).toBeCalledWith({
+    expect(prisma.pumpkinStats.groupBy).toHaveBeenCalledWith({
       by: ['playerId'],
       where: {
         player: {

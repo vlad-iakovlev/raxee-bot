@@ -1,4 +1,4 @@
-import { getPokerCardValue } from './getPokerCardValue.ts'
+import { getPokerCardValue } from './getPokerCardValue.js'
 
 export const isPokerCardValueEqual = (
   card1: number,

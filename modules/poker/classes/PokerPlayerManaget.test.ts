@@ -1,11 +1,11 @@
 import { POKER_ROUND, PokerPlayer, User } from '@prisma/client'
+import { md } from '@vlad-yakovlev/telegram-md'
 import { Api } from 'grammy'
-import { md } from 'telegram-md'
-import { POKER_COMBINATION_LEVEL } from '../types.ts'
-import { PokerCombination } from './PokerCombination.ts'
-import { PokerPlayerManager } from './PokerPlayerManger.ts'
-import { PokerStateManager } from './PokerStateManager.ts'
-import { PokerSubset } from './PokerSubset.ts'
+import { POKER_COMBINATION_LEVEL } from '../types.js'
+import { PokerCombination } from './PokerCombination.js'
+import { PokerPlayerManager } from './PokerPlayerManger.js'
+import { PokerStateManager } from './PokerStateManager.js'
+import { PokerSubset } from './PokerSubset.js'
 
 const mockUserId = jest.fn(() => 'user-id')
 const mockUserTgUserId = jest.fn(() => '123456789')
