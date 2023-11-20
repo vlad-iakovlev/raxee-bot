@@ -9,7 +9,10 @@ generator client {
 }
 
 model User {
-  id        String  @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   tgUserId  String  @unique
   firstName String
   lastName  String?
@@ -20,7 +23,10 @@ model User {
 }
 
 model PokerPlayer {
-  id        String  @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   cards     Int[]
   balance   Int
   betAmount Int
@@ -36,7 +42,10 @@ model PokerPlayer {
 }
 
 model PokerState {
-  id                 String      @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   tgChatId           String      @unique
   cards              Int[]
   round              POKER_ROUND
@@ -55,7 +64,10 @@ enum POKER_ROUND {
 }
 
 model PumpkinPlayer {
-  id       String @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   tgChatId String
 
   user   User   @relation(fields: [userId], references: [id])
@@ -67,7 +79,10 @@ model PumpkinPlayer {
 }
 
 model PumpkinStats {
-  id   String   @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   date DateTime
 
   player   PumpkinPlayer @relation(fields: [playerId], references: [id], onUpdate: Cascade, onDelete: Cascade)

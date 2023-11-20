@@ -65,6 +65,9 @@ export class PokerStateManager {
           include: {
             user: true,
           },
+          orderBy: {
+            createdAt: 'asc',
+          },
         },
       },
     })
@@ -91,6 +94,9 @@ export class PokerStateManager {
         players: {
           include: {
             user: true,
+          },
+          orderBy: {
+            createdAt: 'asc',
           },
         },
       },

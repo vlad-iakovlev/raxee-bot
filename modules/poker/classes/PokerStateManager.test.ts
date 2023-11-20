@@ -141,6 +141,9 @@ describe('PokerStateManager', () => {
             include: {
               user: true,
             },
+            orderBy: {
+              createdAt: 'asc',
+            },
           },
         },
       })
@@ -173,6 +176,9 @@ describe('PokerStateManager', () => {
             include: {
               user: true,
             },
+            orderBy: {
+              createdAt: 'asc',
+            },
           },
         },
       })
@@ -202,6 +208,9 @@ describe('PokerStateManager', () => {
           players: {
             include: {
               user: true,
+            },
+            orderBy: {
+              createdAt: 'asc',
             },
           },
         },
