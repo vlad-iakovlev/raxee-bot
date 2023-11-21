@@ -1,20 +1,21 @@
 import { replyWithMarkdownPlugin } from '@vlad-yakovlev/grammy-reply-with-markdown'
+import assert from 'assert'
 import { Composer, Context } from 'grammy'
 import { BotModule } from '../../types/module.js'
-import { PokerStateManager } from './classes/PokerStateManager.js'
+import { PokerAdapter } from './classes/PokerAdapter.js'
 import { MESSAGES } from './constants.js'
 
 const createComposer = () => {
   const bot = new Composer(replyWithMarkdownPlugin())
 
   bot.chatType(['group', 'supergroup']).command('poker_join', async (ctx) => {
-    const senderPokerState = await PokerStateManager.loadByTgUserId(
+    const senderAdapter = await PokerAdapter.loadByTgUserId(
       String(ctx.from.id),
       ctx.api,
     )
 
-    if (senderPokerState) {
-      if (senderPokerState.tgChatId === String(ctx.chat.id)) {
+    if (senderAdapter) {
+      if (senderAdapter.tgChatId === String(ctx.chat.id)) {
         await ctx.replyWithMarkdown(MESSAGES.pokerJoin.duplicateSameChat, {
           disable_notification: true,
           reply_to_message_id: ctx.message.message_id,
@@ -28,12 +29,12 @@ const createComposer = () => {
       return
     }
 
-    const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
+    const adapter = await PokerAdapter.loadByTgChatIdOrCreate(
       String(ctx.chat.id),
       ctx.api,
     )
 
-    if (pokerState.dealsCount > 0) {
+    if (adapter.dealsCount > 0) {
       await ctx.replyWithMarkdown(MESSAGES.pokerJoin.alreadyStarted, {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
@@ -41,7 +42,7 @@ const createComposer = () => {
       return
     }
 
-    if (pokerState.players.length >= 10) {
+    if (adapter.players.length >= 10) {
       await ctx.replyWithMarkdown(MESSAGES.pokerJoin.tooMany, {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
@@ -49,7 +50,7 @@ const createComposer = () => {
       return
     }
 
-    await pokerState.addPlayer(String(ctx.from.id))
+    await adapter.addPlayer(String(ctx.from.id))
 
     await ctx.replyWithMarkdown(MESSAGES.pokerJoin.registered, {
       disable_notification: true,
@@ -58,12 +59,12 @@ const createComposer = () => {
   })
 
   bot.chatType(['group', 'supergroup']).command('poker_start', async (ctx) => {
-    const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
+    const adapter = await PokerAdapter.loadByTgChatIdOrCreate(
       String(ctx.chat.id),
       ctx.api,
     )
 
-    if (pokerState.dealsCount > 0) {
+    if (adapter.dealsCount > 0) {
       await ctx.replyWithMarkdown(MESSAGES.pokerStart.alreadyStarted, {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
@@ -71,7 +72,7 @@ const createComposer = () => {
       return
     }
 
-    if (pokerState.players.length < 2) {
+    if (adapter.players.length < 2) {
       await ctx.replyWithMarkdown(MESSAGES.pokerStart.tooFew, {
         disable_notification: true,
         reply_to_message_id: ctx.message.message_id,
@@ -79,7 +80,7 @@ const createComposer = () => {
       return
     }
 
-    await pokerState.dealCards()
+    await adapter.dealCards()
 
     await ctx.replyWithMarkdown(MESSAGES.pokerStart.started, {
       disable_notification: true,
@@ -88,14 +89,14 @@ const createComposer = () => {
   })
 
   bot.chatType(['group', 'supergroup']).command('poker_stop', async (ctx) => {
-    const pokerState = await PokerStateManager.loadByTgChatIdOrCreate(
+    const adapter = await PokerAdapter.loadByTgChatIdOrCreate(
       String(ctx.chat.id),
       ctx.api,
     )
-    await pokerState.endGame()
+    await adapter.endGame()
 
     await ctx.replyWithMarkdown(
-      pokerState.dealsCount > 0
+      adapter.dealsCount > 0
         ? MESSAGES.pokerStopGroup.stopped
         : MESSAGES.pokerStopGroup.cancelled,
       {
@@ -106,40 +107,32 @@ const createComposer = () => {
   })
 
   bot.chatType('private').command('poker_stop', async (ctx) => {
-    const senderPokerState = await PokerStateManager.loadByTgUserId(
+    const senderAdapter = await PokerAdapter.loadByTgUserId(
       String(ctx.from.id),
       ctx.api,
     )
 
-    if (senderPokerState) {
-      await senderPokerState.endGame()
+    if (senderAdapter) {
+      await senderAdapter.endGame()
     } else {
       await ctx.replyWithMarkdown(MESSAGES.pokerStopPrivate.notFound)
     }
   })
 
   bot.chatType('private').on('message:text', async (ctx, next) => {
-    const senderPokerState = await PokerStateManager.loadByTgUserId(
+    const senderAdapter = await PokerAdapter.loadByTgUserId(
       String(ctx.from.id),
       ctx.api,
     )
 
-    if (senderPokerState) {
-      const sender = senderPokerState.players.find(
-        (player) => player.user.tgUserId === String(ctx.from.id),
+    if (senderAdapter) {
+      const sender = senderAdapter.players.find(
+        (player) => player.payload.tgUserId === String(ctx.from.id),
       )
-      // istanbul ignore next
-      if (!sender) throw new Error('Player not found')
+      assert(sender, 'Player not found')
 
-      const message = ctx.message.text
-
-      if (senderPokerState.currentPlayer.id === sender.id) {
-        const reply = await senderPokerState.handleMessage(sender, message)
-        if (reply) await ctx.replyWithMarkdown(reply)
-      } else {
-        await ctx.replyWithMarkdown(MESSAGES.onMessage.wrongTurn)
-        await senderPokerState.broadcastPlayerMessage(sender, message)
-      }
+      const reply = await senderAdapter.handleMessage(sender, ctx.message.text)
+      if (reply) await ctx.replyWithMarkdown(reply)
     }
 
     await next()
