@@ -28,7 +28,7 @@
     "grammy": "^1.19.2",
     "remeda": "^1.29.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "devDependencies": {
     "@swc/jest": "^0.2.29",
