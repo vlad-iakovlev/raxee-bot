@@ -23,7 +23,7 @@
     "@types/node": "^20.10.5",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
     "@vlad-yakovlev/telegram-md": "^2.0.0",
-    "date-fns": "^2.30.0",
+    "date-fns": "^3.0.6",
     "dotenv": "^16.3.1",
     "grammy": "^1.19.2",
     "remeda": "^1.33.0",
