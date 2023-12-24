@@ -1,72 +1,76 @@
+import { User } from '@prisma/client'
+import {
+  CARD_SUIT,
+  CARD_VALUE,
+  COMBINATION_LEVEL,
+  ERROR_CODE,
+  Player,
+} from '@vlad-yakovlev/poker'
 import { md } from '@vlad-yakovlev/telegram-md'
 import { getMention } from '../../utils/getMention.js'
-import { PokerPlayerManager } from './classes/PokerPlayerManger.js'
-import {
-  POKER_CARD_SUIT,
-  POKER_CARD_VALUE,
-  POKER_COMBINATION_LEVEL,
-} from './types.js'
 import { getPokerCardString } from './utils/getPokerCardString.js'
+import { getPokerCombinationString } from './utils/getPokerCombinationString.js'
 
-export const DEFAULT_BALANCE = 1000
-
-export const BASE_BET = 20
+export const STARTING_BALANCE = 1000
+export const STARTING_BASE_BET_AMOUNT = 20
 
 export const POKER_CARD_SUIT_NAMES = {
-  [POKER_CARD_SUIT.CLUBS]: '♣️',
-  [POKER_CARD_SUIT.DIAMONDS]: '♦️',
-  [POKER_CARD_SUIT.HEARTS]: '♥️',
-  [POKER_CARD_SUIT.SPADES]: '♠️',
+  [CARD_SUIT.CLUBS]: '♣️',
+  [CARD_SUIT.DIAMONDS]: '♦️',
+  [CARD_SUIT.HEARTS]: '♥️',
+  [CARD_SUIT.SPADES]: '♠️',
 } as const
 
 export const POKER_CARD_VALUE_NAMES = {
-  [POKER_CARD_VALUE.TWO]: '2',
-  [POKER_CARD_VALUE.THREE]: '3',
-  [POKER_CARD_VALUE.FOUR]: '4',
-  [POKER_CARD_VALUE.FIVE]: '5',
-  [POKER_CARD_VALUE.SIX]: '6',
-  [POKER_CARD_VALUE.SEVEN]: '7',
-  [POKER_CARD_VALUE.EIGHT]: '8',
-  [POKER_CARD_VALUE.NINE]: '9',
-  [POKER_CARD_VALUE.TEN]: '10',
-  [POKER_CARD_VALUE.JACK]: 'J',
-  [POKER_CARD_VALUE.QUEEN]: 'Q',
-  [POKER_CARD_VALUE.KING]: 'K',
-  [POKER_CARD_VALUE.ACE]: 'A',
+  [CARD_VALUE.TWO]: '2',
+  [CARD_VALUE.THREE]: '3',
+  [CARD_VALUE.FOUR]: '4',
+  [CARD_VALUE.FIVE]: '5',
+  [CARD_VALUE.SIX]: '6',
+  [CARD_VALUE.SEVEN]: '7',
+  [CARD_VALUE.EIGHT]: '8',
+  [CARD_VALUE.NINE]: '9',
+  [CARD_VALUE.TEN]: '10',
+  [CARD_VALUE.JACK]: 'J',
+  [CARD_VALUE.QUEEN]: 'Q',
+  [CARD_VALUE.KING]: 'K',
+  [CARD_VALUE.ACE]: 'A',
 } as const
 
 export const POKER_COMBINATION_LEVEL_NAMES = {
-  [POKER_COMBINATION_LEVEL.HIGH_CARD]: 'High Card',
-  [POKER_COMBINATION_LEVEL.PAIR]: 'Pair',
-  [POKER_COMBINATION_LEVEL.TWO_PAIR]: 'Two Pair',
-  [POKER_COMBINATION_LEVEL.THREE_OF_KIND]: 'Three of a Kind',
-  [POKER_COMBINATION_LEVEL.STRAIGHT]: 'Straight',
-  [POKER_COMBINATION_LEVEL.FLUSH]: 'Flush',
-  [POKER_COMBINATION_LEVEL.FULL_HOUSE]: 'Full House',
-  [POKER_COMBINATION_LEVEL.FOUR_OF_KIND]: 'Four of a Kind',
-  [POKER_COMBINATION_LEVEL.STRAIGHT_FLUSH]: 'Straight Flush',
-  [POKER_COMBINATION_LEVEL.ROYAL_FLUSH]: 'Royal Flush',
+  [COMBINATION_LEVEL.HIGH_CARD]: 'High Card',
+  [COMBINATION_LEVEL.PAIR]: 'Pair',
+  [COMBINATION_LEVEL.TWO_PAIR]: 'Two Pair',
+  [COMBINATION_LEVEL.THREE_OF_KIND]: 'Three of a Kind',
+  [COMBINATION_LEVEL.STRAIGHT]: 'Straight',
+  [COMBINATION_LEVEL.FLUSH]: 'Flush',
+  [COMBINATION_LEVEL.FULL_HOUSE]: 'Full House',
+  [COMBINATION_LEVEL.FOUR_OF_KIND]: 'Four of a Kind',
+  [COMBINATION_LEVEL.STRAIGHT_FLUSH]: 'Straight Flush',
+  [COMBINATION_LEVEL.ROYAL_FLUSH]: 'Royal Flush',
 } as const
 
 export const STRINGS = {
   allIn: '💰 All in',
   amount: (value: number | string) => `${value} 🪙`,
-  pot: (value: number | string) => `Pot: ${value} 🪙`,
-  call: (value: number | string) => `✅ ${value}`,
+  potAmount: (value: number | string) => `Pot: ${value} 🪙`,
+  call: `✅ Call`,
+  callAmount: (value: number | string) => `✅ ${value}`,
+  raiseAmount: (value: number | string) => `⏫ ${value}`,
   check: '✊ Check',
   fold: '❌ Fold',
   preflop: 'Preflop',
-  win: '🏆 Win',
+  wonAmount: (value: number | string) => `🏆 ${value}`,
 }
 
 // prettier-ignore
 export const MESSAGES = {
   _: {
-    dealStarted: ({ players, dealer, small, big }: {
-      players: PokerPlayerManager[],
-      dealer: PokerPlayerManager,
-      small: PokerPlayerManager,
-      big: PokerPlayerManager
+    nextDeal: ({ players, dealer, smallBlind, bigBlind }: {
+      players: Player<User>[]
+      dealer: Player<User>
+      smallBlind: Player<User>
+      bigBlind: Player<User>
     }) =>
       md.join(
         [
@@ -75,7 +79,7 @@ export const MESSAGES = {
             md.join(
               [
                 '\u2022',
-                getMention(player.user),
+                getMention(player.payload),
                 `(${STRINGS.amount(player.balance + player.betAmount)})`,
                 player.balance === 0 && STRINGS.allIn,
               ].filter(Boolean),
@@ -83,27 +87,30 @@ export const MESSAGES = {
             )
           ),
           '',
-          md`${md.bold('Dealer:')} ${getMention(dealer.user)}`,
-          md`${md.bold('Small:')} ${getMention(small.user)} (${STRINGS.amount(small.betAmount)})`,
-          md`${md.bold('Big:')} ${getMention(big.user)} (${STRINGS.amount(big.betAmount)})`,
+          md`${md.bold('Dealer:')} ${getMention(dealer.payload)}`,
+          md`${md.bold('Small:')} ${getMention(smallBlind.payload)} (${STRINGS.amount(smallBlind.betAmount)})`,
+          md`${md.bold('Big:')} ${getMention(bigBlind.payload)} (${STRINGS.amount(bigBlind.betAmount)})`,
         ],
         '\n'
       ),
     dealEnded: ({ tableCards, players }: {
-      tableCards: number[],
-      players: PokerPlayerManager[]
+      tableCards: number[]
+      players: {
+        player: Player<User>
+        wonAmount: number
+      }[]
     }) =>
       md.join(
         [
           `Table: ${tableCards.map(getPokerCardString).join(' ')}`,
-          ...players.map((player) =>
+          ...players.map(({ player, wonAmount }) =>
             md.join(
               [
-                md`${getMention(player.user)}: ${player.cards.map(getPokerCardString).join(' ')}`,
+                md`${getMention(player.payload)}: ${player.cards.map(getPokerCardString).join(' ')}`,
                 [
-                  player.bestCombination?.getString(),
+                  player.bestCombination && getPokerCombinationString(player.bestCombination),
                   player.hasFolded && STRINGS.fold,
-                  player.isWinner && STRINGS.win,
+                  wonAmount && STRINGS.wonAmount(wonAmount),
                 ]
                   .filter(Boolean)
                   .join(' '),
@@ -114,21 +121,23 @@ export const MESSAGES = {
         ],
         '\n\n'
       ),
+    nextTurn: ({ player }: { player: Player<User> }) => md`${getMention(player.payload)}, your turn!`,
     gameEnded: 'Game over, folks!',
-    userTurn: (player: PokerPlayerManager) => md`${getMention(player.user)}, your turn!`,
-    playerMessage: (player: PokerPlayerManager, message: string) => md`${getMention(player.user)}: ${message}`,
+    playerMessage: (player: Player<User>, message: string) => md`${getMention(player.payload)}: ${message}`,
   },
 
   onMessage: {
-    foldNotAllowed: "Folding is not allowed",
-    checkNotAllowed: "Checking is not allowed",
-    callNotAllowed: "Calling is not allowed",
-    allInNotAllowed: "Going all in is not allowed",
-    raiseNotAllowed: "Raising is not allowed",
-    betTooBig: 'That bet is too large',
-    betTooSmall: 'That bet is too small',
+    errors: {
+      [ERROR_CODE.WRONG_TURN]: "It's not your turn now, but I shared your message with everyone",
+      [ERROR_CODE.FOLD_NOT_ALLOWED]: 'Folding is not allowed',
+      [ERROR_CODE.CHECK_NOT_ALLOWED]: 'Checking is not allowed',
+      [ERROR_CODE.CALL_NOT_ALLOWED]: 'Calling is not allowed',
+      [ERROR_CODE.RAISE_NOT_ALLOWED]: 'Raising is not allowed',
+      [ERROR_CODE.RAISE_AMOUNT_TOO_SMALL]: 'That bet is too small',
+      [ERROR_CODE.RAISE_AMOUNT_TOO_BIG]: 'That bet is too large',
+      [ERROR_CODE.ALL_IN_NOT_ALLOWED]: 'Going all in is not allowed',
+    },
     unknownCommand: "I didn't understand you, but I shared your message with everyone",
-    wrongTurn: "It's not your turn now, but I shared your message with everyone",
   },
 
   pokerJoin: {
