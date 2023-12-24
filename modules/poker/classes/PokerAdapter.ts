@@ -28,14 +28,14 @@ import { PokerStorage } from './PokerStorage.js'
 export class PokerAdapter {
   room: Room<undefined, User>
   tgApi: Api
-  sendMessageQueue = new CallQueue()
+  tgQueue = new CallQueue()
 
   constructor(room: Room<undefined, User>, tgApi: Api) {
     this.room = room
     this.tgApi = tgApi
 
     room.on('nextDeal', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastMessage({
           message: MESSAGES._.nextDeal(data),
         }),
@@ -43,7 +43,7 @@ export class PokerAdapter {
     })
 
     room.on('dealEnded', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastMessage({
           message: MESSAGES._.dealEnded(data),
         }),
@@ -51,7 +51,7 @@ export class PokerAdapter {
     })
 
     room.on('nextTurn', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastMessage({
           message: MESSAGES._.nextTurn(data),
           withKeyboard: true,
@@ -60,7 +60,7 @@ export class PokerAdapter {
     })
 
     room.on('gameEnded', () => {
-      this.sendMessageQueue.add(async () => {
+      this.tgQueue.add(async () => {
         await this.broadcastMessage({
           message: MESSAGES._.gameEnded,
         })
@@ -78,25 +78,25 @@ export class PokerAdapter {
     })
 
     room.on('fold', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastPlayerMessage(data.player, STRINGS.fold),
       )
     })
 
     room.on('check', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastPlayerMessage(data.player, STRINGS.check),
       )
     })
 
     room.on('call', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastPlayerMessage(data.player, STRINGS.call),
       )
     })
 
     room.on('raise', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastPlayerMessage(
           data.player,
           STRINGS.raiseAmount(data.amount),
@@ -105,7 +105,7 @@ export class PokerAdapter {
     })
 
     room.on('allIn', (data) => {
-      this.sendMessageQueue.add(() =>
+      this.tgQueue.add(() =>
         this.broadcastPlayerMessage(data.player, STRINGS.allIn),
       )
     })
@@ -250,7 +250,7 @@ export class PokerAdapter {
             const betAmount = Number(message)
 
             if (!betAmount) {
-              this.sendMessageQueue.add(() =>
+              this.tgQueue.add(() =>
                 this.broadcastPlayerMessage(sender, message),
               )
               return MESSAGES.onMessage.unknownCommand
@@ -263,9 +263,7 @@ export class PokerAdapter {
     } catch (error) {
       if (error instanceof BaseError) {
         if (error.code === ERROR_CODE.WRONG_TURN) {
-          this.sendMessageQueue.add(() =>
-            this.broadcastPlayerMessage(sender, message),
-          )
+          this.tgQueue.add(() => this.broadcastPlayerMessage(sender, message))
         }
 
         return MESSAGES.onMessage.errors[error.code]
