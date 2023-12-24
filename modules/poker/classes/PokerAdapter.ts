@@ -12,6 +12,7 @@ import { Markdown, md } from '@vlad-yakovlev/telegram-md'
 import assert from 'assert'
 import { Api } from 'grammy'
 import * as R from 'remeda'
+import { CallQueue } from '../../../classes/CallQueue.js'
 import { getRandomItem } from '../../../utils/getRandomItem.js'
 import { prisma } from '../../../utils/prisma.js'
 import {
@@ -27,32 +28,39 @@ import { PokerStorage } from './PokerStorage.js'
 export class PokerAdapter {
   room: Room<undefined, User>
   tgApi: Api
+  sendMessageQueue = new CallQueue()
 
   constructor(room: Room<undefined, User>, tgApi: Api) {
     this.room = room
     this.tgApi = tgApi
 
     room.on('nextDeal', (data) => {
-      void this.broadcastMessage({
-        message: MESSAGES._.nextDeal(data),
-      })
+      this.sendMessageQueue.add(() =>
+        this.broadcastMessage({
+          message: MESSAGES._.nextDeal(data),
+        }),
+      )
     })
 
     room.on('dealEnded', (data) => {
-      void this.broadcastMessage({
-        message: MESSAGES._.dealEnded(data),
-      })
+      this.sendMessageQueue.add(() =>
+        this.broadcastMessage({
+          message: MESSAGES._.dealEnded(data),
+        }),
+      )
     })
 
     room.on('nextTurn', (data) => {
-      void this.broadcastMessage({
-        message: MESSAGES._.nextTurn(data),
-        withKeyboard: true,
-      })
+      this.sendMessageQueue.add(() =>
+        this.broadcastMessage({
+          message: MESSAGES._.nextTurn(data),
+          withKeyboard: true,
+        }),
+      )
     })
 
     room.on('gameEnded', () => {
-      void (async () => {
+      this.sendMessageQueue.add(async () => {
         await this.broadcastMessage({
           message: MESSAGES._.gameEnded,
         })
@@ -66,30 +74,40 @@ export class PokerAdapter {
             ),
           ),
         )
-      })()
+      })
     })
 
     room.on('fold', (data) => {
-      void this.broadcastPlayerMessage(data.player, STRINGS.fold)
+      this.sendMessageQueue.add(() =>
+        this.broadcastPlayerMessage(data.player, STRINGS.fold),
+      )
     })
 
     room.on('check', (data) => {
-      void this.broadcastPlayerMessage(data.player, STRINGS.check)
+      this.sendMessageQueue.add(() =>
+        this.broadcastPlayerMessage(data.player, STRINGS.check),
+      )
     })
 
     room.on('call', (data) => {
-      void this.broadcastPlayerMessage(data.player, STRINGS.call)
+      this.sendMessageQueue.add(() =>
+        this.broadcastPlayerMessage(data.player, STRINGS.call),
+      )
     })
 
     room.on('raise', (data) => {
-      void this.broadcastPlayerMessage(
-        data.player,
-        STRINGS.raiseAmount(data.amount),
+      this.sendMessageQueue.add(() =>
+        this.broadcastPlayerMessage(
+          data.player,
+          STRINGS.raiseAmount(data.amount),
+        ),
       )
     })
 
     room.on('allIn', (data) => {
-      void this.broadcastPlayerMessage(data.player, STRINGS.allIn)
+      this.sendMessageQueue.add(() =>
+        this.broadcastPlayerMessage(data.player, STRINGS.allIn),
+      )
     })
   }
 
@@ -232,7 +250,9 @@ export class PokerAdapter {
             const betAmount = Number(message)
 
             if (!betAmount) {
-              await this.broadcastPlayerMessage(sender, message)
+              this.sendMessageQueue.add(() =>
+                this.broadcastPlayerMessage(sender, message),
+              )
               return MESSAGES.onMessage.unknownCommand
             }
 
@@ -243,7 +263,9 @@ export class PokerAdapter {
     } catch (error) {
       if (error instanceof BaseError) {
         if (error.code === ERROR_CODE.WRONG_TURN) {
-          await this.broadcastPlayerMessage(sender, message)
+          this.sendMessageQueue.add(() =>
+            this.broadcastPlayerMessage(sender, message),
+          )
         }
 
         return MESSAGES.onMessage.errors[error.code]
