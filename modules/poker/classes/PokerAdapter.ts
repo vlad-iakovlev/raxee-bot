@@ -60,12 +60,14 @@ export class PokerAdapter {
     })
 
     room.on('gameEnded', () => {
-      this.tgQueue.add(async () => {
-        await this.broadcastMessage({
+      this.tgQueue.add(() =>
+        this.broadcastMessage({
           message: MESSAGES._.gameEnded,
-        })
+        }),
+      )
 
-        await Promise.all(
+      this.tgQueue.add(() =>
+        Promise.all(
           this.players.map((player) =>
             this.tgApi.sendSticker(
               player.payload.tgUserId,
@@ -73,8 +75,8 @@ export class PokerAdapter {
               { reply_markup: { remove_keyboard: true } },
             ),
           ),
-        )
-      })
+        ),
+      )
     })
 
     room.on('fold', (data) => {
