@@ -111,7 +111,8 @@
       "!**/node_modules/**",
       "**/*.ts",
       "!bin/*.ts"
-    ]
+    ],
+    "coverageProvider": "v8"
   },
   "lint-staged": {
     "**/*.(js|ts)": [
