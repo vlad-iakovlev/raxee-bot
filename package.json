@@ -110,9 +110,7 @@
     "collectCoverageFrom": [
       "!**/node_modules/**",
       "**/*.ts",
-      "!bin/*.ts",
-      "!**/types/**/*.ts",
-      "!**/types.ts"
+      "!bin/*.ts"
     ],
     "coverageProvider": "v8"
   },
