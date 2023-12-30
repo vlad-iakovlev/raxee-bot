@@ -16,22 +16,14 @@ export const getStatsMessage = async (tgChatId: string, year?: number) => {
     [
       strings.get(year ? 'statsTitleYear' : 'statsTitleAllTime'),
       '',
-      ...playersWithWinnings.map((player, index) => {
-        let realIndex = index
-        while (
-          realIndex > 0 &&
-          player.winnings === playersWithWinnings[realIndex - 1].winnings
-        ) {
-          realIndex--
-        }
-
-        return interpolate(
+      ...playersWithWinnings.map((player, index) =>
+        interpolate(
           strings.get('statsPlayer'),
-          realIndex + 1,
+          index + 1,
           getUserName(player.user),
           player.winnings,
-        )
-      }),
+        ),
+      ),
       '',
       interpolate(strings.get('statsTotalPlayers'), playersWithStats.length),
     ],
