@@ -58,7 +58,6 @@ describe('#createPokerModule', () => {
           payload: {
             chat_id: 123456789,
             disable_notification: true,
-            disable_web_page_preview: true,
             parse_mode: 'MarkdownV2',
             text: [
               'Welcome to the *Raxee Bot*\\!',
@@ -135,7 +134,6 @@ describe('#createPokerModule', () => {
           payload: {
             chat_id: 123456789,
             disable_notification: true,
-            disable_web_page_preview: true,
             parse_mode: 'MarkdownV2',
             text: [
               'Welcome to the *Raxee Bot*\\!',

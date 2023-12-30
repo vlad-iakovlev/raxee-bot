@@ -9,14 +9,12 @@ const createComposer = () => {
   bot.command('start', async (ctx) => {
     await ctx.replyWithMarkdown(STRINGS.help, {
       disable_notification: true,
-      disable_web_page_preview: true,
     })
   })
 
   bot.command('help', async (ctx) => {
     await ctx.replyWithMarkdown(STRINGS.help, {
       disable_notification: true,
-      disable_web_page_preview: true,
     })
   })
 
