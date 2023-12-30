@@ -15,7 +15,7 @@ Discover the Pumpkin of the Day and participate in a fun and engaging game with 
 
 Enjoy playing poker with your friends right in your Telegram group chats.
 
-The game follows the rules of [Texas Hold'em] (https://en.wikipedia.org/wiki/Texas_hold_%27em). Uses [@vlad-yakovlev/poker](https://www.npmjs.com/package/@vlad-yakovlev/poker) under the hood.
+The game follows the rules of [Texas Hold'em](https://en.wikipedia.org/wiki/Texas_hold_%27em). Uses [@vlad-yakovlev/poker](https://www.npmjs.com/package/@vlad-yakovlev/poker) under the hood.
 
 ## Getting Started
 
