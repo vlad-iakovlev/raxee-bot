@@ -13,13 +13,13 @@ Discover the Pumpkin of the Day and participate in a fun and engaging game with 
 
 ### Poker
 
-Enjoy playing poker with your friends right within your Telegram group chats.
+Enjoy playing poker with your friends right in your Telegram group chats.
 
-The game follows [Texas Hold'em](https://en.wikipedia.org/wiki/Texas_hold_%27em) rules.
+The game follows the rules of [Texas Hold'em] (https://en.wikipedia.org/wiki/Texas_hold_%27em). Uses [@vlad-yakovlev/poker](https://www.npmjs.com/package/@vlad-yakovlev/poker) under the hood.
 
 ## Getting Started
 
-To start using Raxee Bot in your Telegram group chats, simply follow this link: [https://t.me/raxee_bot](https://t.me/raxee_bot)
+To start using Raxee Bot in your Telegram group chats, just follow this link: [https://t.me/raxee_bot](https://t.me/raxee_bot)
 
 ## Support
 
@@ -29,6 +29,6 @@ If you have any questions or need assistance, feel free to contact [@vladyakovle
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## Contributing
+## Contribute
 
-Contributions are welcome! Please feel free to submit a Pull Request or open an Issue.
+Contributions are welcome! Please feel free to submit a pull request or open an issue.
