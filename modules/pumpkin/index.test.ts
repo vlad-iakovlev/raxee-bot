@@ -456,7 +456,7 @@ describe('#createPumpkinModule', () => {
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
-            text: 'Almost forgot\\.\\.\\. Happy New Year, pumpkins\\!\nFind out who won: /pumpkin\\_@john\\_doe',
+            text: 'Almost forgot\\.\\.\\. Happy New Year, pumpkins\\!\nFind out who won: /pumpkin\\_2023',
           },
           signal: undefined,
         },

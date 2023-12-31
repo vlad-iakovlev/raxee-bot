@@ -68,11 +68,7 @@ const createComposer = () => {
     if (getIsDec31(date)) {
       await new Promise((resolve) => setTimeout(resolve, 10000))
       await ctx.replyWithMarkdown(
-        interpolate(
-          strings.get('newWinnerNewYear'),
-          getMention(winner.user),
-          fns.getYear(date),
-        ),
+        interpolate(strings.get('newWinnerNewYear'), fns.getYear(date)),
         { disable_notification: true },
       )
     }
