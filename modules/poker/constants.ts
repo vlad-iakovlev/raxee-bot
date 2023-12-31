@@ -128,14 +128,14 @@ export const MESSAGES = {
 
   onMessage: {
     errors: {
-      [ERROR_CODE.WRONG_TURN]: "It's not your turn now, but I shared your message with everyone",
-      [ERROR_CODE.FOLD_NOT_ALLOWED]: 'Folding is not allowed',
-      [ERROR_CODE.CHECK_NOT_ALLOWED]: 'Checking is not allowed',
-      [ERROR_CODE.CALL_NOT_ALLOWED]: 'Calling is not allowed',
-      [ERROR_CODE.RAISE_NOT_ALLOWED]: 'Raising is not allowed',
-      [ERROR_CODE.RAISE_AMOUNT_TOO_SMALL]: 'That bet is too small',
-      [ERROR_CODE.RAISE_AMOUNT_TOO_BIG]: 'That bet is too large',
-      [ERROR_CODE.ALL_IN_NOT_ALLOWED]: 'Going all in is not allowed',
+      [ERROR_CODE.WRONG_TURN]: "This is not your turn, but I have shared your message with everyone",
+      [ERROR_CODE.FOLD_NOT_ALLOWED]: 'Fold is not allowed',
+      [ERROR_CODE.CHECK_NOT_ALLOWED]: 'Check is not allowed',
+      [ERROR_CODE.CALL_NOT_ALLOWED]: 'Call is not allowed',
+      [ERROR_CODE.RAISE_NOT_ALLOWED]: 'Raise is not allowed',
+      [ERROR_CODE.RAISE_AMOUNT_TOO_SMALL]: 'The bet is too small',
+      [ERROR_CODE.RAISE_AMOUNT_TOO_BIG]: 'The bet is too big',
+      [ERROR_CODE.ALL_IN_NOT_ALLOWED]: 'All-in is not allowed',
     },
     unknownCommand: "I didn't understand you, but I shared your message with everyone",
   },
@@ -150,7 +150,7 @@ export const MESSAGES = {
 
   pokerStart: {
     alreadyStarted: 'A game is already in progress in this chat, please wait for it to finish',
-    started: md`Proceed to the ${md.link('PM', 'https://t.me/raxee_bot')}, the game has begun`,
+    started: md`Go to the ${md.link('PM', 'https://t.me/raxee_bot')}, the game has started`,
     tooFew: 'Not enough players, use /poker_join to add more',
   },
 

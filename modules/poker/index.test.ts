@@ -405,7 +405,7 @@ describe('#createPokerModule', () => {
           method: 'sendMessage',
           payload: {
             chat_id: 1111111,
-            text: 'Proceed to the [PM](https://t\\.me/raxee\\_bot), the game has begun',
+            text: 'Go to the [PM](https://t\\.me/raxee\\_bot), the game has started',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
             disable_notification: true,
