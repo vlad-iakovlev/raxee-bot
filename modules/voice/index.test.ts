@@ -52,6 +52,7 @@ describe('#createVoiceModule', () => {
         {
           method: 'sendSticker',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             sticker:
               'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',
@@ -95,6 +96,7 @@ describe('#createVoiceModule', () => {
         {
           method: 'sendSticker',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             sticker:
               'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',

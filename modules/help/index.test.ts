@@ -56,6 +56,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123456789,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -132,6 +133,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123456789,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
