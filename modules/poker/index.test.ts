@@ -77,6 +77,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: "Get ready, you've joined the game\\. To communicate with me, [start a chat](https://t\\.me/raxee\\_bot)",
             parse_mode: 'MarkdownV2',
@@ -149,6 +150,7 @@ describe('#createPokerModule', () => {
       await bot.handleUpdate({
         update_id: 10000,
         message: {
+          business_connection_id: undefined,
           date: 1441645532,
           chat: {
             id: 1111111,
@@ -177,6 +179,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'You are already in a game in this chat',
             parse_mode: 'MarkdownV2',
@@ -232,6 +235,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'You are already in a game in another chat',
             parse_mode: 'MarkdownV2',
@@ -289,6 +293,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'A game is already in progress in this chat',
             parse_mode: 'MarkdownV2',
@@ -346,6 +351,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'There are too many players in this chat, wait for the current game to end',
             parse_mode: 'MarkdownV2',
@@ -404,6 +410,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'Go to the [PM](https://t\\.me/raxee\\_bot), the game has started',
             parse_mode: 'MarkdownV2',
@@ -504,6 +511,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'A game is already in progress in this chat, please wait for it to finish',
             parse_mode: 'MarkdownV2',
@@ -560,6 +568,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'Not enough players, use /poker\\_join to add more',
             parse_mode: 'MarkdownV2',
@@ -615,6 +624,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'The game in this chat has been stopped',
             parse_mode: 'MarkdownV2',
@@ -668,6 +678,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 1111111,
             text: 'The game in this chat has been cancelled',
             parse_mode: 'MarkdownV2',
@@ -756,6 +767,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123456789,
             text: 'You are not currently in a game',
             parse_mode: 'MarkdownV2',
@@ -850,6 +862,7 @@ describe('#createPokerModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123456789,
             parse_mode: 'MarkdownV2',
             text: 'test response',

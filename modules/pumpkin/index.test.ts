@@ -134,6 +134,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -144,6 +145,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -154,6 +156,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -164,6 +167,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -287,6 +291,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -339,6 +344,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -413,6 +419,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -423,6 +430,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -433,6 +441,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -443,6 +452,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -453,6 +463,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -514,6 +525,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -606,6 +618,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -706,6 +719,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -797,6 +811,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
@@ -895,6 +910,7 @@ describe('#createPumpkinModule', () => {
         {
           method: 'sendMessage',
           payload: {
+            business_connection_id: undefined,
             chat_id: 123,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
