@@ -4,7 +4,7 @@ networks:
 
 services:
   raxee-bot:
-    image: ghcr.io/vlad-yakovlev/raxee-bot:latest
+    image: ghcr.io/vlad-iakovlev/raxee-bot:latest
     pull_policy: always
     build: .
     networks:

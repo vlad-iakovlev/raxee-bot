@@ -34,7 +34,7 @@ export const STRINGS = {
       '',
       md`Find the source code on ${md.link(
         'GitHub',
-        'https://github.com/vlad-yakovlev/raxee-bot',
+        'https://github.com/vlad-iakovlev/raxee-bot',
       )}`,
     ],
     '\n',

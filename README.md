@@ -1,7 +1,7 @@
 # Raxee Bot
 
-![GitHub CI](https://img.shields.io/github/actions/workflow/status/vlad-yakovlev/raxee-bot/ci.yml?branch=main&label=github-ci)
-[![Codecov](https://img.shields.io/codecov/c/github/vlad-yakovlev/raxee-bot/main)](https://codecov.io/gh/vlad-yakovlev/raxee-bot)
+![GitHub CI](https://img.shields.io/github/actions/workflow/status/vlad-iakovlev/raxee-bot/ci.yml?branch=main&label=github-ci)
+[![Codecov](https://img.shields.io/codecov/c/github/vlad-iakovlev/raxee-bot/main)](https://codecov.io/gh/vlad-iakovlev/raxee-bot)
 
 Welcome to the Raxee Bot repository! Raxee Bot is a fun and interactive Telegram bot that brings poker and a unique "Pumpkin of the Day" game to your group chats.
 
