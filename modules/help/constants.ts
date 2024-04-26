@@ -30,7 +30,7 @@ export const STRINGS = {
       `\u2022 The fourth row shows the available actions: ❌ Fold, ✊ Check, ✅ Call, 💰 All in.`,
       `To make a ⏫ Raise, type a number in the chat. For example, "100" if you want to bet 100 🪙.`,
       '',
-      'If you have any questions, feel free to contact me @vladyakovlev',
+      'If you have any questions, feel free to contact me @vladiakovlevdev',
       '',
       md`Find the source code on ${md.link(
         'GitHub',
