@@ -25,7 +25,7 @@ To start using Raxee Bot in your Telegram group chats, just follow this link: [h
 
 ## Support
 
-If you have any questions or need assistance, feel free to contact [@vladyakovlev](https://t.me/vladyakovlev) on Telegram.
+If you have any questions or need assistance, feel free to contact [@vladiakovlevdev](https://t.me/vladiakovlevdev) on Telegram.
 
 ## License
 
