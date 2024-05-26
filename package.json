@@ -25,7 +25,7 @@
     "@vlad-yakovlev/telegram-md": "^2.0.0",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
-    "grammy": "^1.23.0",
+    "grammy": "^1.23.1",
     "remeda": "^1.61.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
