@@ -17,7 +17,7 @@
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.1",
     "@grammyjs/runner": "^2.0.3",
-    "@prisma/client": "^5.16.1",
+    "@prisma/client": "^5.16.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.10",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
@@ -26,20 +26,20 @@
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "grammy": "^1.27.0",
-    "remeda": "^2.3.0",
+    "remeda": "^2.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },
   "devDependencies": {
     "@swc/jest": "^0.2.36",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
-    "lefthook": "^1.6.18",
-    "prettier": "^3.3.2",
-    "prisma": "^5.16.1"
+    "lefthook": "^1.7.2",
+    "prettier": "^3.3.3",
+    "prisma": "^5.16.2"
   },
   "eslintConfig": {
     "parserOptions": {
