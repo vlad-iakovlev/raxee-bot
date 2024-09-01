@@ -19,7 +19,7 @@
     "@grammyjs/runner": "^2.0.3",
     "@prisma/client": "^5.19.0",
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.19.47",
+    "@types/node": "^18.19.48",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
     "@vlad-yakovlev/poker": "^1.3.2",
     "@vlad-yakovlev/telegram-md": "^2.0.0",
