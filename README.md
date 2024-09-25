@@ -27,10 +27,6 @@ To start using Raxee Bot in your Telegram group chats, just follow this link: [h
 
 If you have any questions or need assistance, feel free to contact [@vladiakovlevdev](https://t.me/vladiakovlevdev) on Telegram.
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## Contribute
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue.
