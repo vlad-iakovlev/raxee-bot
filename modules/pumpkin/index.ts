@@ -102,8 +102,8 @@ const createComposer = () => {
       )
     })
 
-  // TODO: https://grammy.dev/plugins/command-filter.html
-  ;[2020, 2021, 2022, 2023].forEach((year) => {
+  // TODO: https://grammy.dev/plugins/commands
+  ;[2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028].forEach((year) => {
     bot
       .chatType(['group', 'supergroup'])
       .command(`pumpkin_${year}`, async (ctx) => {
