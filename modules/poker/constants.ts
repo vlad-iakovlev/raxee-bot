@@ -75,7 +75,7 @@ export const MESSAGES = {
       md.join(
         [
           md.bold('Who is in the game:'),
-          ...players.map((player) =>
+          ...players.filter(player => !player.hasLost).map((player) =>
             md.join(
               [
                 '\u2022',
