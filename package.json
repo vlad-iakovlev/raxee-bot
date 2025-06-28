@@ -24,21 +24,21 @@
     "@vlad-yakovlev/poker": "^1.4.0",
     "@vlad-yakovlev/telegram-md": "^2.0.0",
     "date-fns": "^4.1.0",
-    "dotenv": "^16.5.0",
+    "dotenv": "^16.6.1",
     "grammy": "^1.36.3",
-    "remeda": "^2.23.0",
+    "remeda": "^2.23.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@swc/jest": "^0.2.38",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.5",
-    "jest": "^30.0.2",
+    "jest": "^30.0.3",
     "lefthook": "^1.11.14",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "prisma": "^6.10.1"
   },
   "eslintConfig": {
