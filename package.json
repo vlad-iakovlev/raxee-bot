@@ -17,29 +17,29 @@
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
-    "@prisma/client": "^6.10.1",
+    "@prisma/client": "^6.11.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "^18.19.113",
+    "@types/node": "^18.19.115",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
     "@vlad-yakovlev/poker": "^1.4.0",
-    "@vlad-yakovlev/telegram-md": "^2.0.0",
+    "@vlad-yakovlev/telegram-md": "^2.1.0",
     "date-fns": "^4.1.0",
-    "dotenv": "^17.0.0",
+    "dotenv": "^17.0.1",
     "grammy": "^1.36.3",
-    "remeda": "^2.23.2",
+    "remeda": "^2.24.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@swc/jest": "^0.2.38",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.5",
-    "jest": "^30.0.3",
-    "lefthook": "^1.11.14",
+    "jest": "^30.0.4",
+    "lefthook": "^1.11.16",
     "prettier": "^3.6.2",
-    "prisma": "^6.10.1"
+    "prisma": "^6.11.1"
   },
   "eslintConfig": {
     "parserOptions": {
