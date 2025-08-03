@@ -17,16 +17,16 @@
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
-    "@prisma/client": "^6.12.0",
+    "@prisma/client": "^6.13.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^18.19.120",
+    "@types/node": "^18.19.121",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
     "@vlad-yakovlev/poker": "^1.4.0",
     "@vlad-yakovlev/telegram-md": "^2.1.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.1",
     "grammy": "^1.37.0",
-    "remeda": "^2.26.1",
+    "remeda": "^2.27.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
@@ -39,7 +39,7 @@
     "jest": "^30.0.5",
     "lefthook": "^1.12.2",
     "prettier": "^3.6.2",
-    "prisma": "^6.12.0"
+    "prisma": "^6.13.0"
   },
   "eslintConfig": {
     "parserOptions": {
