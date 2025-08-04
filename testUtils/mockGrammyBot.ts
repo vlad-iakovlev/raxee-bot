@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AbortSignal } from 'abort-controller'
 import { Bot } from 'grammy'
 
-interface MockGrammyBotRequest {
+type MockGrammyBotRequest = {
   method: string
   payload: any
   signal: AbortSignal | undefined

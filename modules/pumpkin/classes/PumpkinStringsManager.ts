@@ -3,7 +3,7 @@ import { getRandomItem } from '../../../utils/getRandomItem.js'
 import { prisma } from '../../../utils/prisma.js'
 import { STRINGS } from '../constants.js'
 
-interface Strings {
+type Strings = {
   hello: (string | Markdown)[]
   notEnoughPlayers: (string | Markdown)[]
   earlyWinner: (string | Markdown)[]

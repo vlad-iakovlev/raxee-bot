@@ -1,9 +1,9 @@
 import { PumpkinPlayer, User } from '@prisma/client'
 
-export interface PumpkinPlayerWithUser extends PumpkinPlayer {
+export type PumpkinPlayerWithUser = PumpkinPlayer & {
   user: User
 }
 
-export interface PumpkinPlayerWithStats extends PumpkinPlayerWithUser {
+export type PumpkinPlayerWithStats = PumpkinPlayerWithUser & {
   winnings: number
 }

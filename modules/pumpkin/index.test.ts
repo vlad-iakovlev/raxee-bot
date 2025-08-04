@@ -64,6 +64,7 @@ describe('#createPumpkinModule', () => {
       jest.useFakeTimers()
       jest
         .spyOn(global, 'setTimeout')
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
         .mockImplementation((cb) => cb() as unknown as NodeJS.Timeout)
       jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
     })

@@ -1,5 +1,4 @@
-# See https://github.com/nodejs/docker-node/issues/2175
-FROM node:18-alpine3.20 AS base
+FROM node:22-alpine3.22 AS base
 
 WORKDIR /app
 COPY package.json .
