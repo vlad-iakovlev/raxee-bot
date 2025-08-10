@@ -87,8 +87,8 @@ describe('#getStats', () => {
           tgChatId,
         },
         date: {
-          gte: fns.startOfYear(new Date(String('2023'))),
-          lte: fns.endOfYear(new Date(String('2023'))),
+          gte: fns.startOfYear(new Date('2023')),
+          lte: fns.endOfYear(new Date('2023')),
         },
       },
       _count: {
