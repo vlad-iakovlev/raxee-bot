@@ -8,4 +8,4 @@ COPY . .
 RUN npx prisma generate
 RUN npm prune --production
 
-CMD npm run start:prod
+CMD ["npm", "run", "start:prod"]
