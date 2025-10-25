@@ -1,10 +1,12 @@
+import { PrismaClient } from '@prisma/client'
+import { describe, expect, test, vi } from 'vitest'
 import { prisma } from './prisma.js'
 
-jest.mock('@prisma/client')
-const { PrismaClient } = jest.requireMock('@prisma/client')
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+vi.mock(import('@prisma/client'), () => ({ PrismaClient: class {} as any }))
 
 describe('#prisma', () => {
-  it('should return instance of PrismaClient', () => {
+  test('should return instance of PrismaClient', () => {
     expect(prisma).toBeInstanceOf(PrismaClient)
   })
 })

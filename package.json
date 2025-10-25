@@ -11,14 +11,14 @@
     "lint:ci": "DEBUG=eslint:eslint eslint .",
     "prettier": "prettier --write '**/*.(ts|js|md|json)'",
     "prettier:ci": "prettier --check '**/*.(ts|js|md|json)'",
-    "test": "jest --coverage",
-    "test:ci": "prisma generate && jest"
+    "test": "vitest run --coverage --coverage.include='**/*.ts'",
+    "test:ci": "prisma generate && vitest",
+    "test:codecov": "prisma generate && npx vitest run --coverage --coverage.include='**/*.ts'"
   },
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
     "@prisma/client": "^6.18.0",
-    "@types/jest": "^30.0.0",
     "@types/node": "^22.18.12",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
     "@vlad-yakovlev/poker": "^1.4.0",
@@ -31,15 +31,16 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@swc/jest": "^0.2.39",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@vitest/coverage-v8": "^4.0.3",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
-    "jest": "^30.2.0",
     "jiti": "^2.6.1",
     "lefthook": "^1.13.6",
     "prettier": "^3.6.2",
     "prisma": "^6.18.0",
-    "typescript-eslint": "^8.46.2"
+    "typescript-eslint": "^8.46.2",
+    "vitest": "^4.0.3",
+    "vitest-mock-extended": "^3.1.0"
   }
 }

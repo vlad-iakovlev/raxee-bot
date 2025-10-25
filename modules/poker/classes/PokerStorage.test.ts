@@ -1,37 +1,21 @@
 import { POKER_ROUND, User } from '@prisma/client'
 import { ROUND, RoomData } from '@vlad-yakovlev/poker'
+import { describe, expect, test } from 'vitest'
+import { prisma } from '../../../utils/prisma.mock.js'
 import { PokerStorage } from './PokerStorage.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    $transaction: jest.fn(),
-    pokerPlayer: {
-      upsert: jest.fn(),
-      deleteMany: jest.fn(),
-    },
-    pokerState: {
-      upsert: jest.fn(),
-      delete: jest.fn(),
-    },
-  },
-}))
-const { prisma } = jest.requireMock('../../../utils/prisma.js')
-
 describe('PokerStorage', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
-
   describe('#get', () => {
-    it('should load data from DB and return RoomData', async () => {
+    test('should load data from DB and return RoomData', async () => {
       const tgChatId = '100500'
-      prisma.pokerState.upsert.mockReturnValueOnce({
+      prisma.pokerState.upsert.mockResolvedValueOnce({
         tgChatId,
         cards: [12, 14, 16, 6, 48],
         round: ROUND.TURN,
         dealsCount: 2,
         dealerIndex: 1,
         currentPlayerIndex: 3,
+        // @ts-expect-error Prop `players` is added by `include`
         players: [
           {
             cards: [1, 2],
@@ -147,7 +131,7 @@ describe('PokerStorage', () => {
   })
 
   describe('#set', () => {
-    it('should save data to DB', async () => {
+    test('should save data to DB', async () => {
       const tgChatId = '100500'
       const roomData: RoomData<undefined, User> = {
         id: tgChatId,
@@ -196,12 +180,12 @@ describe('PokerStorage', () => {
         ],
         payload: undefined,
       }
-      prisma.pokerState.upsert.mockReturnValueOnce('pokerState.upsert')
+      prisma.pokerState.upsert.mockReturnValueOnce('pokerState.upsert' as any)
       prisma.pokerPlayer.upsert
-        .mockReturnValueOnce('pokerPlayer.upsert (1)')
-        .mockReturnValueOnce('pokerPlayer.upsert (2)')
+        .mockReturnValueOnce('pokerPlayer.upsert (1)' as any)
+        .mockReturnValueOnce('pokerPlayer.upsert (2)' as any)
       prisma.pokerPlayer.deleteMany.mockReturnValueOnce(
-        'pokerPlayer.deleteMany',
+        'pokerPlayer.deleteMany' as any,
       )
 
       await new PokerStorage().set(tgChatId, roomData)
@@ -333,7 +317,7 @@ describe('PokerStorage', () => {
   })
 
   describe('#delete', () => {
-    it('should delete data from DB', async () => {
+    test('should delete data from DB', async () => {
       const tgChatId = '100500'
 
       await new PokerStorage().delete(tgChatId)

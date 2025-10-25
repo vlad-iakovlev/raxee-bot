@@ -1,24 +1,16 @@
 import { md } from '@vlad-yakovlev/telegram-md'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
+import '../../../utils/prisma.mock.js'
 import { PumpkinPlayerWithStats } from '../types.js'
 import { getPumpkinOfYear } from './getPumpkinOfYear.js'
+import { getStats } from './getStats.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    pumpkinStrings: {
-      findFirst: jest.fn(),
-    },
-  },
-}))
-
-jest.mock('./getStats.js')
-const { getStats } = jest.requireMock('./getStats.js')
+vi.mock(import('./getStats.js'))
+const getStatsMocked = vi.mocked(getStats)
+beforeEach(() => getStatsMocked.mockReset())
 
 describe('#getPumpkinOfYear', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
-
-  it('should return a message with winners of year', async () => {
+  test('should return a message with winners of year', async () => {
     const tgChatId = '123'
     const year = 2023
     const playersWithStats = [
@@ -53,17 +45,17 @@ describe('#getPumpkinOfYear', () => {
         winnings: 1,
       },
     ] as PumpkinPlayerWithStats[]
-    getStats.mockResolvedValueOnce(playersWithStats)
+    getStatsMocked.mockResolvedValueOnce(playersWithStats)
 
     const message = await getPumpkinOfYear(tgChatId, year)
 
-    expect(getStats).toHaveBeenCalledWith(tgChatId, year)
+    expect(getStatsMocked).toHaveBeenCalledWith(tgChatId, year)
     expect(message).toStrictEqual(
       md.bold('Pumpkin of 2023 \u2014 @john_doe, @jane_roe'),
     )
   })
 
-  it('should return IDK if no winners', async () => {
+  test('should return IDK if no winners', async () => {
     const tgChatId = '123'
     const year = 2023
     const playersWithStats = [
@@ -98,11 +90,11 @@ describe('#getPumpkinOfYear', () => {
         winnings: 0,
       },
     ] as PumpkinPlayerWithStats[]
-    getStats.mockResolvedValueOnce(playersWithStats)
+    getStatsMocked.mockResolvedValueOnce(playersWithStats)
 
     const message = await getPumpkinOfYear(tgChatId, year)
 
-    expect(getStats).toHaveBeenCalledWith(tgChatId, year)
+    expect(getStatsMocked).toHaveBeenCalledWith(tgChatId, year)
     expect(message).toStrictEqual(md.bold('Pumpkin of 2023 \u2014 IDK'))
   })
 })

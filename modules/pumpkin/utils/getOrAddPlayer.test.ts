@@ -1,24 +1,12 @@
+import { describe, expect, test } from 'vitest'
+import { prisma } from '../../../utils/prisma.mock.js'
 import { getOrAddPlayer } from './getOrAddPlayer.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    pumpkinPlayer: {
-      create: jest.fn(),
-      findFirst: jest.fn(),
-    },
-  },
-}))
-const { prisma } = jest.requireMock('../../../utils/prisma.js')
-
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('#getOrAddPlayer', () => {
-  it('should call prisma.pumpkinPlayer.findFirst and return player', async () => {
+  test('should call prisma.pumpkinPlayer.findFirst and return player', async () => {
     const tgChatId = '123'
     const tgUserId = '456'
-    prisma.pumpkinPlayer.findFirst.mockResolvedValueOnce('player-mock')
+    prisma.pumpkinPlayer.findFirst.mockResolvedValueOnce('player-mock' as any)
 
     const player = await getOrAddPlayer(tgChatId, tgUserId)
 
@@ -36,11 +24,11 @@ describe('#getOrAddPlayer', () => {
     expect(player).toBe('player-mock')
   })
 
-  it('should call prisma.pumpkinPlayer.create and return player', async () => {
+  test('should call prisma.pumpkinPlayer.create and return player', async () => {
     const tgChatId = '123'
     const tgUserId = '456'
     prisma.pumpkinPlayer.findFirst.mockResolvedValueOnce(null)
-    prisma.pumpkinPlayer.create.mockResolvedValueOnce('player-mock')
+    prisma.pumpkinPlayer.create.mockResolvedValueOnce('player-mock' as any)
 
     const player = await getOrAddPlayer(tgChatId, tgUserId)
 

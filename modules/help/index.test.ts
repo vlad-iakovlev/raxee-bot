@@ -1,13 +1,10 @@
 import { Composer } from 'grammy'
+import { describe, expect, test } from 'vitest'
 import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
 import { createHelpModule } from './index.js'
 
 describe('#createPokerModule', () => {
-  beforeEach(() => {
-    jest.resetAllMocks()
-  })
-
-  it('should return a help module', () => {
+  test('should return a help module', () => {
     const module = createHelpModule()
 
     expect(module.commands).toStrictEqual([
@@ -20,7 +17,7 @@ describe('#createPokerModule', () => {
   })
 
   describe('/start', () => {
-    it('should reply with help message', async () => {
+    test('should reply with help message', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createHelpModule()
       bot.use(module.composer)
@@ -58,6 +55,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 123456789,
+            direct_messages_topic_id: undefined,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
             text: [
@@ -97,7 +95,7 @@ describe('#createPokerModule', () => {
   })
 
   describe('/help', () => {
-    it('should reply with help message', async () => {
+    test('should reply with help message', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createHelpModule()
       bot.use(module.composer)
@@ -135,6 +133,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 123456789,
+            direct_messages_topic_id: undefined,
             disable_notification: true,
             parse_mode: 'MarkdownV2',
             text: [

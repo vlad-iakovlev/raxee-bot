@@ -1,3 +1,4 @@
+import { Mock, beforeEach, describe, expect, test, vi } from 'vitest'
 import { CallQueue } from './CallQueue.js'
 
 describe('CallQueue', () => {
@@ -5,12 +6,11 @@ describe('CallQueue', () => {
 
   beforeEach(() => {
     queue = new CallQueue()
-    jest.clearAllMocks()
   })
 
   describe('#add', () => {
-    it('should add callback to queue', async () => {
-      const cb = jest.fn().mockResolvedValue(undefined)
+    test('should add callback to queue', async () => {
+      const cb = vi.fn().mockResolvedValue(undefined)
 
       queue.add(cb)
       queue.add(cb)
@@ -21,10 +21,10 @@ describe('CallQueue', () => {
       expect(cb).toHaveBeenCalledTimes(3)
     })
 
-    it('should not fail if callback fails', async () => {
-      jest.spyOn(global.console, 'error').mockImplementation(() => {})
+    test('should not fail if callback fails', async () => {
+      vi.spyOn(global.console, 'error').mockImplementation(() => {})
 
-      const cb = jest.fn().mockRejectedValue('test-error')
+      const cb = vi.fn().mockRejectedValue('test-error')
 
       queue.add(cb)
       queue.add(cb)
@@ -33,15 +33,15 @@ describe('CallQueue', () => {
       await queue.queue
 
       expect(cb).toHaveBeenCalledTimes(3)
-      expect((console.error as jest.Mock).mock.calls).toStrictEqual([
+      expect((console.error as Mock).mock.calls).toStrictEqual([
         ['test-error'],
         ['test-error'],
         ['test-error'],
       ])
     })
 
-    it('should wait for previous callbacks to finish', async () => {
-      const cb = jest.fn().mockResolvedValue(undefined)
+    test('should wait for previous callbacks to finish', async () => {
+      const cb = vi.fn().mockResolvedValue(undefined)
 
       queue.add(cb)
 

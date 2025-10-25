@@ -1,30 +1,18 @@
+import { PumpkinPlayer } from '@prisma/client'
 import * as fns from 'date-fns'
+import { describe, expect, test } from 'vitest'
+import { prisma } from '../../../utils/prisma.mock.js'
 import { getStats } from './getStats.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    pumpkinPlayer: {
-      findMany: jest.fn(),
-    },
-    pumpkinStats: {
-      groupBy: jest.fn(),
-    },
-  },
-}))
-const { prisma } = jest.requireMock('../../../utils/prisma.js')
-
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('#getStats', () => {
-  it('should call prisma.pumpkinPlayer.findMany, prisma.pumpkinStats.groupBy and return stats', async () => {
+  test('should call prisma.pumpkinPlayer.findMany, prisma.pumpkinStats.groupBy and return stats', async () => {
     const tgChatId = '123'
     prisma.pumpkinPlayer.findMany.mockResolvedValueOnce([
       { id: 'player-1-mock' },
       { id: 'player-2-mock' },
       { id: 'player-3-mock' },
-    ])
+    ] as PumpkinPlayer[])
+    // @ts-expect-error Complex Prisma types
     prisma.pumpkinStats.groupBy.mockResolvedValueOnce([
       { playerId: 'player-1-mock', _count: { id: 1 } },
       { playerId: 'player-2-mock', _count: { id: 2 } },
@@ -58,13 +46,14 @@ describe('#getStats', () => {
     ])
   })
 
-  it('should call prisma.pumpkinPlayer.findMany, prisma.pumpkinStats.groupBy and return stats filtered by year', async () => {
+  test('should call prisma.pumpkinPlayer.findMany, prisma.pumpkinStats.groupBy and return stats filtered by year', async () => {
     const tgChatId = '123'
     prisma.pumpkinPlayer.findMany.mockResolvedValueOnce([
       { id: 'player-1-mock' },
       { id: 'player-2-mock' },
       { id: 'player-3-mock' },
-    ])
+    ] as PumpkinPlayer[])
+    // @ts-expect-error Complex Prisma types
     prisma.pumpkinStats.groupBy.mockResolvedValueOnce([
       { playerId: 'player-1-mock', _count: { id: 1 } },
       { playerId: 'player-2-mock', _count: { id: 2 } },

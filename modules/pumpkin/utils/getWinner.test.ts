@@ -1,27 +1,16 @@
 import * as fns from 'date-fns'
+import { describe, expect, test } from 'vitest'
+import { prisma } from '../../../utils/prisma.mock.js'
 import { getWinner } from './getWinner.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    pumpkinStats: {
-      findMany: jest.fn(),
-    },
-  },
-}))
-const { prisma } = jest.requireMock('../../../utils/prisma.js')
-
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('#getWinner', () => {
-  it('should call prisma.pumpkinStats.findMany and return first player', async () => {
+  test('should call prisma.pumpkinStats.findMany and return first player', async () => {
     const tgChatId = '123'
     const date = new Date()
     prisma.pumpkinStats.findMany.mockResolvedValueOnce([
       { player: 'player-1-mock' },
       { player: 'player-2-mock' },
-    ])
+    ] as any)
 
     const winner = await getWinner(tgChatId, date)
 
@@ -50,7 +39,7 @@ describe('#getWinner', () => {
     expect(winner).toBe('player-1-mock')
   })
 
-  it('should call prisma.pumpkinStats.findMany and return null if no stats found', async () => {
+  test('should call prisma.pumpkinStats.findMany and return null if no stats found', async () => {
     const tgChatId = '123'
     const date = new Date()
     prisma.pumpkinStats.findMany.mockResolvedValueOnce([])

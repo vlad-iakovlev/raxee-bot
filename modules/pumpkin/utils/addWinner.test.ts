@@ -1,20 +1,9 @@
+import { describe, expect, test } from 'vitest'
+import { prisma } from '../../../utils/prisma.mock.js'
 import { addWinner } from './addWinner.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    pumpkinStats: {
-      create: jest.fn(),
-    },
-  },
-}))
-const { prisma } = jest.requireMock('../../../utils/prisma.js')
-
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('#addWinner', () => {
-  it('should call prisma.pumpkinStats.create', async () => {
+  test('should call prisma.pumpkinStats.create', async () => {
     const playerId = 'player-mock'
     const date = new Date()
 

@@ -1,16 +1,15 @@
 import { Composer } from 'grammy'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
+import { PokerAdapter } from './classes/PokerAdapter.js'
 import { createPokerModule } from './index.js'
 
-jest.mock('./classes/PokerAdapter')
-const { PokerAdapter } = jest.requireMock('./classes/PokerAdapter')
+vi.mock(import('./classes/PokerAdapter.js'))
+const PokerAdapterMocked = vi.mocked(PokerAdapter, true)
+beforeEach(() => vi.resetAllMocks())
 
 describe('#createPokerModule', () => {
-  beforeEach(() => {
-    jest.resetAllMocks()
-  })
-
-  it('should return a poker module', () => {
+  test('should return a poker module', () => {
     const module = createPokerModule()
 
     expect(module.commands).toStrictEqual([
@@ -31,16 +30,16 @@ describe('#createPokerModule', () => {
   })
 
   describe('/poker_join', () => {
-    it('should register user', async () => {
-      const mockAddPlayer = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce(undefined)
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should register user', async () => {
+      const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
         players: {
           length: 2,
         },
-        addPlayer: mockAddPlayer,
-      })
+        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -79,6 +78,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: "Get ready, you've joined the game\\. To communicate with me, [start a chat](https://t\\.me/raxee\\_bot)",
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -89,16 +89,16 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should do nothing in private chat', async () => {
-      const mockAddPlayer = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce(undefined)
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should do nothing in private chat', async () => {
+      const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
         players: {
           length: 2,
         },
-        addPlayer: mockAddPlayer,
-      })
+        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -134,14 +134,14 @@ describe('#createPokerModule', () => {
       expect(requests).toStrictEqual([])
     })
 
-    it('should reply with error if user is already registered (same chat)', async () => {
-      const mockAddPlayer = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce({
+    test('should reply with error if user is already registered (same chat)', async () => {
+      const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
         tgChatId: '1111111',
-      })
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
-        mockAddPlayer,
-      })
+      } as PokerAdapter)
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
+        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -181,6 +181,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'You are already in a game in this chat',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -191,14 +192,14 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should reply with error if user is already registered (other chat)', async () => {
-      const mockAddPlayer = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce({
+    test('should reply with error if user is already registered (other chat)', async () => {
+      const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
         tgChatId: '2222222',
-      })
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
-        mockAddPlayer,
-      })
+      } as PokerAdapter)
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
+        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -237,6 +238,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'You are already in a game in another chat',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -247,16 +249,16 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should reply with error if game is already started', async () => {
-      const mockAddPlayer = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce(undefined)
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should reply with error if game is already started', async () => {
+      const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 1,
         players: {
           length: 2,
         },
-        addPlayer: mockAddPlayer,
-      })
+        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -295,6 +297,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'A game is already in progress in this chat',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -305,16 +308,16 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should reply with error if too many players', async () => {
-      const mockAddPlayer = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce(undefined)
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should reply with error if too many players', async () => {
+      const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
         players: {
           length: 10,
         },
-        addPlayer: mockAddPlayer,
-      })
+        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -353,6 +356,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'There are too many players in this chat, wait for the current game to end',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -365,15 +369,15 @@ describe('#createPokerModule', () => {
   })
 
   describe('/poker_start', () => {
-    it('should deal cards', async () => {
-      const mockDealCards = jest.fn()
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should deal cards', async () => {
+      const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
         players: {
           length: 5,
         },
-        dealCards: mockDealCards,
-      })
+        dealCards: mockDealCards as PokerAdapter['dealCards'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -412,6 +416,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'Go to the [PM](https://t\\.me/raxee\\_bot), the game has started',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -422,15 +427,15 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should do nothing in private chat', async () => {
-      const mockDealCards = jest.fn()
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should do nothing in private chat', async () => {
+      const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
         players: {
           length: 5,
         },
-        dealCards: mockDealCards,
-      })
+        dealCards: mockDealCards as PokerAdapter['dealCards'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -466,15 +471,15 @@ describe('#createPokerModule', () => {
       expect(requests).toStrictEqual([])
     })
 
-    it('should reply with error if game is already started', async () => {
-      const mockDealCards = jest.fn()
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should reply with error if game is already started', async () => {
+      const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 1,
         players: {
           length: 5,
         },
-        dealCards: mockDealCards,
-      })
+        dealCards: mockDealCards as PokerAdapter['dealCards'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -513,6 +518,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'A game is already in progress in this chat, please wait for it to finish',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -523,15 +529,15 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should reply with error if not enough players', async () => {
-      const mockDealCards = jest.fn()
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should reply with error if not enough players', async () => {
+      const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
         players: {
           length: 1,
         },
-        dealCards: mockDealCards,
-      })
+        dealCards: mockDealCards as PokerAdapter['dealCards'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -570,6 +576,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'Not enough players, use /poker\\_join to add more',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -582,12 +589,12 @@ describe('#createPokerModule', () => {
   })
 
   describe('/poker_stop', () => {
-    it('should stop the game', async () => {
-      const mockEndGame = jest.fn()
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should stop the game', async () => {
+      const mockEndGame = vi.fn<PokerAdapter['endGame']>()
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 1,
-        endGame: mockEndGame,
-      })
+        endGame: mockEndGame as PokerAdapter['endGame'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -626,6 +633,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'The game in this chat has been stopped',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -636,12 +644,12 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should cancel the game if it is not started', async () => {
-      const mockEndGame = jest.fn()
-      PokerAdapter.loadByTgChatIdOrCreate.mockReturnValueOnce({
+    test('should cancel the game if test is not started', async () => {
+      const mockEndGame = vi.fn<PokerAdapter['endGame']>()
+      PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        endGame: mockEndGame,
-      })
+        endGame: mockEndGame as PokerAdapter['endGame'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -680,6 +688,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             text: 'The game in this chat has been cancelled',
             parse_mode: 'MarkdownV2',
             reply_to_message_id: 1365,
@@ -690,11 +699,11 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should stop game in private chat', async () => {
-      const mockEndGame = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce({
-        endGame: mockEndGame,
-      })
+    test('should stop game in private chat', async () => {
+      const mockEndGame = vi.fn<PokerAdapter['endGame']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
+        endGame: mockEndGame as PokerAdapter['endGame'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -730,8 +739,8 @@ describe('#createPokerModule', () => {
       expect(requests).toStrictEqual([])
     })
 
-    it('should reply with error in private chat if game not found', async () => {
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce(null)
+    test('should reply with error in private chat if game not found', async () => {
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -769,6 +778,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 123456789,
+            direct_messages_topic_id: undefined,
             text: 'You are not currently in a game',
             parse_mode: 'MarkdownV2',
           },
@@ -779,15 +789,22 @@ describe('#createPokerModule', () => {
   })
 
   describe('on:message', () => {
-    it('should call handleMessage', async () => {
-      const mockHandleMessage = jest.fn()
-      const mockBroadcastPlayerMessage = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce({
-        players: [{ id: 'player-1-id', payload: { tgUserId: '123456789' } }],
-        currentPlayer: { id: 'player-1-id' },
-        handleMessage: mockHandleMessage,
-        broadcastPlayerMessage: mockBroadcastPlayerMessage,
-      })
+    test('should call handleMessage', async () => {
+      const mockHandleMessage = vi.fn<PokerAdapter['handleMessage']>()
+      const mockBroadcastPlayerMessage =
+        vi.fn<PokerAdapter['broadcastPlayerMessage']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
+        players: [
+          {
+            id: 'player-1-id',
+            payload: { tgUserId: '123456789' },
+          },
+        ],
+        currentPlayer: { id: 'player-1-id' } as PokerAdapter['currentPlayer'],
+        handleMessage: mockHandleMessage as PokerAdapter['handleMessage'],
+        broadcastPlayerMessage:
+          mockBroadcastPlayerMessage as PokerAdapter['broadcastPlayerMessage'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -820,15 +837,21 @@ describe('#createPokerModule', () => {
       expect(requests).toStrictEqual([])
     })
 
-    it('should call handleMessage and reply with response from handleMessage', async () => {
-      const mockHandleMessage = jest.fn(() => 'test response')
-      const mockBroadcastPlayerMessage = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce({
-        players: [{ id: 'player-1-id', payload: { tgUserId: '123456789' } }],
-        currentPlayer: { id: 'player-1-id' },
-        handleMessage: mockHandleMessage,
-        broadcastPlayerMessage: mockBroadcastPlayerMessage,
-      })
+    test('should call handleMessage and reply with response from handleMessage', async () => {
+      const mockHandleMessage = vi.fn<PokerAdapter['handleMessage']>(() =>
+        Promise.resolve('test response'),
+      )
+      const mockBroadcastPlayerMessage =
+        vi.fn<PokerAdapter['broadcastPlayerMessage']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
+        players: [
+          { id: 'player-1-id', payload: { tgUserId: '123456789' } },
+        ] as PokerAdapter['players'],
+        currentPlayer: { id: 'player-1-id' } as PokerAdapter['currentPlayer'],
+        handleMessage: mockHandleMessage as PokerAdapter['handleMessage'],
+        broadcastPlayerMessage:
+          mockBroadcastPlayerMessage as PokerAdapter['broadcastPlayerMessage'],
+      } as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -864,6 +887,7 @@ describe('#createPokerModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 123456789,
+            direct_messages_topic_id: undefined,
             parse_mode: 'MarkdownV2',
             text: 'test response',
           },
@@ -872,10 +896,11 @@ describe('#createPokerModule', () => {
       ])
     })
 
-    it('should do nothing if game not found', async () => {
-      const mockHandleMessage = jest.fn()
-      const mockBroadcastPlayerMessage = jest.fn()
-      PokerAdapter.loadByTgUserId.mockReturnValueOnce(undefined)
+    test('should do nothing if game not found', async () => {
+      const mockHandleMessage = vi.fn<PokerAdapter['handleMessage']>()
+      const mockBroadcastPlayerMessage =
+        vi.fn<PokerAdapter['broadcastPlayerMessage']>()
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -905,7 +930,7 @@ describe('#createPokerModule', () => {
       expect(requests).toStrictEqual([])
     })
 
-    it('should do nothing in group chat', async () => {
+    test('should do nothing in group chat', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -930,7 +955,7 @@ describe('#createPokerModule', () => {
         },
       })
 
-      expect(PokerAdapter.loadByTgUserId).not.toHaveBeenCalled()
+      expect(PokerAdapterMocked.loadByTgUserId).not.toHaveBeenCalled()
       expect(requests).toStrictEqual([])
     })
   })

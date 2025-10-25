@@ -1,18 +1,19 @@
 import { BotError, Context } from 'grammy'
+import { afterEach, describe, expect, test, vi } from 'vitest'
 import { handleError } from './handleError.js'
 
 afterEach(() => {
-  jest.spyOn(global.console, 'error').mockRestore()
+  vi.spyOn(global.console, 'error').mockRestore()
 })
 
 describe('#handleError', () => {
-  it('should console error and send reply', async () => {
+  test('should console error and send reply', async () => {
     const error = new Error('some error')
 
-    const consoleError = jest.fn()
-    const reply = jest.fn()
+    const consoleError = vi.fn()
+    const reply = vi.fn()
 
-    jest.spyOn(global.console, 'error').mockImplementation(consoleError)
+    vi.spyOn(global.console, 'error').mockImplementation(consoleError)
 
     await handleError(
       new BotError(error, {
@@ -31,16 +32,16 @@ describe('#handleError', () => {
     expect(reply).toHaveBeenCalledWith('Something went wrong ¯\\_(ツ)_/¯')
   })
 
-  it('should handle send reply error', async () => {
+  test('should handle send reply error', async () => {
     const error = new Error('some error')
     const replyError = new Error('reply error')
 
-    const consoleError = jest.fn()
-    const reply = jest.fn().mockImplementation(() => {
+    const consoleError = vi.fn()
+    const reply = vi.fn().mockImplementation(() => {
       throw replyError
     })
 
-    jest.spyOn(global.console, 'error').mockImplementation(consoleError)
+    vi.spyOn(global.console, 'error').mockImplementation(consoleError)
 
     await handleError(
       new BotError(error, {

@@ -1,20 +1,9 @@
+import { describe, expect, test, vi } from 'vitest'
+import { prisma } from '../utils/prisma.mock.js'
 import { initUserMiddleware } from './initUser.js'
 
-jest.mock('../utils/prisma.js', () => ({
-  prisma: {
-    user: {
-      upsert: jest.fn(),
-    },
-  },
-}))
-const { prisma } = jest.requireMock('../utils/prisma.js')
-
 describe('#initUserMiddleware', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
-
-  it('should call prisma.user.upsert when ctx.from is not null', async () => {
+  test('should call prisma.user.upsert when ctx.from is not null', async () => {
     const ctx = {
       from: {
         id: 123456789,
@@ -23,7 +12,7 @@ describe('#initUserMiddleware', () => {
         username: 'cool_john',
       },
     } as any
-    const next = jest.fn()
+    const next = vi.fn()
 
     await initUserMiddleware(ctx, next)
 
@@ -49,11 +38,11 @@ describe('#initUserMiddleware', () => {
     expect(next).toHaveBeenCalledWith()
   })
 
-  it('should not call prisma.user.upsert when ctx.from is null', async () => {
+  test('should not call prisma.user.upsert when ctx.from is null', async () => {
     const ctx = {
       from: null,
     } as any
-    const next = jest.fn()
+    const next = vi.fn()
 
     await initUserMiddleware(ctx, next)
 

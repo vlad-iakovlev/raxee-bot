@@ -1,25 +1,14 @@
+import { describe, expect, test } from 'vitest'
+import { prisma } from '../../../utils/prisma.mock.js'
 import { getPlayers } from './getPlayers.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    pumpkinPlayer: {
-      findMany: jest.fn(),
-    },
-  },
-}))
-const { prisma } = jest.requireMock('../../../utils/prisma.js')
-
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('#getPlayers', () => {
-  it('should call prisma.pumpkinPlayer.findMany and return players', async () => {
+  test('should call prisma.pumpkinPlayer.findMany and return players', async () => {
     const tgChatId = '123'
     prisma.pumpkinPlayer.findMany.mockResolvedValueOnce([
       'player-1-mock',
       'player-2-mock',
-    ])
+    ] as any)
 
     const players = await getPlayers(tgChatId)
 

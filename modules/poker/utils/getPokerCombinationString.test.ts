@@ -1,8 +1,9 @@
 import { COMBINATION_LEVEL, Combination, Subset } from '@vlad-yakovlev/poker'
+import { describe, expect, test } from 'vitest'
 import { getPokerCombinationString } from './getPokerCombinationString.js'
 
 describe('#getPokerCombinationString', () => {
-  it('should return combination string', () => {
+  test('should return combination string', () => {
     const level = COMBINATION_LEVEL.PAIR
     const subset = new Subset([1, 2, 3, 4, 5])
 

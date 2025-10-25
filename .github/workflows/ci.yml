@@ -16,6 +16,7 @@ jobs:
           - compile
           - lint:ci
           - prettier:ci
+          - test:ci
     name: ${{ matrix.check }}
     runs-on: ubuntu-latest
     steps:

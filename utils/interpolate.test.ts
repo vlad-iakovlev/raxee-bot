@@ -1,8 +1,9 @@
 import { Markdown, md } from '@vlad-yakovlev/telegram-md'
+import { describe, expect, test } from 'vitest'
 import { interpolate } from './interpolate.js'
 
 describe('#interpolate', () => {
-  it('should interpolate over markdown', () => {
+  test('should interpolate over markdown', () => {
     const text = new Markdown('Hello %{0}, %{1}, %{2}!')
 
     const result = interpolate(text, 'Mark', 'Tom_Tom', md.bold('Bond'))
@@ -11,7 +12,7 @@ describe('#interpolate', () => {
     expect(result).not.toBe(text)
   })
 
-  it('should interpolate over string', () => {
+  test('should interpolate over string', () => {
     const text = 'Hello %{0}, %{1}, %{2}!'
 
     const result = interpolate(text, 'Mark', 'Tom_Tom', md.bold('Bond'))
@@ -19,7 +20,7 @@ describe('#interpolate', () => {
     expect(result).toStrictEqual(md`Hello Mark, Tom_Tom, ${md.bold('Bond')}!`)
   })
 
-  it('should replace null arguments with empty string', () => {
+  test('should replace null arguments with empty string', () => {
     const text = 'Hello %{0}, %{1}, %{2}!'
 
     const result = interpolate(text, null, 'Tom_Tom', md.bold('Bond'))

@@ -9,7 +9,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
-    "types": ["node", "jest"]
+    "types": ["node"]
   },
   "exclude": ["node_modules"]
 }

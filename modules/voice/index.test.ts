@@ -1,17 +1,18 @@
 import { Composer } from 'grammy'
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
 import { createVoiceModule } from './index.js'
 
 describe('#createVoiceModule', () => {
   beforeEach(() => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.3)
+    vi.spyOn(global.Math, 'random').mockReturnValue(0.3)
   })
 
   afterEach(() => {
-    jest.spyOn(global.Math, 'random').mockRestore()
+    vi.spyOn(global.Math, 'random').mockRestore()
   })
 
-  it('should return a voice module', () => {
+  test('should return a voice module', () => {
     const module = createVoiceModule()
 
     expect(module.commands).toStrictEqual([])
@@ -19,7 +20,7 @@ describe('#createVoiceModule', () => {
   })
 
   describe('on:message:voice, on:message:video_note', () => {
-    it('should reply with sticker when receiving a voice message', async () => {
+    test('should reply with sticker when receiving a voice message', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createVoiceModule()
       bot.use(module.composer)
@@ -54,6 +55,7 @@ describe('#createVoiceModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             sticker:
               'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',
           },
@@ -62,7 +64,7 @@ describe('#createVoiceModule', () => {
       ])
     })
 
-    it('should reply with sticker when receiving a video_note message', async () => {
+    test('should reply with sticker when receiving a video_note message', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createVoiceModule()
       bot.use(module.composer)
@@ -98,6 +100,7 @@ describe('#createVoiceModule', () => {
           payload: {
             business_connection_id: undefined,
             chat_id: 1111111,
+            direct_messages_topic_id: undefined,
             sticker:
               'CAACAgIAAxkBAAITWWOsE-EpAkaSTjmANDWs-qKOFQO8AAKfDAACFDf4Shf94QABMrpFZCwE',
           },
@@ -106,7 +109,7 @@ describe('#createVoiceModule', () => {
       ])
     })
 
-    it('should not reply with sticker when receiving a text message', async () => {
+    test('should not reply with sticker when receiving a text message', async () => {
       const { bot, requests } = mockGrammyBot()
       const module = createVoiceModule()
       bot.use(module.composer)

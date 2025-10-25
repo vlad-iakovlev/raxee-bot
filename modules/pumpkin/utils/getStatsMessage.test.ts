@@ -1,24 +1,16 @@
 import { md } from '@vlad-yakovlev/telegram-md'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
+import '../../../utils/prisma.mock.js'
 import { PumpkinPlayerWithStats } from '../types.js'
+import { getStats } from './getStats.js'
 import { getStatsMessage } from './getStatsMessage.js'
 
-jest.mock('../../../utils/prisma.js', () => ({
-  prisma: {
-    pumpkinStrings: {
-      findFirst: jest.fn(),
-    },
-  },
-}))
-
-jest.mock('./getStats.js')
-const { getStats } = jest.requireMock('./getStats.js')
+vi.mock(import('./getStats.js'))
+const getStatsMocked = vi.mocked(getStats)
+beforeEach(() => getStatsMocked.mockReset())
 
 describe('#getStatsMessage', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
-
-  it('should return a message with stats', async () => {
+  test('should return a message with stats', async () => {
     const tgChatId = '123'
     const playersWithStats = [
       {
@@ -52,11 +44,11 @@ describe('#getStatsMessage', () => {
         winnings: 0,
       },
     ] as PumpkinPlayerWithStats[]
-    getStats.mockResolvedValueOnce(playersWithStats)
+    getStatsMocked.mockResolvedValueOnce(playersWithStats)
 
     const message = await getStatsMessage(tgChatId)
 
-    expect(getStats).toHaveBeenCalledWith(tgChatId, undefined)
+    expect(getStatsMocked).toHaveBeenCalledWith(tgChatId, undefined)
     expect(message).toStrictEqual(
       md.join(
         [
@@ -72,7 +64,7 @@ describe('#getStatsMessage', () => {
     )
   })
 
-  it('should return a message with stats filtered by year', async () => {
+  test('should return a message with stats filtered by year', async () => {
     const tgChatId = '123'
     const year = 2023
     const playersWithStats = [
@@ -107,11 +99,11 @@ describe('#getStatsMessage', () => {
         winnings: 0,
       },
     ] as PumpkinPlayerWithStats[]
-    getStats.mockResolvedValueOnce(playersWithStats)
+    getStatsMocked.mockResolvedValueOnce(playersWithStats)
 
     const message = await getStatsMessage(tgChatId, year)
 
-    expect(getStats).toHaveBeenCalledWith(tgChatId, year)
+    expect(getStatsMocked).toHaveBeenCalledWith(tgChatId, year)
     expect(message).toStrictEqual(
       md.join(
         [
