@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm -r dotenv/config bin/bot.ts",
-    "start:prod": "prisma migrate deploy && npm run start",
     "compile": "tsc",
     "lint": "eslint .",
     "lint:ci": "DEBUG=eslint:eslint eslint .",
     "prettier": "prettier --write '**/*.(ts|js|md|json)'",
     "prettier:ci": "prettier --check '**/*.(ts|js|md|json)'",
+    "start": "node --loader ts-node/esm -r dotenv/config bin/bot.ts",
+    "start:prod": "prisma migrate deploy && npm run start",
     "test": "vitest run --coverage --coverage.include='**/*.ts'",
     "test:ci": "prisma generate && vitest run",
     "test:codecov": "prisma generate && npx vitest run --coverage --coverage.include='**/*.ts'"
@@ -33,18 +33,14 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@vitest/coverage-v8": "^4.0.6",
-    "eslint": "9.38.0",
-    "eslint-config-prettier": "^10.1.8",
+    "@vlad-iakovlev/eslint-config": "^1.0.0",
+    "eslint": "^9.39.1",
     "jiti": "^2.6.1",
     "lefthook": "^2.0.2",
     "prettier": "^3.6.2",
+    "prettier-plugin-packagejson": "^2.5.19",
     "prisma": "^6.18.0",
-    "typescript-eslint": "^8.46.3",
     "vitest": "^4.0.3",
     "vitest-mock-extended": "^3.1.0"
-  },
-  "overrides": {
-    "@eslint/config-helpers": "0.4.1",
-    "@eslint/plugin-kit": "0.4.0"
   }
 }
