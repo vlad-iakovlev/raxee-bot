@@ -5,7 +5,7 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm ci
 COPY . .
-RUN npx prisma generate
+RUN npx prisma@6 generate
 RUN npm prune --production
 
 CMD ["npm", "run", "start:prod"]
