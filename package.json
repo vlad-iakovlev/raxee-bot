@@ -10,10 +10,10 @@
     "prettier": "prettier --write '**/*.(ts|js|md|json)'",
     "prettier:ci": "prettier --check '**/*.(ts|js|md|json)'",
     "start": "node --loader ts-node/esm -r dotenv/config bin/bot.ts",
-    "start:prod": "prisma@6 migrate deploy && npm run start",
+    "start:prod": "prisma migrate deploy && npm run start",
     "test": "vitest run --coverage --coverage.include='**/*.ts'",
-    "test:ci": "prisma@6 generate && vitest run",
-    "test:codecov": "prisma@6 generate && npx vitest run --coverage --coverage.include='**/*.ts'"
+    "test:ci": "prisma generate && vitest run",
+    "test:codecov": "prisma generate && npx vitest run --coverage --coverage.include='**/*.ts'"
   },
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
