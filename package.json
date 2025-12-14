@@ -18,7 +18,7 @@
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
-    "@prisma/client": "^6.19.1",
+    "@prisma/client": "^7.1.0",
     "@types/node": "^22.19.3",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
     "@vlad-yakovlev/poker": "^1.4.0",
