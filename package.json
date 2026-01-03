@@ -25,13 +25,13 @@
     "@vlad-yakovlev/telegram-md": "^2.1.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
-    "grammy": "^1.38.4",
-    "remeda": "^2.32.0",
+    "grammy": "^1.39.2",
+    "remeda": "^2.33.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.1",
     "@vitest/coverage-v8": "^4.0.16",
     "@vlad-iakovlev/eslint-config": "^1.0.0",
     "eslint": "^9.39.2",
