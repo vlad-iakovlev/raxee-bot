@@ -19,7 +19,7 @@
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
     "@prisma/client": "^6.19.2",
-    "@types/node": "^22.19.10",
+    "@types/node": "^22.19.11",
     "@vlad-yakovlev/grammy-reply-with-markdown": "^2.0.1",
     "@vlad-yakovlev/poker": "^1.4.0",
     "@vlad-yakovlev/telegram-md": "^2.1.0",
