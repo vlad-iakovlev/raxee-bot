@@ -1,5 +1,5 @@
 import { POKER_ROUND, User } from '@prisma/client'
-import { ROUND, RoomData } from '@vlad-yakovlev/poker'
+import { ROUND, RoomData } from '@vlad-iakovlev/poker'
 import { describe, expect, test } from 'vitest'
 import { prisma } from '../../../utils/prisma.mock.js'
 import { PokerStorage } from './PokerStorage.js'

@@ -1,4 +1,4 @@
-import { Subset } from '@vlad-yakovlev/poker'
+import { Subset } from '@vlad-iakovlev/poker'
 import { describe, expect, test } from 'vitest'
 import { getPokerSubsetString } from './getPokerSubsetString.js'
 

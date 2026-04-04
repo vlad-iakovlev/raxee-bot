@@ -1,4 +1,4 @@
-import { Markdown } from '@vlad-yakovlev/telegram-md'
+import { Markdown } from '@telegram-md/core'
 
 export const interpolate = (text: unknown, ...subs: unknown[]) => {
   const markdown = new Markdown(text, text instanceof Markdown)

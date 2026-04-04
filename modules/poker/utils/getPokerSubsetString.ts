@@ -1,4 +1,4 @@
-import { Subset } from '@vlad-yakovlev/poker'
+import { Subset } from '@vlad-iakovlev/poker'
 import { getPokerCardString } from './getPokerCardString.js'
 
 export const getPokerSubsetString = (subset: Subset): string =>

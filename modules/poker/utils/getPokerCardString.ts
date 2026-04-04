@@ -1,4 +1,4 @@
-import { getCardSuit, getCardValue } from '@vlad-yakovlev/poker'
+import { getCardSuit, getCardValue } from '@vlad-iakovlev/poker'
 import { POKER_CARD_SUIT_NAMES, POKER_CARD_VALUE_NAMES } from '../constants.js'
 
 export const getPokerCardString = (card: number): string => {

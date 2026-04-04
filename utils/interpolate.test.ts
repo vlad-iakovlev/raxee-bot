@@ -1,4 +1,4 @@
-import { Markdown, md } from '@vlad-yakovlev/telegram-md'
+import { Markdown, md } from '@telegram-md/core'
 import { describe, expect, test } from 'vitest'
 import { interpolate } from './interpolate.js'
 

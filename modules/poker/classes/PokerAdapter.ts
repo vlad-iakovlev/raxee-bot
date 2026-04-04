@@ -1,4 +1,5 @@
 import { User } from '@prisma/client'
+import { Markdown, md } from '@telegram-md/core'
 import {
   BaseError,
   ERROR_CODE,
@@ -7,8 +8,7 @@ import {
   Room,
   RoomData,
   RoomParams,
-} from '@vlad-yakovlev/poker'
-import { Markdown, md } from '@vlad-yakovlev/telegram-md'
+} from '@vlad-iakovlev/poker'
 import assert from 'assert'
 import { Api } from 'grammy'
 import * as R from 'remeda'

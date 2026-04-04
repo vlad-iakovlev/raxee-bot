@@ -1,4 +1,4 @@
-import { md } from '@vlad-yakovlev/telegram-md'
+import { md } from '@telegram-md/core'
 import { getUserName } from '../../../utils/getUserName.js'
 import { interpolate } from '../../../utils/interpolate.js'
 import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.js'

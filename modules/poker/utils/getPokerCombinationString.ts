@@ -1,4 +1,4 @@
-import { Combination } from '@vlad-yakovlev/poker'
+import { Combination } from '@vlad-iakovlev/poker'
 import { POKER_COMBINATION_LEVEL_NAMES } from '../constants.js'
 import { getPokerSubsetString } from './getPokerSubsetString.js'
 
