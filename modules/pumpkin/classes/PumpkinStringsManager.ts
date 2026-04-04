@@ -1,4 +1,4 @@
-import { Markdown } from '@vlad-yakovlev/telegram-md'
+import { Markdown } from '@telegram-md/core'
 import { getRandomItem } from '../../../utils/getRandomItem.js'
 import { prisma } from '../../../utils/prisma.js'
 import { STRINGS } from '../constants.js'

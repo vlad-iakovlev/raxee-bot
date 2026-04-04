@@ -1,4 +1,4 @@
-import { replyWithMarkdownPlugin } from '@vlad-yakovlev/grammy-reply-with-markdown'
+import { markdownPlugin } from '@telegram-md/grammy-plugin'
 import * as fns from 'date-fns'
 import { Composer, Context } from 'grammy'
 import { BotModule } from '../../types/module.js'
@@ -15,7 +15,7 @@ import { getStatsMessage } from './utils/getStatsMessage.js'
 import { getWinner } from './utils/getWinner.js'
 
 const createComposer = () => {
-  const bot = new Composer(replyWithMarkdownPlugin())
+  const bot = new Composer(markdownPlugin())
 
   bot.chatType(['group', 'supergroup']).command('pumpkin', async (ctx) => {
     const strings = await PumpkinStringsManager.load(String(ctx.chat.id))

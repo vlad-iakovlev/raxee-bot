@@ -1,5 +1,5 @@
 import { POKER_ROUND, User } from '@prisma/client'
-import { ROUND, RoomData, RoomStorage } from '@vlad-yakovlev/poker'
+import { ROUND, RoomData, RoomStorage } from '@vlad-iakovlev/poker'
 import { prisma } from '../../../utils/prisma.js'
 
 export class PokerStorage implements RoomStorage<undefined, User> {

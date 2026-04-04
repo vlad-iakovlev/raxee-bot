@@ -1,4 +1,4 @@
-import { replyWithMarkdownPlugin } from '@vlad-yakovlev/grammy-reply-with-markdown'
+import { markdownPlugin } from '@telegram-md/grammy-plugin'
 import assert from 'assert'
 import { Composer, Context } from 'grammy'
 import { BotModule } from '../../types/module.js'
@@ -6,7 +6,7 @@ import { PokerAdapter } from './classes/PokerAdapter.js'
 import { MESSAGES } from './constants.js'
 
 const createComposer = () => {
-  const bot = new Composer(replyWithMarkdownPlugin())
+  const bot = new Composer(markdownPlugin())
 
   bot.chatType(['group', 'supergroup']).command('poker_join', async (ctx) => {
     const senderAdapter = await PokerAdapter.loadByTgUserId(

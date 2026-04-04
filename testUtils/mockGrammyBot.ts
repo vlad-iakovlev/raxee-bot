@@ -29,6 +29,7 @@ export const mockGrammyBot = () => {
     username: 'bot',
     can_join_groups: true,
     can_read_all_group_messages: true,
+    can_manage_bots: false,
     supports_inline_queries: false,
     can_connect_to_business: false,
     has_main_web_app: false,

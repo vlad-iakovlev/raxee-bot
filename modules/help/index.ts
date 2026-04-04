@@ -1,10 +1,10 @@
-import { replyWithMarkdownPlugin } from '@vlad-yakovlev/grammy-reply-with-markdown'
+import { markdownPlugin } from '@telegram-md/grammy-plugin'
 import { Composer, Context } from 'grammy'
 import { BotModule } from '../../types/module.js'
 import { STRINGS } from './constants.js'
 
 const createComposer = () => {
-  const bot = new Composer(replyWithMarkdownPlugin())
+  const bot = new Composer(markdownPlugin())
 
   bot.command('start', async (ctx) => {
     await ctx.replyWithMarkdown(STRINGS.help, {

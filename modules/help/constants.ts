@@ -1,4 +1,4 @@
-import { md } from '@vlad-yakovlev/telegram-md'
+import { md } from '@telegram-md/core'
 
 export const STRINGS = {
   help: md.join(

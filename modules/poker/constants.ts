@@ -1,12 +1,12 @@
 import { User } from '@prisma/client'
+import { md } from '@telegram-md/core'
 import {
   CARD_SUIT,
   CARD_VALUE,
   COMBINATION_LEVEL,
   ERROR_CODE,
   Player,
-} from '@vlad-yakovlev/poker'
-import { md } from '@vlad-yakovlev/telegram-md'
+} from '@vlad-iakovlev/poker'
 import { getMention } from '../../utils/getMention.js'
 import { getPokerCardString } from './utils/getPokerCardString.js'
 import { getPokerCombinationString } from './utils/getPokerCombinationString.js'

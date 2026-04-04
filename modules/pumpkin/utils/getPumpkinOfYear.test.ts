@@ -1,4 +1,4 @@
-import { md } from '@vlad-yakovlev/telegram-md'
+import { md } from '@telegram-md/core'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 import '../../../utils/prisma.mock.js'
 import { PumpkinPlayerWithStats } from '../types.js'
