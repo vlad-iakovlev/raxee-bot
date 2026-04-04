@@ -9,7 +9,7 @@
     "lint:ci": "DEBUG=eslint:eslint eslint .",
     "prettier": "prettier --write '**/*.(ts|js|md|json)'",
     "prettier:ci": "prettier --check '**/*.(ts|js|md|json)'",
-    "start": "node --loader ts-node/esm -r dotenv/config bin/bot.ts",
+    "start": "tsx bin/bot.ts",
     "start:prod": "prisma migrate deploy && npm run start",
     "test": "vitest run --coverage --coverage.include='**/*.ts'",
     "test:ci": "prisma generate && vitest run",
@@ -27,7 +27,7 @@
     "dotenv": "^17.4.0",
     "grammy": "^1.42.0",
     "remeda": "^2.33.7",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
