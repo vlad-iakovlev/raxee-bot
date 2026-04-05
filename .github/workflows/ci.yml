@@ -40,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/${{ github.repository }}-${{ matrix.image }}
+          images: ghcr.io/${{ github.repository }}
           tags: |
             type=raw,value=latest
             type=sha
