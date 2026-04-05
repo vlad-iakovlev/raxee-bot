@@ -1,6 +1,6 @@
 import { Composer } from 'grammy'
 import { describe, expect, test } from 'vitest'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
+import { mockGrammyBot } from '@/testUtils/mockGrammyBot.js'
 import { createHelpModule } from './index.js'
 
 describe('#createPokerModule', () => {

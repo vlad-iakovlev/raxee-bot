@@ -1,4 +1,4 @@
-import { prisma } from '../../../utils/prisma.js'
+import { prisma } from '@/prisma/index.js'
 
 export const addWinner = async (
   playerId: string,

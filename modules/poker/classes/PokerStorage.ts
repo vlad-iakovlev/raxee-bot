@@ -1,6 +1,5 @@
-import { POKER_ROUND, User } from '@prisma/client'
 import { ROUND, RoomData, RoomStorage } from '@vlad-iakovlev/poker'
-import { prisma } from '../../../utils/prisma.js'
+import { POKER_ROUND, User, prisma } from '@/prisma/index.js'
 
 export class PokerStorage implements RoomStorage<undefined, User> {
   async get(id: string): Promise<RoomData | undefined> {

@@ -1,5 +1,5 @@
-import { User } from '@prisma/client'
 import { Markdown, md } from '@telegram-md/core'
+import { User } from '@/prisma/index.js'
 import { getUserName } from './getUserName.js'
 
 export const getMention = (user: User): Markdown => {

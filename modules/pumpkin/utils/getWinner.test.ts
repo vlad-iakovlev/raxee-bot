@@ -1,6 +1,6 @@
 import * as fns from 'date-fns'
 import { describe, expect, test } from 'vitest'
-import { prisma } from '../../../utils/prisma.mock.js'
+import { prisma } from '@/prisma/index.mock.js'
 import { getWinner } from './getWinner.js'
 
 describe('#getWinner', () => {

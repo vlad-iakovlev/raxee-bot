@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest'
-import { prisma } from '../utils/prisma.mock.js'
+import { prisma } from '@/prisma/index.mock.js'
 import { initUserMiddleware } from './initUser.js'
 
 describe('#initUserMiddleware', () => {

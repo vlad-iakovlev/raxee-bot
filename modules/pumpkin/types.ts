@@ -1,4 +1,4 @@
-import { PumpkinPlayer, User } from '@prisma/client'
+import { PumpkinPlayer, User } from '@/prisma/index.js'
 
 export type PumpkinPlayerWithUser = PumpkinPlayer & {
   user: User

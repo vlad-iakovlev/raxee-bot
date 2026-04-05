@@ -2,12 +2,12 @@ import { autoRetry } from '@grammyjs/auto-retry'
 import { run, sequentialize } from '@grammyjs/runner'
 import assert from 'assert'
 import { Bot, Composer } from 'grammy'
-import { initUserMiddleware } from '../middleware/initUser.js'
-import { createHelpModule } from '../modules/help/index.js'
-import { createPokerModule } from '../modules/poker/index.js'
-import { createPumpkinModule } from '../modules/pumpkin/index.js'
-import { createVoiceModule } from '../modules/voice/index.js'
-import { handleError } from '../utils/handleError.js'
+import { initUserMiddleware } from '@/middleware/initUser.js'
+import { createHelpModule } from '@/modules/help/index.js'
+import { createPokerModule } from '@/modules/poker/index.js'
+import { createPumpkinModule } from '@/modules/pumpkin/index.js'
+import { createVoiceModule } from '@/modules/voice/index.js'
+import { handleError } from '@/utils/handleError.js'
 
 void (async () => {
   try {

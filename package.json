@@ -5,20 +5,25 @@
   "type": "module",
   "scripts": {
     "compile": "tsc",
+    "dev": "tsx watch bin/bot.ts",
     "lint": "eslint .",
     "lint:ci": "DEBUG=eslint:eslint eslint .",
     "prettier": "prettier --write '**/*.(ts|js|md|json)'",
     "prettier:ci": "prettier --check '**/*.(ts|js|md|json)'",
+    "prisma": "prisma --config prisma/config.ts",
     "start": "tsx bin/bot.ts",
-    "start:prod": "prisma migrate deploy && npm run start",
     "test": "vitest run --coverage --coverage.include='**/*.ts'",
     "test:ci": "prisma generate && vitest run",
     "test:codecov": "prisma generate && npx vitest run --coverage --coverage.include='**/*.ts'"
   },
+  "overrides": {
+    "typescript": "$typescript"
+  },
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
-    "@prisma/client": "^6.19.3",
+    "@prisma/adapter-pg": "^7.6.0",
+    "@prisma/client": "^7.6.0",
     "@telegram-md/core": "^1.0.0",
     "@telegram-md/grammy-plugin": "^1.0.0",
     "@types/node": "^22.19.17",
@@ -26,6 +31,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.0",
     "grammy": "^1.42.0",
+    "prisma": "^7.6.0",
     "remeda": "^2.33.7",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2"
@@ -41,7 +47,7 @@
     "magicast": "^0.3.5",
     "prettier": "^3.8.1",
     "prettier-plugin-packagejson": "^3.0.2",
-    "prisma": "^6.19.3",
+    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.0.3",
     "vitest-mock-extended": "^3.1.1"
   }

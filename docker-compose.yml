@@ -1,13 +1,7 @@
-networks:
-  vlad-iakovlev-dev:
-    name: vlad-iakovlev-dev
-
 services:
   raxee-bot:
     image: ghcr.io/vlad-iakovlev/raxee-bot:latest
     pull_policy: always
     build: .
-    networks:
-      - vlad-iakovlev-dev
     env_file: .env
-    restart: always
+    restart: unless-stopped

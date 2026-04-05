@@ -6,7 +6,7 @@ const prettierConfig = {
   ],
   semi: false,
   singleQuote: true,
-  importOrder: ['\.mock\.js$', '^\\.\\./', '^\\./'],
+  importOrder: ['\.mock\.js$', '^@/', '^\\.\\./', '^\\./'],
   importOrderSortSpecifiers: true,
 }
 

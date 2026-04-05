@@ -1,0 +1,11 @@
+# Dependencies
+/node_modules
+
+# Misc
+.DS_Store
+
+# Vitest
+/coverage
+
+# Local env files
+.env

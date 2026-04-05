@@ -1,6 +1,6 @@
 import { Markdown } from '@telegram-md/core'
-import { getRandomItem } from '../../../utils/getRandomItem.js'
-import { prisma } from '../../../utils/prisma.js'
+import { prisma } from '@/prisma/index.js'
+import { getRandomItem } from '@/utils/getRandomItem.js'
 import { STRINGS } from '../constants.js'
 
 type Strings = {

@@ -1,6 +1,6 @@
 import { md } from '@telegram-md/core'
-import { getMention } from '../../../utils/getMention.js'
-import { interpolate } from '../../../utils/interpolate.js'
+import { getMention } from '@/utils/getMention.js'
+import { interpolate } from '@/utils/interpolate.js'
 import { PumpkinStringsManager } from '../classes/PumpkinStringsManager.js'
 import { getStats } from './getStats.js'
 

@@ -1,4 +1,3 @@
-import { User } from '@prisma/client'
 import { Markdown, md } from '@telegram-md/core'
 import {
   BaseError,
@@ -12,9 +11,9 @@ import {
 import assert from 'assert'
 import { Api } from 'grammy'
 import * as R from 'remeda'
-import { CallQueue } from '../../../classes/CallQueue.js'
-import { getRandomItem } from '../../../utils/getRandomItem.js'
-import { prisma } from '../../../utils/prisma.js'
+import { CallQueue } from '@/classes/CallQueue.js'
+import { User, prisma } from '@/prisma/index.js'
+import { getRandomItem } from '@/utils/getRandomItem.js'
 import {
   MESSAGES,
   STARTING_BALANCE,

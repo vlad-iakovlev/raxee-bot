@@ -1,7 +1,7 @@
 import { markdownPlugin } from '@telegram-md/grammy-plugin'
 import assert from 'assert'
 import { Composer, Context } from 'grammy'
-import { BotModule } from '../../types/module.js'
+import { BotModule } from '@/types/module.js'
 import { PokerAdapter } from './classes/PokerAdapter.js'
 import { MESSAGES } from './constants.js'
 

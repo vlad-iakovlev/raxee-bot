@@ -1,7 +1,7 @@
-import { PumpkinPlayer } from '@prisma/client'
 import * as fns from 'date-fns'
 import { describe, expect, test } from 'vitest'
-import { prisma } from '../../../utils/prisma.mock.js'
+import { prisma } from '@/prisma/index.mock.js'
+import { PumpkinPlayer } from '@/prisma/index.js'
 import { getStats } from './getStats.js'
 
 describe('#getStats', () => {

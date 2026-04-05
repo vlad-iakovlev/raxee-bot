@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { prisma } from '../../../utils/prisma.mock.js'
+import { prisma } from '@/prisma/index.mock.js'
 import { getPlayers } from './getPlayers.js'
 
 describe('#getPlayers', () => {

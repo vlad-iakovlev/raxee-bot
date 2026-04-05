@@ -1,11 +1,9 @@
 FROM node:22-alpine3.22 AS base
 
 WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
-RUN npm ci
 COPY . .
-RUN npx prisma generate
-RUN npm prune --production
+RUN npm ci --omit=dev
 
-CMD ["npm", "run", "start:prod"]
+RUN chmod +x /app/docker/entrypoint.sh
+
+ENTRYPOINT ["/app/docker/entrypoint.sh"]

@@ -1,6 +1,6 @@
 import { Composer } from 'grammy'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-import { mockGrammyBot } from '../../testUtils/mockGrammyBot.js'
+import { mockGrammyBot } from '@/testUtils/mockGrammyBot.js'
 import { PokerAdapter } from './classes/PokerAdapter.js'
 import { createPokerModule } from './index.js'
 

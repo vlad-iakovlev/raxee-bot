@@ -1,7 +1,7 @@
-import { PumpkinStrings } from '@prisma/client'
 import { md } from '@telegram-md/core'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
-import { prisma } from '../../../utils/prisma.mock.js'
+import { prisma } from '@/prisma/index.mock.js'
+import { PumpkinStrings } from '@/prisma/index.js'
 import { PumpkinStringsManager } from './PumpkinStringsManager.js'
 
 describe('PumpkinStringsManager', () => {

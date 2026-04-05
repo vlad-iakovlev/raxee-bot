@@ -1,5 +1,5 @@
 import * as fns from 'date-fns'
-import { prisma } from '../../../utils/prisma.js'
+import { prisma } from '@/prisma/index.js'
 import { PumpkinPlayerWithStats } from '../types.js'
 
 export const getStats = async (

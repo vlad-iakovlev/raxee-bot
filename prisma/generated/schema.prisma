@@ -1,0 +1,110 @@
+datasource db {
+  provider = "postgres"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "generated"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tgUserId  String  @unique
+  firstName String
+  lastName  String?
+  username  String?
+
+  pokerPlayer   PokerPlayer?
+  pumpkinPlayer PumpkinPlayer[]
+}
+
+model PokerPlayer {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cards     Int[]
+  balance   Int
+  betAmount Int
+  hasFolded Boolean
+  hasLost   Boolean
+  hasTurned Boolean
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  state   PokerState @relation(fields: [stateId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  stateId String
+}
+
+model PokerState {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tgChatId           String      @unique
+  cards              Int[]
+  round              POKER_ROUND
+  dealsCount         Int
+  dealerIndex        Int
+  currentPlayerIndex Int
+
+  players PokerPlayer[]
+}
+
+enum POKER_ROUND {
+  PREFLOP
+  FLOP
+  TURN
+  RIVER
+}
+
+model PumpkinPlayer {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tgChatId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  stats PumpkinStats[]
+
+  @@unique([tgChatId, userId])
+}
+
+model PumpkinStats {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  date DateTime
+
+  player   PumpkinPlayer @relation(fields: [playerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  playerId String
+
+  @@unique([playerId, date])
+}
+
+model PumpkinStrings {
+  id                String   @id @default(uuid())
+  tgChatIds         String[]
+  hello             String[]
+  notEnoughPlayers  String[]
+  earlyWinner       String[]
+  newWinner1        String[]
+  newWinner2        String[]
+  newWinner3        String[]
+  newWinner4        String[]
+  newWinnerNewYear  String[]
+  pumpkinOfYear     String[]
+  replyForWinner    String[]
+  statsTitleAllTime String[]
+  statsTitleYear    String[]
+  statsPlayer       String[]
+  statsTotalPlayers String[]
+}

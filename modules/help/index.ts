@@ -1,6 +1,6 @@
 import { markdownPlugin } from '@telegram-md/grammy-plugin'
 import { Composer, Context } from 'grammy'
-import { BotModule } from '../../types/module.js'
+import { BotModule } from '@/types/module.js'
 import { STRINGS } from './constants.js'
 
 const createComposer = () => {
