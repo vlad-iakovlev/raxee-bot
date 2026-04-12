@@ -39,7 +39,7 @@
   "devDependencies": {
     "@napi-rs/wasm-runtime": "^1.1.2",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@vitest/coverage-v8": "^4.1.2",
+    "@vitest/coverage-v8": "^4.1.4",
     "@vlad-iakovlev/eslint-config": "^1.2.0",
     "eslint": "^9.39.4",
     "jiti": "^2.6.1",
