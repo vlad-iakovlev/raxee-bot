@@ -22,33 +22,32 @@
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
-    "@prisma/adapter-pg": "^7.6.0",
-    "@prisma/client": "^7.6.0",
+    "@prisma/adapter-pg": "^7.7.0",
+    "@prisma/client": "^7.7.0",
     "@telegram-md/core": "^1.0.0",
     "@telegram-md/grammy-plugin": "^1.0.0",
     "@types/node": "^22.19.17",
     "@vlad-iakovlev/poker": "^1.5.0",
     "date-fns": "^4.1.0",
-    "dotenv": "^17.4.0",
+    "dotenv": "^17.4.2",
     "grammy": "^1.42.0",
-    "prisma": "^7.6.0",
+    "prisma": "^7.7.0",
     "remeda": "^2.33.7",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@napi-rs/wasm-runtime": "^1.1.2",
+    "@napi-rs/wasm-runtime": "^1.1.4",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@vitest/coverage-v8": "^4.1.2",
+    "@vitest/coverage-v8": "^4.1.4",
     "@vlad-iakovlev/eslint-config": "^1.2.0",
     "eslint": "^9.39.4",
     "jiti": "^2.6.1",
-    "lefthook": "^2.1.4",
+    "lefthook": "^2.1.6",
     "magicast": "^0.3.5",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "prettier-plugin-packagejson": "^3.0.2",
-    "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.0.3",
-    "vitest-mock-extended": "^3.1.1"
+    "vitest": "^4.1.4",
+    "vitest-mock-extended": "^4.0.0"
   }
 }
