@@ -22,8 +22,8 @@
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
-    "@prisma/adapter-pg": "^7.7.0",
-    "@prisma/client": "^7.7.0",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "@telegram-md/core": "^1.0.0",
     "@telegram-md/grammy-plugin": "^1.0.0",
     "@types/node": "^22.19.17",
@@ -31,7 +31,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
     "grammy": "^1.42.0",
-    "prisma": "^7.7.0",
+    "prisma": "^7.8.0",
     "remeda": "^2.33.7",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
@@ -44,7 +44,7 @@
     "eslint": "^9.39.4",
     "jiti": "^2.6.1",
     "lefthook": "^2.1.6",
-    "magicast": "^0.3.5",
+    "magicast": "0.3.5",
     "prettier": "^3.8.3",
     "prettier-plugin-packagejson": "^3.0.2",
     "vitest": "^4.1.4",
