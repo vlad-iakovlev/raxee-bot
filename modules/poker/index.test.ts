@@ -35,11 +35,9 @@ describe('#createPokerModule', () => {
       PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        players: {
-          length: 2,
-        },
-        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
-      } as PokerAdapter)
+        players: { length: 2 } as PokerAdapter['players'],
+        addPlayer: mockAddPlayer,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -94,11 +92,9 @@ describe('#createPokerModule', () => {
       PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        players: {
-          length: 2,
-        },
-        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
-      } as PokerAdapter)
+        players: { length: 2 } as PokerAdapter['players'],
+        addPlayer: mockAddPlayer,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -140,8 +136,8 @@ describe('#createPokerModule', () => {
         tgChatId: '1111111',
       } as PokerAdapter)
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
-        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
-      } as PokerAdapter)
+        addPlayer: mockAddPlayer,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -198,8 +194,8 @@ describe('#createPokerModule', () => {
         tgChatId: '2222222',
       } as PokerAdapter)
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
-        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
-      } as PokerAdapter)
+        addPlayer: mockAddPlayer,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -254,11 +250,9 @@ describe('#createPokerModule', () => {
       PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 1,
-        players: {
-          length: 2,
-        },
-        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
-      } as PokerAdapter)
+        players: { length: 2 } as PokerAdapter['players'],
+        addPlayer: mockAddPlayer,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -313,11 +307,9 @@ describe('#createPokerModule', () => {
       PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(undefined)
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        players: {
-          length: 10,
-        },
-        addPlayer: mockAddPlayer as PokerAdapter['addPlayer'],
-      } as PokerAdapter)
+        players: { length: 10 } as PokerAdapter['players'],
+        addPlayer: mockAddPlayer,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -373,11 +365,9 @@ describe('#createPokerModule', () => {
       const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        players: {
-          length: 5,
-        },
-        dealCards: mockDealCards as PokerAdapter['dealCards'],
-      } as PokerAdapter)
+        players: { length: 5 } as PokerAdapter['players'],
+        dealCards: mockDealCards,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -431,11 +421,9 @@ describe('#createPokerModule', () => {
       const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        players: {
-          length: 5,
-        },
-        dealCards: mockDealCards as PokerAdapter['dealCards'],
-      } as PokerAdapter)
+        players: { length: 5 } as PokerAdapter['players'],
+        dealCards: mockDealCards,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -475,11 +463,9 @@ describe('#createPokerModule', () => {
       const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 1,
-        players: {
-          length: 5,
-        },
-        dealCards: mockDealCards as PokerAdapter['dealCards'],
-      } as PokerAdapter)
+        players: { length: 5 } as PokerAdapter['players'],
+        dealCards: mockDealCards,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -533,11 +519,9 @@ describe('#createPokerModule', () => {
       const mockDealCards = vi.fn<PokerAdapter['dealCards']>()
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        players: {
-          length: 1,
-        },
-        dealCards: mockDealCards as PokerAdapter['dealCards'],
-      } as PokerAdapter)
+        players: { length: 1 } as PokerAdapter['players'],
+        dealCards: mockDealCards,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -593,8 +577,8 @@ describe('#createPokerModule', () => {
       const mockEndGame = vi.fn<PokerAdapter['endGame']>()
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 1,
-        endGame: mockEndGame as PokerAdapter['endGame'],
-      } as PokerAdapter)
+        endGame: mockEndGame,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -648,8 +632,8 @@ describe('#createPokerModule', () => {
       const mockEndGame = vi.fn<PokerAdapter['endGame']>()
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         dealsCount: 0,
-        endGame: mockEndGame as PokerAdapter['endGame'],
-      } as PokerAdapter)
+        endGame: mockEndGame,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -702,8 +686,8 @@ describe('#createPokerModule', () => {
     test('should stop game in private chat', async () => {
       const mockEndGame = vi.fn<PokerAdapter['endGame']>()
       PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
-        endGame: mockEndGame as PokerAdapter['endGame'],
-      } as PokerAdapter)
+        endGame: mockEndGame,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -799,12 +783,11 @@ describe('#createPokerModule', () => {
             id: 'player-1-id',
             payload: { tgUserId: '123456789' },
           },
-        ],
+        ] as PokerAdapter['players'],
         currentPlayer: { id: 'player-1-id' } as PokerAdapter['currentPlayer'],
-        handleMessage: mockHandleMessage as PokerAdapter['handleMessage'],
-        broadcastPlayerMessage:
-          mockBroadcastPlayerMessage as PokerAdapter['broadcastPlayerMessage'],
-      } as PokerAdapter)
+        handleMessage: mockHandleMessage,
+        broadcastPlayerMessage: mockBroadcastPlayerMessage,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -848,10 +831,9 @@ describe('#createPokerModule', () => {
           { id: 'player-1-id', payload: { tgUserId: '123456789' } },
         ] as PokerAdapter['players'],
         currentPlayer: { id: 'player-1-id' } as PokerAdapter['currentPlayer'],
-        handleMessage: mockHandleMessage as PokerAdapter['handleMessage'],
-        broadcastPlayerMessage:
-          mockBroadcastPlayerMessage as PokerAdapter['broadcastPlayerMessage'],
-      } as PokerAdapter)
+        handleMessage: mockHandleMessage,
+        broadcastPlayerMessage: mockBroadcastPlayerMessage,
+      } as Partial<PokerAdapter> as PokerAdapter)
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
