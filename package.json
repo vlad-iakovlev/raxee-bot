@@ -16,9 +16,6 @@
     "test:ci": "prisma generate && vitest run",
     "test:codecov": "prisma generate && npx vitest run --coverage --coverage.include='**/*.ts'"
   },
-  "overrides": {
-    "typescript": "$typescript"
-  },
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/runner": "^2.0.3",
