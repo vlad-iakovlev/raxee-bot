@@ -23,14 +23,14 @@
     "@prisma/client": "^7.8.0",
     "@telegram-md/core": "^1.0.0",
     "@telegram-md/grammy-plugin": "^1.0.0",
-    "@types/node": "^24.12.3",
+    "@types/node": "^24.12.4",
     "@vlad-iakovlev/poker": "^1.5.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
     "grammy": "^1.42.0",
     "prisma": "^7.8.0",
-    "remeda": "^2.34.0",
-    "tsx": "^4.21.0",
+    "remeda": "^2.34.1",
+    "tsx": "^4.22.0",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
