@@ -27,7 +27,7 @@
     "@vlad-iakovlev/poker": "^1.5.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
-    "grammy": "^1.42.0",
+    "grammy": "^1.43.0",
     "prisma": "^7.8.0",
     "remeda": "^2.34.1",
     "tsx": "^4.22.0",
