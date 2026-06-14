@@ -34,7 +34,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@napi-rs/wasm-runtime": "^1.1.4",
+    "@napi-rs/wasm-runtime": "^1.1.5",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@vitest/coverage-v8": "^4.1.4",
     "@vlad-iakovlev/eslint-config": "^1.2.0",
