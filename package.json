@@ -23,7 +23,7 @@
     "@prisma/client": "^7.8.0",
     "@telegram-md/core": "^1.0.0",
     "@telegram-md/grammy-plugin": "^1.0.0",
-    "@types/node": "^24.13.1",
+    "@types/node": "^24.13.2",
     "@vlad-iakovlev/poker": "^1.5.0",
     "date-fns": "^4.4.0",
     "dotenv": "^17.4.2",
