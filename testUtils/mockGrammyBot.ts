@@ -35,6 +35,7 @@ export const mockGrammyBot = () => {
     has_main_web_app: false,
     has_topics_enabled: false,
     allows_users_to_create_topics: false,
+    supports_join_request_queries: false,
   }
 
   return {
