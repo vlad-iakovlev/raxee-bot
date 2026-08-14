@@ -29,12 +29,12 @@
     "dotenv": "^17.4.2",
     "grammy": "^1.45.1",
     "prisma": "^7.9.1",
-    "remeda": "^2.39.0",
-    "tsx": "^4.23.11",
+    "remeda": "^2.40.0",
+    "tsx": "^4.23.12",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@napi-rs/wasm-runtime": "^1.2.2",
+    "@napi-rs/wasm-runtime": "^1.2.3",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@vitest/coverage-v8": "^4.1.4",
     "@vlad-iakovlev/eslint-config": "^2.0.1",
