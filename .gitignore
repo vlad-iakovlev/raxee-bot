@@ -5,6 +5,7 @@
 .DS_Store
 
 # Vitest
+/.vitest
 /coverage
 
 # Local env files

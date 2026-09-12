@@ -2,7 +2,12 @@ import eslintConfig from '@vlad-iakovlev/eslint-config'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig(
-  globalIgnores(['coverage', 'prisma/generated', 'prettier.config.js']),
+  globalIgnores([
+    '.vitest',
+    'coverage',
+    'prisma/generated',
+    'prettier.config.js',
+  ]),
   eslintConfig.node,
   {
     languageOptions: {
