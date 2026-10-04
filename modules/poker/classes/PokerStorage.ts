@@ -31,6 +31,7 @@ export class PokerStorage implements RoomStorage<undefined, User> {
     return {
       id: stateData.tgChatId,
       cards: stateData.cards,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-assignment
       round: stateData.round as ROUND,
       dealsCount: stateData.dealsCount,
       dealerIndex: stateData.dealerIndex,
