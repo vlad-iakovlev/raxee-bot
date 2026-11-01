@@ -29,20 +29,20 @@
     "dotenv": "^18.0.9",
     "grammy": "^1.46.0",
     "prisma": "^7.10.1",
-    "remeda": "^2.53.0",
+    "remeda": "^2.57.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@napi-rs/wasm-runtime": "^1.2.5",
+    "@napi-rs/wasm-runtime": "^1.2.6",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@vitest/coverage-v8": "^5.0.0",
     "@vlad-iakovlev/eslint-config": "^2.0.1",
-    "eslint": "^10.13.0",
+    "eslint": "^10.14.0",
     "jiti": "^2.7.0",
     "magicast": "0.3.5",
     "prettier": "^3.9.10",
-    "prettier-plugin-packagejson": "^3.0.2",
+    "prettier-plugin-packagejson": "^3.0.3",
     "vitest": "^5.0.0",
     "vitest-mock-extended": "^5.1.1"
   }
