@@ -29,7 +29,7 @@
     "dotenv": "^18.0.10",
     "grammy": "^1.46.0",
     "prisma": "^7.10.1",
-    "remeda": "^2.61.0",
+    "remeda": "^2.62.2",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   },
@@ -44,6 +44,6 @@
     "prettier": "^3.10.1",
     "prettier-plugin-packagejson": "^3.1.0",
     "vitest": "^5.0.0",
-    "vitest-mock-extended": "^6.0.0"
+    "vitest-mock-extended": "^6.0.1"
   }
 }
