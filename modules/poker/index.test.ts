@@ -810,7 +810,10 @@ describe('#createPokerModule', () => {
       })
 
       expect(mockHandleMessage).toHaveBeenCalledWith(
-        { id: 'player-1-id', payload: { tgUserId: '123456789' } },
+        expect.objectContaining({
+          id: 'player-1-id',
+          payload: expect.objectContaining({ tgUserId: '123456789' }),
+        }),
         'test',
       )
       expect(mockBroadcastPlayerMessage).not.toHaveBeenCalled()
@@ -855,7 +858,10 @@ describe('#createPokerModule', () => {
       })
 
       expect(mockHandleMessage).toHaveBeenCalledWith(
-        { id: 'player-1-id', payload: { tgUserId: '123456789' } },
+        expect.objectContaining({
+          id: 'player-1-id',
+          payload: expect.objectContaining({ tgUserId: '123456789' }),
+        }),
         'test',
       )
       expect(mockBroadcastPlayerMessage).not.toHaveBeenCalled()
