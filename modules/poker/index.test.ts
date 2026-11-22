@@ -1,5 +1,6 @@
 import { Composer } from 'grammy'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
+import { mock } from 'vitest-mock-extended'
 import { mockGrammyBot } from '@/testUtils/mockGrammyBot.js'
 import { PokerAdapter } from './classes/PokerAdapter.js'
 import { createPokerModule } from './index.js'
@@ -132,9 +133,9 @@ describe('#createPokerModule', () => {
 
     test('should reply with error if user is already registered (same chat)', async () => {
       const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
-      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
-        tgChatId: '1111111',
-      } as PokerAdapter)
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(
+        mock<PokerAdapter>({ tgChatId: '1111111' }),
+      )
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         addPlayer: mockAddPlayer,
       } as Partial<PokerAdapter> as PokerAdapter)
@@ -190,9 +191,9 @@ describe('#createPokerModule', () => {
 
     test('should reply with error if user is already registered (other chat)', async () => {
       const mockAddPlayer = vi.fn<PokerAdapter['addPlayer']>()
-      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
-        tgChatId: '2222222',
-      } as PokerAdapter)
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(
+        mock<PokerAdapter>({ tgChatId: '2222222' }),
+      )
       PokerAdapterMocked.loadByTgChatIdOrCreate.mockResolvedValueOnce({
         addPlayer: mockAddPlayer,
       } as Partial<PokerAdapter> as PokerAdapter)
@@ -777,17 +778,13 @@ describe('#createPokerModule', () => {
       const mockHandleMessage = vi.fn<PokerAdapter['handleMessage']>()
       const mockBroadcastPlayerMessage =
         vi.fn<PokerAdapter['broadcastPlayerMessage']>()
-      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
-        players: [
-          {
-            id: 'player-1-id',
-            payload: { tgUserId: '123456789' },
-          },
-        ] as PokerAdapter['players'],
-        currentPlayer: { id: 'player-1-id' } as PokerAdapter['currentPlayer'],
-        handleMessage: mockHandleMessage,
-        broadcastPlayerMessage: mockBroadcastPlayerMessage,
-      } as Partial<PokerAdapter> as PokerAdapter)
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(
+        mock<PokerAdapter>({
+          players: [{ id: 'player-1-id', payload: { tgUserId: '123456789' } }],
+          handleMessage: mockHandleMessage,
+          broadcastPlayerMessage: mockBroadcastPlayerMessage,
+        }),
+      )
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -813,7 +810,10 @@ describe('#createPokerModule', () => {
       })
 
       expect(mockHandleMessage).toHaveBeenCalledWith(
-        { id: 'player-1-id', payload: { tgUserId: '123456789' } },
+        expect.objectContaining({
+          id: 'player-1-id',
+          payload: expect.objectContaining({ tgUserId: '123456789' }),
+        }),
         'test',
       )
       expect(mockBroadcastPlayerMessage).not.toHaveBeenCalled()
@@ -826,14 +826,13 @@ describe('#createPokerModule', () => {
       )
       const mockBroadcastPlayerMessage =
         vi.fn<PokerAdapter['broadcastPlayerMessage']>()
-      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce({
-        players: [
-          { id: 'player-1-id', payload: { tgUserId: '123456789' } },
-        ] as PokerAdapter['players'],
-        currentPlayer: { id: 'player-1-id' } as PokerAdapter['currentPlayer'],
-        handleMessage: mockHandleMessage,
-        broadcastPlayerMessage: mockBroadcastPlayerMessage,
-      } as Partial<PokerAdapter> as PokerAdapter)
+      PokerAdapterMocked.loadByTgUserId.mockResolvedValueOnce(
+        mock<PokerAdapter>({
+          players: [{ id: 'player-1-id', payload: { tgUserId: '123456789' } }],
+          handleMessage: mockHandleMessage,
+          broadcastPlayerMessage: mockBroadcastPlayerMessage,
+        }),
+      )
       const { bot, requests } = mockGrammyBot()
       const module = createPokerModule()
       bot.use(module.composer)
@@ -859,7 +858,10 @@ describe('#createPokerModule', () => {
       })
 
       expect(mockHandleMessage).toHaveBeenCalledWith(
-        { id: 'player-1-id', payload: { tgUserId: '123456789' } },
+        expect.objectContaining({
+          id: 'player-1-id',
+          payload: expect.objectContaining({ tgUserId: '123456789' }),
+        }),
         'test',
       )
       expect(mockBroadcastPlayerMessage).not.toHaveBeenCalled()
